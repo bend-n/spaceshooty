@@ -15,10 +15,10 @@ var velocity = Vector2.ZERO
 signal player_death
 var ACCELERATION = 500
 var FRICTION = 400
-var recoil = 0
+var recoil = 5
+var input_vector = Vector2.ZERO
 
 func _physics_process(delta):
-	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
@@ -28,7 +28,6 @@ func _physics_process(delta):
 	else:
 		#stops you
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	velocity = move_and_slide(velocity)
 	
 	if firing:
 		SPEED = movementpenalty
@@ -38,6 +37,7 @@ func _physics_process(delta):
 		queue_free()
 	if Input.is_action_pressed("ui_accept") or Input.is_action_just_released("ui_accept"):
 		fire_laser()
+		velocity.x -= recoil
 		sprite.flip_h = false
 	else:
 		firing = false
@@ -49,6 +49,7 @@ func _physics_process(delta):
 				rockets()
 			"rockets":
 				lasers()
+	move(delta)
 func rockets():
 	timer.wait_time = .5
 	enemy_damage.min_damage = 10
@@ -64,7 +65,7 @@ func lasers():
 	enemy_damage.min_damage = 3
 	enemy_damage.max_damage = 6
 	movementpenalty = 20
-	recoil = 1
+	recoil = 5
 	attack = preload("res://Laser.tscn")
 	gun = "lasers"
 	print("BONKITY BONK")
@@ -73,21 +74,26 @@ func splitshot():
 	timer.wait_time = 0.01
 	enemy_damage.min_damage = .2
 	enemy_damage.max_damage = 1
-	recoil = 0.01
+	recoil = 5
 	movementpenalty = 130
 	attack = preload("res://SplitShot.tscn")
 	gun = "splitshot"
 	print("BAP BAP BAP")
+
+func move(delta):
+	velocity = move_and_slide(velocity)
+
 func fire_laser():
 	firing = true
 
 
-func _on_Timer_timeout():
+func _on_Timer_timeout(): #shoot
 	if firing:
 		var laser = attack.instance()
 		var main = get_tree().current_scene
 		main.add_child(laser)
 		laser.global_position = global_position
+
 
 func _exit_tree():
 	var main = get_tree().current_scene
