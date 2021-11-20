@@ -20,7 +20,6 @@ func _process(delta):
 	position.x -= SPEED * delta
 	if global_position.distance_to(target_destination) > 5:
 		global_position += global_position.direction_to(target_destination) * SPEED * delta
-		print("hi")
 
 
 func _on_Enemy_body_entered(body):

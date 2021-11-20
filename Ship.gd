@@ -17,11 +17,18 @@ var ACCELERATION = 500
 var FRICTION = 400
 var recoil = 5
 var input_vector = Vector2.ZERO
-
+var USE_TOUCH = OS.has_touchscreen_ui_hint()
+func _ready() -> void:
+	print(USE_TOUCH)
+	$MobileJoystick/TouchScreenButton.visible = USE_TOUCH
+	$MobileJoystick/MobileControls/Attack.visible = USE_TOUCH
+	$"MobileJoystick/MobileControls/Change gun".visible = USE_TOUCH
 func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
+	if $MobileJoystick/TouchScreenButton.in_use:
+		input_vector = $MobileJoystick/TouchScreenButton.force
 	#makes a input vector based off of inputs, and supports controllers
 	if input_vector != Vector2.ZERO:#moves ya
 		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
@@ -49,7 +56,7 @@ func _physics_process(delta):
 				rockets()
 			"rockets":
 				lasers()
-	move(delta)
+	move()
 func rockets():
 	timer.wait_time = .5
 	enemy_damage.min_damage = 10
@@ -80,7 +87,7 @@ func splitshot():
 	gun = "splitshot"
 	print("BAP BAP BAP")
 
-func move(delta):
+func move():
 	velocity = move_and_slide(velocity)
 
 func fire_laser():
@@ -124,3 +131,7 @@ func create_hit_effect():
 	var hitEffect = HitEffect.instance()
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
+
+
+func _on_TouchScreenButton_force(force):
+	move_and_slide(force)

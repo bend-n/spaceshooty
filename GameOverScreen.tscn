@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GameOverScreen.gd" type="Script" id=3]
 [ext_resource path="res://(16)04B_30__.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://changegun.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 4 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 30.0
 
 [node name="GameOverScreen" type="Node"]
 script = ExtResource( 3 )
@@ -62,3 +66,9 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( 24, 24 )
+normal = ExtResource( 5 )
+shape = SubResource( 2 )
+action = "ui_cancel"

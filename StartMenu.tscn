@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
 [ext_resource path="res://StartMenu.gd" type="Script" id=2]
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MobileControls.tscn" type="PackedScene" id=4]
 
 [node name="StartMenu" type="Node"]
 script = ExtResource( 2 )
@@ -46,3 +47,10 @@ text = "highscore = "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MobileControls" parent="." instance=ExtResource( 4 )]
+
+[node name="Change gun" parent="MobileControls" index="1"]
+visible = false
+
+[editable path="MobileControls"]

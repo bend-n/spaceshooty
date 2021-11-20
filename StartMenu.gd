@@ -11,3 +11,8 @@ func _process(_delta):
 		get_tree().quit()
 	var save_data = SaveAndLoad.load_data_from_file()
 	highscoreLabel.text = "Highscore = " + str(save_data.highscore)
+
+var USE_TOUCH = OS.has_touchscreen_ui_hint()
+func _ready() -> void:
+	print(USE_TOUCH)
+	$MobileControls/Attack.visible = USE_TOUCH

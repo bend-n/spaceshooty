@@ -1,10 +1,12 @@
 extends Node
 
 onready var highscoreLabel = $HighscoreLabel
+var USE_TOUCH = OS.has_touchscreen_ui_hint()
 
 func _ready():
 	set_highscore_label()
-
+	print(USE_TOUCH)
+	$TouchScreenButton.visible = USE_TOUCH
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):

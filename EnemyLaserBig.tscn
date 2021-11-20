@@ -137,7 +137,7 @@ linear_velocity = Vector2( -40, 0 )
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 14 )
-frame = 7
+frame = 11
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 15 )
