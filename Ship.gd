@@ -34,6 +34,7 @@ func _physics_process(delta):
 	#makes a input vector based off of inputs, and supports controllers
 	if input_vector != Vector2.ZERO:#moves ya
 		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
+		$AnimationTree.set("parameters/Turn/blend_position", input_vector)
 	else:
 		#stops you
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
