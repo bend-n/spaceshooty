@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UFO.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UFO-export.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+resource_local_to_scene = true
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
+extents = Vector2( 4, 8 )
+
+[node name="StronkUfo" instance=ExtResource( 1 )]
+ARMOR = 60
+score_on_kill = 200
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource( 2 )

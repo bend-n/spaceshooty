@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Stars.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameOverScreen.gd" type="Script" id=3]
+[ext_resource path="res://(16)04B_30__.TTF" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 4 )
+
+[node name="GameOverScreen" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Stars" parent="." instance=ExtResource( 2 )]
+
+[node name="GameOverLabel" type="Label" parent="."]
+margin_left = 51.0
+margin_top = 96.0
+margin_right = 267.0
+margin_bottom = 129.0
+custom_fonts/font = SubResource( 1 )
+text = "You died."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighscoreLabel" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 320.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 1 )
+text = "Highscore ="
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Esc" type="Label" parent="."]
+margin_left = 64.0
+margin_top = 160.0
+margin_right = 256.0
+margin_bottom = 177.0
+custom_fonts/font = ExtResource( 1 )
+text = "esc to return"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

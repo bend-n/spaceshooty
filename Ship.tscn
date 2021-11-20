@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Ship.gd" type="Script" id=1]
+[ext_resource path="res://Ship.png" type="Texture" id=2]
+[ext_resource path="res://ShipHit.wav" type="AudioStream" id=3]
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Collision2" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -7, -4, -7, -7, -4, -7, -4, -5, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -4, 5, -5, 7, -7, 7, -7, 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -20.0
+
+[node name="Ship" type="Area2D" parent="."]
+z_index = 2
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionPolygon2D" parent="Ship"]
+visible = false
+polygon = PoolVector2Array( -7, -4, -7, -7, -4, -7, -4, -5, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -4, 5, -5, 7, -7, 7, -7, 4 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+[connection signal="area_entered" from="Ship" to="." method="_on_Ship_area_entered"]
+[connection signal="body_entered" from="Ship" to="." method="_on_Ship_body_entered"]
