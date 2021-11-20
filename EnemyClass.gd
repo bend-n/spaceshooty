@@ -9,13 +9,19 @@ export var Laser = preload("res://EnemyLaser.tscn")
 export var SPEED = 25
 onready var timer = $Timer
 export var shootspeed = 1.5
-
+var target_destination = Vector2.ZERO
 var damagetobesubtracted 
+
 func _ready():
 	timer.wait_time = shootspeed
+	target_destination = global_position
 
 func _process(delta):
 	position.x -= SPEED * delta
+	if global_position.distance_to(target_destination) > 5:
+		global_position += global_position.direction_to(target_destination) * SPEED * delta
+		print("hi")
+
 
 func _on_Enemy_body_entered(body):
 	body.create_hit_effect()
@@ -48,3 +54,12 @@ func _on_Timer_timeout():
 	var main = get_tree().current_scene
 	main.add_child(laser)
 	laser.global_position = global_position
+
+func _on_sidestep_timeout():
+	var choosing = randi() %2
+	var choice = [20, -20]
+	target_destination = global_position + Vector2(0, choice[choosing])
+	if target_destination.y > 179:
+		target_destination.y = 179
+	elif target_destination.y < 1:
+		target_destination.y = 1

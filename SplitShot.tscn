@@ -79,7 +79,7 @@ spreadminneg = -10
 
 [node name="Laser" parent="." index="0"]
 frames = SubResource( 15 )
-frame = 11
+frame = 2
 
 [node name="Collision" parent="." index="1"]
 shape = SubResource( 16 )
