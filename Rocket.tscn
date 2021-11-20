@@ -22,7 +22,7 @@ data = PoolByteArray( 0, 0, 203, 21, 206, 21, 202, 21, 206, 21, 201, 21, 204, 21
 format = 1
 
 [node name="Rocket" instance=ExtResource( 1 )]
-mass = 20.0
+mass = 60.0
 linear_velocity = Vector2( 300, 0 )
 spread = false
 
