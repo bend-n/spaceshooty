@@ -18,11 +18,13 @@ var FRICTION = 400
 var recoil = 5
 var input_vector = Vector2.ZERO
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
+
 func _ready() -> void:
 	print(USE_TOUCH)
 	$MobileJoystick/TouchScreenButton.visible = USE_TOUCH
 	$MobileJoystick/MobileControls/Attack.visible = USE_TOUCH
 	$"MobileJoystick/MobileControls/Change gun".visible = USE_TOUCH
+
 func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -43,9 +45,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_end"):
 		queue_free()
 	if Input.is_action_pressed("ui_accept") or Input.is_action_just_released("ui_accept"):
-		fire_laser()
-		velocity.x -= recoil
-		sprite.flip_h = false
+		firing = true
+		position.x -= recoil * delta
 	else:
 		firing = false
 	if Input.is_action_just_pressed("ui_focus_next"):
@@ -57,6 +58,36 @@ func _physics_process(delta):
 			"rockets":
 				lasers()
 	move()
+	flipping()
+func unrotate():
+	$Sprite.rotation_degrees = 0
+
+func flipping():
+	pass
+#	if firing:
+#		$Sprite.flip_h = false
+#		unrotate()
+#	if velocity.x > 0 and velocity.y > 0:
+#		unrotate()
+#	elif velocity.x < 0 and velocity.y < 0:
+#		unrotate()
+#	elif velocity.x > 0:
+#		$Sprite.flip_h = false
+#		unrotate()
+#	elif velocity.x < 0:
+#		$Sprite.flip_h = true
+#		unrotate()
+#	if velocity.y > 0 and firing == true:
+#		sprite.flip_h = false
+#		unrotate()
+#	elif velocity.y < 0 and firing == true:
+#		sprite.flip_h = false
+#		unrotate()
+#	elif velocity.y > 0:
+#		$Sprite.rotation_degrees = 90
+#	elif velocity.y < 0:
+#		$Sprite.rotation_degrees = -90
+
 func rockets():
 	timer.wait_time = .5
 	enemy_damage.min_damage = 10
@@ -89,9 +120,6 @@ func splitshot():
 
 func move():
 	velocity = move_and_slide(velocity)
-
-func fire_laser():
-	firing = true
 
 
 func _on_Timer_timeout(): #shoot
