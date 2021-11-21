@@ -7,7 +7,7 @@
 [ext_resource path="res://Boss.tscn" type="PackedScene" id=5]
 [ext_resource path="res://StronkEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://StronkUfo.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Enemy.gd" type="Script" id=8]
+[ext_resource path="res://Boss2.tscn" type="PackedScene" id=8]
 
 [node name="Difficulty Scaling" type="Node2D"]
 
@@ -38,8 +38,9 @@
 [node name="StronkEnemy" parent="Difficulty_Impossible" instance=ExtResource( 6 )]
 
 [node name="StronkUfo" parent="Difficulty_Impossible" instance=ExtResource( 7 )]
-z_index = 1
-collision_layer = 2
-script = ExtResource( 8 )
 
 [node name="Boss" parent="Difficulty_Impossible" instance=ExtResource( 5 )]
+
+[node name="Congrats_you beat the game now die" type="Node2D" parent="."]
+
+[node name="Boss2" parent="Congrats_you beat the game now die" instance=ExtResource( 8 )]

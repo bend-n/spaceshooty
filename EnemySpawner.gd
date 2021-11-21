@@ -8,7 +8,8 @@ var score_ranges : Array = [
 	[50, 200, 1],
 	[200, 749, 2],
 	[750, 2499, 3],
-	[2500, 5000, 4]
+	[2500, 5000, 4],
+	[5001, 20000, 5]
 ]
 onready var timer = $Enemytimer
 onready var spawnPoints = $SpawnPoints
@@ -59,9 +60,12 @@ func _on_process_timeout():
 			elif score_ranges[i][2] == 3:
 				timer.wait_time = 3
 				onscreenmax = 1
-			else:
+			elif score_ranges[i][2] == 4:
 				timer.wait_time = 5
 				onscreenmax = 9
+			else:
+				timer.wait_time = 2
+				onscreenmax = 1
 
 func diff_levels(value):
 	current_difficulty_level = difficulty_levels[value]
