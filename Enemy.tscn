@@ -54,15 +54,15 @@ animations = [ {
 "name": "New Anim 1",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ) ],
-"loop": true,
-"name": "New Anim 2",
-"speed": 1.5
-}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "New Anim 3",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "New Anim 2",
+"speed": 1.5
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -79,6 +79,7 @@ shootspeed = 2.0
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
+frame = 1
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

@@ -19,6 +19,7 @@ var recoil = 40
 var input_vector = Vector2.ZERO
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
 
+
 func _ready() -> void:
 	print(USE_TOUCH)
 	$MobileJoystick/TouchScreenButton.visible = USE_TOUCH
@@ -47,9 +48,8 @@ func _physics_process(delta):
 		SPEED = 100
 	if Input.is_action_just_pressed("ui_end"):
 		queue_free()
-	if Input.is_action_pressed("ui_accept") or Input.is_action_just_released("ui_accept"):
+	if Input.is_action_pressed("ui_accept"):
 		firing = true
-		position.x -= recoil * delta
 	else:
 		firing = false
 	if Input.is_action_just_pressed("ui_focus_next"):
@@ -64,15 +64,13 @@ func _physics_process(delta):
 func unrotate():
 	$Sprite.rotation_degrees = 0
 
-func recoil():
-	pass
 
 func rockets():
 	timer.wait_time = .5
 	enemy_damage.min_damage = 10
 	enemy_damage.max_damage = 30
 	movementpenalty = 60
-	recoil = 100
+	recoil = 200
 	attack = preload("res://Rocket.tscn")
 	playerstats.gun = "rockets"
 	print("ROCKETS AHOY")
@@ -91,7 +89,7 @@ func splitshot():
 	timer.wait_time = 0.01
 	enemy_damage.min_damage = .2
 	enemy_damage.max_damage = 1
-	recoil = 135
+	recoil = 10
 	movementpenalty = 130
 	attack = preload("res://SplitShot.tscn")
 	playerstats.gun = "splitshot"
@@ -103,11 +101,11 @@ func move():
 
 func _on_Timer_timeout(): #shoot
 	if firing:
+		velocity.x -= recoil
 		var laser = attack.instance()
 		var main = get_tree().current_scene
 		main.add_child(laser)
 		laser.global_position = global_position
-		recoil()
 
 
 func _exit_tree():
