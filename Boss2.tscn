@@ -11,7 +11,7 @@ extents = Vector2( 8, 9 )
 ARMOR = 300
 score_on_kill = 400
 Laser = ExtResource( 2 )
-SPEED = 10
+SPEED = 5
 shootspeed = 1.0
 
 [node name="Sprite" parent="." index="0"]

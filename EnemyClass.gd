@@ -11,17 +11,15 @@ onready var timer = $Timer
 export var shootspeed = 1.5
 var target_destination = Vector2.ZERO
 var damagetobesubtracted 
-
+export var stop_pos = Vector2(200, 0)
+onready var tween = $Tween
 func _ready():
 	timer.wait_time = shootspeed
 	target_destination = global_position
 
 func _process(delta):
-	position.x -= SPEED * delta
-	if global_position.distance_to(target_destination) > 5:
-		global_position += global_position.direction_to(target_destination) * SPEED * delta
-
-
+	if global_position.x > stop_pos.x:
+		global_position.x -= SPEED * delta
 func _on_Enemy_body_entered(body):
 	body.create_hit_effect()
 	body.queue_free()
@@ -56,9 +54,20 @@ func _on_Timer_timeout():
 
 func _on_sidestep_timeout():
 	var choosing = randi() %2
-	var choice = [20, -20]
+	var choice = [30, -30]
 	target_destination = global_position + Vector2(0, choice[choosing])
 	if target_destination.y > 160:
 		target_destination.y = 160
 	elif target_destination.y < 10:
 		target_destination.y = 10
+	tween.interpolate_property(self, "position",
+			global_position, target_destination, 1,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+#	var choosing = randi() %2
+#	var choice = [20, -20]
+#	target_destination = global_position + Vector2(0, choice[choosing])
+#	if target_destination.y > 160:
+#		target_destination.y = 160
+#	elif target_destination.y < 10:
+#		target_destination.y = 10

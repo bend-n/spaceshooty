@@ -2,7 +2,7 @@ extends Node2D
 
 #The array where you will input your ranges in the format minimum, maximum, difficulty value. it must always
 #have this format or it will crash or something
-var onscreenmax = 4
+var onscreenmax = 0
 var onscreen = 0
 var score_ranges : Array = [
 	[50, 200, 1],

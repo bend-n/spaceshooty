@@ -67,7 +67,7 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
-extents = Vector2( 8, 9 )
+extents = Vector2( 5, 7 )
 
 [node name="Enemy" type="Area2D"]
 z_index = 1
@@ -93,8 +93,10 @@ autostart = true
 shape = SubResource( 1 )
 
 [node name="sidestep" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_Enemy_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
