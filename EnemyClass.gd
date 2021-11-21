@@ -58,7 +58,7 @@ func _on_sidestep_timeout():
 	var choosing = randi() %2
 	var choice = [20, -20]
 	target_destination = global_position + Vector2(0, choice[choosing])
-	if target_destination.y > 179:
-		target_destination.y = 179
-	elif target_destination.y < 1:
-		target_destination.y = 1
+	if target_destination.y > 160:
+		target_destination.y = 160
+	elif target_destination.y < 10:
+		target_destination.y = 10

@@ -2,7 +2,7 @@ extends Node2D
 
 #The array where you will input your ranges in the format minimum, maximum, difficulty value. it must always
 #have this format or it will crash or something
-var onscreenmax = 5
+var onscreenmax = 4
 var onscreen = 0
 var score_ranges : Array = [
 	[50, 200, 1],
@@ -58,10 +58,10 @@ func _on_process_timeout():
 				timer.wait_time = 4
 			elif score_ranges[i][2] == 3:
 				timer.wait_time = 3
-				onscreenmax = 2
+				onscreenmax = 1
 			else:
 				timer.wait_time = 5
-				onscreenmax = 10
+				onscreenmax = 9
 
 func diff_levels(value):
 	current_difficulty_level = difficulty_levels[value]
