@@ -23,7 +23,6 @@ func _ready() -> void:
 	print(USE_TOUCH)
 	$MobileJoystick/TouchScreenButton.visible = USE_TOUCH
 	$MobileJoystick/MobileControls/Attack.visible = USE_TOUCH
-	$"MobileJoystick/MobileControls/Change gun".visible = USE_TOUCH
 
 func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -66,28 +65,19 @@ func unrotate():
 func flipping():
 	pass
 #	if firing:
-#		$Sprite.flip_h = false
-#		unrotate()
-#	if velocity.x > 0 and velocity.y > 0:
-#		unrotate()
-#	elif velocity.x < 0 and velocity.y < 0:
-#		unrotate()
-#	elif velocity.x > 0:
-#		$Sprite.flip_h = false
-#		unrotate()
-#	elif velocity.x < 0:
 #		$Sprite.flip_h = true
 #		unrotate()
-#	if velocity.y > 0 and firing == true:
-#		sprite.flip_h = false
+#	elif velocity.x != 0 and velocity.y != 0:
+#		if velocity.x > 0:
+#			$Sprite.flip_h = false
+#		elif velocity.x < 0:
+#			$Sprite.flip_h = true
 #		unrotate()
-#	elif velocity.y < 0 and firing == true:
-#		sprite.flip_h = false
-#		unrotate()
-#	elif velocity.y > 0:
-#		$Sprite.rotation_degrees = 90
-#	elif velocity.y < 0:
-#		$Sprite.rotation_degrees = -90
+#	else: 
+#		if velocity.y > 0:
+#			$Sprite.rotation_degrees = 90
+#		elif velocity.y < 0:
+#			$Sprite.rotation_degrees = -90
 
 func rockets():
 	timer.wait_time = .5
