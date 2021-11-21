@@ -15,7 +15,7 @@ var velocity = Vector2.ZERO
 signal player_death
 var ACCELERATION = 500
 var FRICTION = 400
-var recoil = 5
+var recoil = 40
 var input_vector = Vector2.ZERO
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
 
@@ -83,8 +83,8 @@ func rockets():
 	timer.wait_time = .5
 	enemy_damage.min_damage = 10
 	enemy_damage.max_damage = 30
-	movementpenalty = 70
-	recoil = 10
+	movementpenalty = 60
+	recoil = 100
 	attack = preload("res://Rocket.tscn")
 	gun = "rockets"
 	print("ROCKETS AHOY")
@@ -94,7 +94,7 @@ func lasers():
 	enemy_damage.min_damage = 3
 	enemy_damage.max_damage = 6
 	movementpenalty = 20
-	recoil = 5
+	recoil = 40
 	attack = preload("res://Laser.tscn")
 	gun = "lasers"
 	print("BONKITY BONK")
@@ -103,7 +103,7 @@ func splitshot():
 	timer.wait_time = 0.01
 	enemy_damage.min_damage = .2
 	enemy_damage.max_damage = 1
-	recoil = 5
+	recoil = 135
 	movementpenalty = 130
 	attack = preload("res://SplitShot.tscn")
 	gun = "splitshot"
