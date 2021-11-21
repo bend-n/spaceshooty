@@ -61,26 +61,11 @@ func _physics_process(delta):
 			"rockets":
 				lasers()
 	move()
-	flipping()
 func unrotate():
 	$Sprite.rotation_degrees = 0
 
-func flipping():
+func recoil():
 	pass
-#	if firing:
-#		$Sprite.flip_h = true
-#		unrotate()
-#	elif velocity.x != 0 and velocity.y != 0:
-#		if velocity.x > 0:
-#			$Sprite.flip_h = false
-#		elif velocity.x < 0:
-#			$Sprite.flip_h = true
-#		unrotate()
-#	else: 
-#		if velocity.y > 0:
-#			$Sprite.rotation_degrees = 90
-#		elif velocity.y < 0:
-#			$Sprite.rotation_degrees = -90
 
 func rockets():
 	timer.wait_time = .5
@@ -122,6 +107,7 @@ func _on_Timer_timeout(): #shoot
 		var main = get_tree().current_scene
 		main.add_child(laser)
 		laser.global_position = global_position
+		recoil()
 
 
 func _exit_tree():
