@@ -2,6 +2,8 @@ extends Node2D
 
 #The array where you will input your ranges in the format minimum, maximum, difficulty value. it must always
 #have this format or it will crash or something
+var onscreenmax = 5
+var onscreen = 0
 var score_ranges : Array = [
 	[50, 200, 1],
 	[200, 749, 2],
@@ -19,13 +21,15 @@ func _ready():
 
 
 func spawn_enemy_on_current_difficulty():
-	var choices = current_difficulty_level.get_children()
-	var to_spawn = choices[randi() % choices.size()]
-	var clone = to_spawn.duplicate()
-	var main = get_tree().current_scene
-	var spawn_position = get_spawn_position()
-	main.add_child(clone)
-	clone.global_position = spawn_position
+	if onscreen <= onscreenmax:
+		var choices = current_difficulty_level.get_children()
+		var to_spawn = choices[randi() % choices.size()]
+		var clone = to_spawn.duplicate()
+		var main = get_tree().current_scene
+		print(main)
+		var spawn_position = get_spawn_position()
+		main.add_child(clone)
+		clone.global_position = spawn_position
 
 func get_spawn_position():
 	var points = spawnPoints.get_children()
