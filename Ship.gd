@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+onready var animationState = $AnimationTree.get("parameters/playback")
 onready var HitEffect = preload("res://HitEffect.tscn")
 onready var hitSound = $AudioStreamPlayer
 const ExplosionEffect = preload("res://ExplosionEffect.tscn")
@@ -23,6 +24,7 @@ func _ready() -> void:
 	print(USE_TOUCH)
 	$MobileJoystick/TouchScreenButton.visible = USE_TOUCH
 	$MobileJoystick/MobileControls/Attack.visible = USE_TOUCH
+	$AnimationTree.active = true
 
 func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -34,8 +36,10 @@ func _physics_process(delta):
 	if input_vector != Vector2.ZERO:#moves ya
 		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
 		$AnimationTree.set("parameters/Turn/blend_position", input_vector)
+		animationState.travel("Turn")
 	else:
 		#stops you
+		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	if firing:
