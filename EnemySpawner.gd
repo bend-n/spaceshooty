@@ -14,6 +14,7 @@ onready var timer = $Enemytimer
 onready var spawnPoints = $SpawnPoints
 var difficulty_levels:Array
 var current_difficulty_level
+onready var main = get_node("../EnemyHolder")
 
 func _ready():
 	difficulty_levels = load("res://Difficulty Scaling.tscn").instance().get_children();
@@ -21,15 +22,16 @@ func _ready():
 
 
 func spawn_enemy_on_current_difficulty():
+	onscreen = main.get_child_count()
 	if onscreen <= onscreenmax:
 		var choices = current_difficulty_level.get_children()
 		var to_spawn = choices[randi() % choices.size()]
 		var clone = to_spawn.duplicate()
-		var main = get_tree().current_scene
-		print(main)
+		main = get_node("../EnemyHolder")
 		var spawn_position = get_spawn_position()
 		main.add_child(clone)
 		clone.global_position = spawn_position
+		print(onscreen)
 
 func get_spawn_position():
 	var points = spawnPoints.get_children()
@@ -55,9 +57,11 @@ func _on_process_timeout():
 			elif score_ranges[i][2] == 2:
 				timer.wait_time = 4
 			elif score_ranges[i][2] == 3:
-				timer.wait_time = 15
+				timer.wait_time = 3
+				onscreenmax = 2
 			else:
 				timer.wait_time = 5
+				onscreenmax = 10
 
 func diff_levels(value):
 	current_difficulty_level = difficulty_levels[value]

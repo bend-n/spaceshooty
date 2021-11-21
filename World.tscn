@@ -56,4 +56,6 @@ collision_layer = 0
 position = Vector2( -17, 81 )
 shape = SubResource( 4 )
 
+[node name="EnemyHolder" type="Node2D" parent="."]
+
 [connection signal="player_death" from="Ship" to="." method="_on_Ship_player_death"]
