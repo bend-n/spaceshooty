@@ -9,7 +9,6 @@ var ARMOR = 3
 var firing = null
 export(int) var SPEED = 100
 onready var timer = $Timer
-var gun = "lasers"
 var movementpenalty = 20
 onready var sprite = $Sprite
 var velocity = Vector2.ZERO
@@ -54,7 +53,7 @@ func _physics_process(delta):
 	else:
 		firing = false
 	if Input.is_action_just_pressed("ui_focus_next"):
-		match gun:
+		match playerstats.gun:
 			"lasers":
 				splitshot()
 			"splitshot":
@@ -90,7 +89,7 @@ func rockets():
 	movementpenalty = 60
 	recoil = 100
 	attack = preload("res://Rocket.tscn")
-	gun = "rockets"
+	playerstats.gun = "rockets"
 	print("ROCKETS AHOY")
 
 func lasers():
@@ -100,7 +99,7 @@ func lasers():
 	movementpenalty = 20
 	recoil = 40
 	attack = preload("res://Laser.tscn")
-	gun = "lasers"
+	playerstats.gun = "lasers"
 	print("BONKITY BONK")
 
 func splitshot():
@@ -110,7 +109,7 @@ func splitshot():
 	recoil = 135
 	movementpenalty = 130
 	attack = preload("res://SplitShot.tscn")
-	gun = "splitshot"
+	playerstats.gun = "splitshot"
 	print("BAP BAP BAP")
 
 func move():
@@ -145,8 +144,8 @@ func play():
 	hitSound.play()
 
 func _on_AudioStreamPlayer_finished():
-	ARMOR -= 1
-	if ARMOR <= 0:
+	playerstats.hp -= 1
+	if playerstats.hp <= 0:
 		queue_free()
 
 func create_hit_effect():

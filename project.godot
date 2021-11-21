@@ -61,6 +61,7 @@ config/icon="res://icon.png"
 Music="*res://Music.tscn"
 SaveAndLoad="*res://Save&Load.gd"
 enemy_damage="*res://enemy_damage.gd"
+playerstats="*res://playerstats.gd"
 
 [display]
 

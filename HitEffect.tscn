@@ -1,14 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Hit.wav" type="AudioStream" id=1]
-
-[sub_resource type="ParticlesMaterial" id=1]
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 60.0
-initial_velocity_random = 0.75
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Hit"
@@ -47,14 +39,16 @@ stream = ExtResource( 1 )
 volume_db = -30.0
 autoplay = true
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Particles2D" type="CPUParticles2D" parent="."]
 scale = Vector2( 2, 2 )
 emitting = false
 amount = 3
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 1 )
+gravity = Vector2( 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.75
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Hit"
