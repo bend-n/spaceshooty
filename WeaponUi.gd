@@ -5,9 +5,12 @@ func _process(delta) -> void:
 		"rockets":
 			$Rocket.visible = true
 			$Split.visible = false
+			$Laser.visible = false
 		"lasers":
 			$Laser.visible = true
 			$Rocket.visible = false
+			$Split.visible = false
 		"splitshot":
 			$Split.visible = true
 			$Laser.visible = false
+			$Rocket.visible = false
