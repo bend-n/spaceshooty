@@ -1,5 +1,8 @@
 extends Node
 
+var splitshot = false
+var rockets = false
+var lasers = true
 var gun = "lasers"
 export(int) var max_hp = 3 setget set_max_health
 var hp = max_hp setget set_health

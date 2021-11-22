@@ -18,6 +18,9 @@ var FRICTION = 400
 var recoil = 40
 var input_vector = Vector2.ZERO
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
+var splitshot = playerstats.splitshot
+var rockets = playerstats.rockets
+var lasers = playerstats.lasers
 
 
 func _ready() -> void:
@@ -55,10 +58,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_focus_next"):
 		match playerstats.gun:
 			"lasers":
-				splitshot()
-			"splitshot":
 				rockets()
 			"rockets":
+				splitshot()
+			"splitshot":
 				lasers()
 	move()
 func unrotate():

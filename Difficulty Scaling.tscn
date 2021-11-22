@@ -44,3 +44,9 @@
 [node name="Congrats_you beat the game now die" type="Node2D" parent="."]
 
 [node name="Boss2" parent="Congrats_you beat the game now die" instance=ExtResource( 8 )]
+
+[node name="fuckyou" type="Node2D" parent="."]
+
+[node name="Boss2" parent="fuckyou" instance=ExtResource( 8 )]
+
+[node name="Boss" parent="fuckyou" instance=ExtResource( 5 )]
