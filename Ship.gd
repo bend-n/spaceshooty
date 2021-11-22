@@ -133,8 +133,8 @@ func play():
 func _on_AudioStreamPlayer_finished():
 	playerstats.hp -= 1
 	if playerstats.hp <= 0:
-		queue_free()
-
+		$AnimationPlayer.play("Die Anim")
+		playerstats.hp = playerstats.max_hp
 func create_hit_effect():
 	var main = get_tree().current_scene
 	var hitEffect = HitEffect.instance()

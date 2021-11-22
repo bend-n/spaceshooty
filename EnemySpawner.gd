@@ -49,7 +49,7 @@ func _on_Timer_timeout():
 func _on_process_timeout():
 	var world = get_tree().current_scene
 	for i in score_ranges.size():
-		if main.score in range(score_ranges[i][0], score_ranges[i][1], 1):
+		if world.score in range(score_ranges[i][0], score_ranges[i][1], 1):
 			#set your dificulty to score_ranges[i][2]
 			diff_levels(score_ranges[i][2])
 			if score_ranges[i][2] == 1:

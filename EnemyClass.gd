@@ -13,6 +13,7 @@ var target_destination = Vector2.ZERO
 var damagetobesubtracted 
 export var stop_pos = Vector2(200, 0)
 onready var tween = $Tween
+
 func _ready():
 	timer.wait_time = shootspeed
 	target_destination = global_position
@@ -20,9 +21,11 @@ func _ready():
 func _process(delta):
 	if global_position.x > stop_pos.x:
 		global_position.x -= SPEED * delta
+
 func _on_Enemy_body_entered(body):
 	body.create_hit_effect()
-	body.queue_free()
+	if body != body.is_in_group("Player"):
+		body.queue_free()
 	damagetobesubtracted = rand_range(enemy_damage.min_damage, enemy_damage.max_damage)
 	damagetobesubtracted = round(damagetobesubtracted)
 	ARMOR -= damagetobesubtracted
