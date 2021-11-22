@@ -4,7 +4,7 @@ var score = 0 setget set_score
 
 onready var scoreLabel = $ScoreLabel
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_home"):
 		set_score (2500)
 	if Input.is_action_just_pressed("cheat"):

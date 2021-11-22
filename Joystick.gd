@@ -9,7 +9,6 @@ func weighted_average (a: Vector2, b: Vector2, weight: float) -> Vector2:
 var radius: float
 var center: Vector2
 var event_index = -1
-signal force
 var in_use: bool = false
 var force: Vector2 = Vector2()
 onready var FRICTION = 400
