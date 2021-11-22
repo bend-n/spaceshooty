@@ -7,6 +7,7 @@ func _ready():
 	set_highscore_label()
 	print(USE_TOUCH)
 	$TouchScreenButton.visible = USE_TOUCH
+	$AnimatedSprite.play("hole")
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
