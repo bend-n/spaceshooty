@@ -1641,7 +1641,7 @@ position = Vector2( 296, 112 )
 rotation = 1.5708
 frames = SubResource( 53 )
 animation = "New Anim"
-frame = 216
+frame = 65
 playing = true
 
 [node name="GameOverLabel" type="Label" parent="."]
