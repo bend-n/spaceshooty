@@ -24,7 +24,7 @@ func _process(delta):
 
 func _on_Enemy_body_entered(body):
 	body.create_hit_effect()
-	if body != body.is_in_group("Player"):
+	if not body.is_in_group("Player"):
 		body.queue_free()
 	damagetobesubtracted = rand_range(enemy_damage.min_damage, enemy_damage.max_damage)
 	damagetobesubtracted = round(damagetobesubtracted)

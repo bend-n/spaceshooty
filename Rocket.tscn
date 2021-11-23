@@ -23,7 +23,7 @@ format = 1
 
 [node name="Rocket" instance=ExtResource( 1 )]
 mass = 60.0
-linear_velocity = Vector2( 300, 0 )
+linear_velocity = Vector2( 400, 0 )
 spread = false
 
 [node name="Laser" parent="." index="0"]
