@@ -2,7 +2,6 @@ extends Node
 
 onready var highscoreLabel = $Label
 
-
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 # warning-ignore:return_value_discarded
@@ -14,5 +13,6 @@ func _process(_delta):
 
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
 func _ready() -> void:
+	$AnimatedSprite.play("default")
 	print(USE_TOUCH)
 	$MobileControls/Attack.visible = USE_TOUCH
