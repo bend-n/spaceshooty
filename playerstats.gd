@@ -1,6 +1,7 @@
 extends Node
 
 var splitshot = false
+var multiplayerlocal = false
 var rockets = false
 var lasers = true
 var gun = "lasers"

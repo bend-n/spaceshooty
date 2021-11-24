@@ -1,10 +1,12 @@
-[gd_scene load_steps=407 format=2]
+[gd_scene load_steps=409 format=2]
 
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
 [ext_resource path="res://StartMenu.gd" type="Script" id=2]
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MobileControls.tscn" type="PackedScene" id=4]
 [ext_resource path="res://blackhoole.png" type="Texture" id=5]
+[ext_resource path="res://localmultiplayer.png" type="Texture" id=6]
+[ext_resource path="res://Ship.png" type="Texture" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )
@@ -1666,5 +1668,22 @@ __meta__ = {
 
 [node name="Change gun" parent="MobileControls" index="1"]
 visible = false
+
+[node name="TextureButton" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -32.0
+margin_right = 12.0
+toggle_mode = true
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="toggled" from="TextureButton" to="." method="_on_TextureButton_toggled"]
 
 [editable path="MobileControls"]

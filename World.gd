@@ -3,12 +3,13 @@ extends Node
 var score = 0 setget set_score
 
 onready var scoreLabel = $ScoreLabel
+onready var player = preload("res://Ship.tscn")
 
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_home"):
-		set_score (2500)
-	if Input.is_action_just_pressed("cheat"):
-		set_score(2500)
+func _ready():
+	if playerstats.multiplayerlocal:
+		var Player = player.instance()
+		self.add_child(Player)
+		Player.id = 2
 
 func set_score(value):
 	score = value

@@ -16,7 +16,7 @@ position = Vector2( 280, 144 )
 normal = ExtResource( 2 )
 shape = SubResource( 1 )
 passby_press = true
-action = "ui_accept"
+action = "shoot_1"
 
 [node name="Change gun" type="TouchScreenButton" parent="."]
 modulate = Color( 1, 1, 1, 0.392157 )

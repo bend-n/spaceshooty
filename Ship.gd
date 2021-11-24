@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+
+export var id = 1
 onready var animationState = $AnimationTree.get("parameters/playback")
 onready var HitEffect = preload("res://HitEffect.tscn")
 onready var hitSound = $AudioStreamPlayer
@@ -30,8 +32,8 @@ func _ready() -> void:
 	$AnimationTree.active = true
 
 func _physics_process(delta):
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector.x = Input.get_action_strength('right_%s' % id) - Input.get_action_strength('left_%s' % id)
+	input_vector.y = Input.get_action_strength('down_%s' % id) - Input.get_action_strength('up_%s' % id)
 	input_vector = input_vector.normalized()
 	if $MobileJoystick/TouchScreenButton.in_use:
 		input_vector = $MobileJoystick/TouchScreenButton.force
@@ -51,11 +53,11 @@ func _physics_process(delta):
 		SPEED = 100
 	if Input.is_action_just_pressed("ui_end"):
 		queue_free()
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed('shoot_%s' % id):
 		firing = true
 	else:
 		firing = false
-	if Input.is_action_just_pressed("ui_focus_next"):
+	if Input.is_action_just_pressed("change_gun_%s" % id):
 		match playerstats.gun:
 			"lasers":
 				rockets()

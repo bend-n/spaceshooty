@@ -32,7 +32,7 @@ __meta__ = {
 [node name="Stars" parent="." instance=ExtResource( 6 )]
 
 [node name="Ship" parent="." instance=ExtResource( 1 )]
-position = Vector2( 32, 90 )
+position = Vector2( 32, 136 )
 z_index = 1
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 3 )]
