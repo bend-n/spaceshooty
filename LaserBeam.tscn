@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://laserbeam.png" type="Texture" id=1]
 [ext_resource path="res://laserbeamstart.png" type="Texture" id=2]
 [ext_resource path="res://LaserBeam.gd" type="Script" id=3]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://collidr.gd" type="Script" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -13,7 +15,10 @@ blend_mode = 1
 offsets = PoolRealArray( 0, 0.90625 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[node name="LaserBeam" type="Node2D"]
+[sub_resource type="CircleShape2D" id=5]
+radius = 8.0
+
+[node name="LaserBeam" type="Node2D" groups=["laser"]]
 script = ExtResource( 3 )
 
 [node name="Begin" type="Sprite" parent="."]
@@ -23,30 +28,47 @@ texture = ExtResource( 2 )
 material = SubResource( 1 )
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( 0, -8 )
+offset = Vector2( 0, -11 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 100, 16 )
+region_rect = Rect2( 0, 0, 100, 17.8645 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 100, 0 )
+collision_mask = 130
+collide_with_areas = true
 
 [node name="End" type="Position2D" parent="."]
 position = Vector2( 100, 0 )
 
 [node name="Particles2D" type="CPUParticles2D" parent="End"]
 material = SubResource( 4 )
-emitting = false
-lifetime = 0.25
+z_index = 1
+amount = 6
+lifetime = 0.2
 preprocess = 0.25
+speed_scale = 0.3
+explosiveness = 0.5
+randomness = 1.0
 texture = ExtResource( 2 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 100.0
 initial_velocity_random = 0.5
-angular_velocity = 10.0
+angular_velocity = 80.0
 angular_velocity_random = 1.0
+angle = 30.0
+angle_random = 1.0
 scale_amount = 0.5
 color_ramp = SubResource( 3 )
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 100, 0 )
+[node name="collidr" type="KinematicBody2D" parent="End" groups=["laser"]]
+collision_layer = 0
 collision_mask = 2
-collide_with_areas = true
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="End/collidr"]
+shape = SubResource( 5 )
+
+[node name="Enemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 242, 62 )

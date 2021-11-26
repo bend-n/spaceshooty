@@ -1,5 +1,7 @@
 extends Area2D
 
+var beammade = false
+var beam
 export var id = 1
 onready var animationState = $AnimationTree.get("parameters/playback")
 onready var HitEffect = preload("res://HitEffect.tscn")
@@ -26,7 +28,6 @@ signal velocity
 signal force
 
 func _ready() -> void:
-	print(USE_TOUCH)
 	$MobileJoystick/TouchScreenButton.visible = USE_TOUCH
 	$MobileJoystick/MobileControls/Attack.visible = USE_TOUCH
 	$AnimationTree.active = true
@@ -66,6 +67,9 @@ func _physics_process(delta):
 			"rockets":
 				splitshot()
 			"splitshot":
+				beam()
+				shoot_beam()
+			"beam":
 				lasers()
 	move()
 
@@ -109,6 +113,18 @@ func splitshot():
 	playerstats.gun = "splitshot"
 	print("BAP BAP BAP")
 
+func beam():
+	enemy_damage.min_damage = .5
+	enemy_damage.max_damage = 2
+	movementpenalty = 20
+	beam = preload("res://LaserBeam.tscn")
+	playerstats.gun = "beam"
+
+func shoot_beam():
+	var b = beam.instance()
+	if beammade == false:
+		get_parent().add_child(b)
+
 func move():
 	emit_signal("velocity", velocity)
 
@@ -123,6 +139,8 @@ func _on_Timer_timeout(): #shoot
 			main.add_child(m)
 			m.global_position = global_position
 			m.start(self.global_transform, target)
+		elif playerstats.gun == "beam":
+			pass
 		else:
 			velocity.x -= recoil
 			var laser = attack.instance()

@@ -91,9 +91,9 @@ animations = [ {
 resource_local_to_scene = true
 extents = Vector2( 4, 6 )
 
-[node name="EnemyLaser" type="RigidBody2D"]
+[node name="EnemyLaser" type="RigidBody2D" groups=["ebullet"]]
 z_index = 1
-collision_layer = 2
+collision_layer = 128
 mass = 20.0
 gravity_scale = 0.0
 linear_velocity = Vector2( -50, 0 )
@@ -107,6 +107,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 14 )
 animation = "New Anim"
+frame = 9
 playing = true
 flip_h = true
 

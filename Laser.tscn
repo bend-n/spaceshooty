@@ -93,7 +93,7 @@ spreadmaxneg = -3
 
 [node name="Laser" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
-frame = 5
+frame = 4
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

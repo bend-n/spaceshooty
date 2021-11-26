@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-
+var beaming = false
 export var ARMOR = 20
 export var score_on_kill = 10
 const ExplosionEffect = preload("res://ExplosionEffect.tscn")
@@ -22,10 +22,7 @@ func _process(delta):
 	if global_position.x > stop_pos.x:
 		global_position.x -= SPEED * delta
 
-func _on_Enemy_body_entered(body):
-	body.create_hit_effect()
-	if not body.is_in_group("Player"):
-		body.queue_free()
+func damage():
 	damagetobesubtracted = rand_range(enemy_damage.min_damage, enemy_damage.max_damage)
 	damagetobesubtracted = round(damagetobesubtracted)
 	ARMOR -= damagetobesubtracted
@@ -33,6 +30,29 @@ func _on_Enemy_body_entered(body):
 		add_to_score()
 		create_explosion()
 		queue_free()
+
+func _on_Enemy_body_entered(body):
+	body.create_hit_effect()
+	if not body.is_in_group("laser"):
+		if not body.is_in_group("Player"):
+			body.queue_free()
+			damage()
+
+	elif body.is_in_group("laser"):
+		var beam = get_overlapping_bodies()
+		if beam != null:
+			beaming = true
+			beam()
+		else:
+			beaming = false
+
+func _on_laser_timer_timeout():
+	if beaming == true:
+		beam()
+
+func beam():
+	damage()
+
 
 func add_to_score():
 	var main = get_tree().current_scene

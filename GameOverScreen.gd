@@ -5,7 +5,6 @@ var USE_TOUCH = OS.has_touchscreen_ui_hint()
 
 func _ready():
 	set_highscore_label()
-	print(USE_TOUCH)
 	$TouchScreenButton.visible = USE_TOUCH
 	$AnimatedSprite.play("hole")
 

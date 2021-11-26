@@ -99,7 +99,12 @@ autostart = true
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="laser timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_Enemy_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="sidestep" to="." method="_on_sidestep_timeout"]
+[connection signal="timeout" from="laser timer" to="." method="_on_laser_timer_timeout"]

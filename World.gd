@@ -11,6 +11,7 @@ func _ready():
 		self.add_child(Player)
 		Player.id = 2
 
+
 func set_score(value):
 	score = value
 	update_score_label()
@@ -25,8 +26,6 @@ func update_save_data():
 		SaveAndLoad.save_data_to_file(save_data)
 
 func _on_Ship_player_death():
-	$CanvasLayer.visible = false
-	$Ship/Ship/MobileJoystick.visible = false
 	playerstats.hp = playerstats.max_hp
 	update_save_data()
 	yield(get_tree().create_timer(1), "timeout")
