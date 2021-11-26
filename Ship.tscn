@@ -291,7 +291,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 3 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Turn/blend_position = Vector2( 1, 0 )
+parameters/Turn/blend_position = Vector2( 0, 0 )
 
 [node name="Collision" type="CollisionShape2D" parent="Ship"]
 visible = false
@@ -322,12 +322,6 @@ volume_db = -20.0
 [node name="MobileJoystick" parent="Ship" instance=ExtResource( 4 )]
 
 [node name="MobileControls" parent="Ship/MobileJoystick" instance=ExtResource( 5 )]
-
-[node name="Sprite2" type="Sprite" parent="Ship"]
-z_index = 2
-z_as_relative = false
-texture = ExtResource( 2 )
-hframes = 9
 
 [connection signal="area_entered" from="damage" to="Ship" method="_on_Ship_area_entered"]
 [connection signal="body_entered" from="damage" to="Ship" method="_on_Ship_body_entered"]

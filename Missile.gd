@@ -28,12 +28,6 @@ func _physics_process(delta):
 	rotation = velocity.angle()
 	add_central_force(velocity * speed * delta)
 
-func _on_Missile_body_entered(body):
-	queue_free()
-
-func _on_Lifetime_timeout():
-	queue_free()
-
 func create_hit_effect():
 	var main = get_tree().current_scene
 	var hitEffect = HitEffect.instance()

@@ -19,6 +19,7 @@ mass = 40.0
 gravity_scale = 0.0
 script = ExtResource( 1 )
 speed = 100
+steer_force = 75.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

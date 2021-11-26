@@ -78,7 +78,7 @@ extents = Vector2( 4.5, 4 )
 [node name="Laser" type="RigidBody2D" groups=["pbullet"]]
 show_behind_parent = true
 collision_layer = 0
-collision_mask = 2
+collision_mask = 130
 mass = 5.0
 gravity_scale = 0.0
 linear_velocity = Vector2( 100, 0 )
@@ -93,7 +93,7 @@ spreadmaxneg = -3
 
 [node name="Laser" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

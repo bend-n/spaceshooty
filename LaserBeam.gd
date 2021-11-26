@@ -1,10 +1,11 @@
 extends Node2D
 
 const MAX_LENGTH = 500
-
+var Ray
 onready var beam = $Beam
 onready var end = $End
 onready var rayCast = $RayCast2D
+
 
 func _physics_process(_delta):
 	var mouse_position = get_local_mouse_position()
