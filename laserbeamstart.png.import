@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bigenemylasers.png-052ae5c1a4737f5a70c0dcc67f0acd4d.stex"
+path="res://.import/laserbeamstart.png-4a88b1c2adc1df650e1fc30440420c37.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bigenemylasers.png"
-dest_files=[ "res://.import/bigenemylasers.png-052ae5c1a4737f5a70c0dcc67f0acd4d.stex" ]
+source_file="res://laserbeamstart.png"
+dest_files=[ "res://.import/laserbeamstart.png-4a88b1c2adc1df650e1fc30440420c37.stex" ]
 
 [params]
 

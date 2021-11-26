@@ -107,7 +107,6 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 14 )
 animation = "New Anim"
-frame = 10
 playing = true
 flip_h = true
 

@@ -67,10 +67,4 @@ func _on_sidestep_timeout():
 			global_position, target_destination, 1,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-#	var choosing = randi() %2
-#	var choice = [20, -20]
-#	target_destination = global_position + Vector2(0, choice[choosing])
-#	if target_destination.y > 160:
-#		target_destination.y = 160
-#	elif target_destination.y < 10:
-#		target_destination.y = 10
+

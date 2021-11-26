@@ -1,14 +1,19 @@
 extends RigidBody2D
 
+export var homing = false
+export var steer_force = 50.0
 export var speed = 400
 export var spreadminpos:int
 export var spreadmaxpos:int
 export var spreadmaxneg:int
 export var spreadminneg:int
 export var spread = true
+var target = null 
 var rotation_pos
 var rotation_neg
 var to_rotate
+var dir = Vector2.ZERO
+var velocity
 
 const HitEffect = preload("res://HitEffect.tscn")
 var choosing = 0
@@ -36,9 +41,10 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _physics_process(delta):
-	if spread:
-		var dir = Vector2.RIGHT.rotated(rotation)
-		add_central_force(dir * speed * delta)
+	if spread or homing:
+		dir = Vector2.RIGHT.rotated(rotation)
+		velocity = dir * speed * delta
+		add_central_force(velocity)
 
 
 func _on_Timer_timeout():

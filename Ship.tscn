@@ -1,16 +1,17 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://ship.png" type="Texture" id=2]
 [ext_resource path="res://ShipHit.wav" type="AudioStream" id=3]
 [ext_resource path="res://MobileJoystick.tscn" type="PackedScene" id=4]
 [ext_resource path="res://MobileControls.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ShipArea2d.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=38]
 resource_name = "Die Anim"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/path = NodePath("Ship/CPUParticles2D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -239,16 +240,16 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
+[sub_resource type="CircleShape2D" id=39]
+radius = 318.496
+
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 17
 collision_mask = 9
 script = ExtResource( 1 )
 
-[node name="MobileJoystick" parent="." instance=ExtResource( 4 )]
-
-[node name="MobileControls" parent="MobileJoystick" instance=ExtResource( 5 )]
-
-[node name="Collision2" type="CollisionPolygon2D" parent="."]
+[node name="Collision3" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( -7, -4, -4, -4, -4, -6, -1, -6, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -1, 6, -4, 6, -4, 4, -7, 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -256,24 +257,20 @@ texture = ExtResource( 2 )
 hframes = 9
 frame = 1
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
+[node name="damage" type="Area2D" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -20.0
-
-[node name="Ship" type="Area2D" parent="."]
-z_index = 2
-collision_layer = 0
-collision_mask = 2
-
-[node name="Collision" type="CollisionPolygon2D" parent="Ship"]
+[node name="Collision2" type="CollisionPolygon2D" parent="damage"]
 visible = false
-polygon = PoolVector2Array( -7, -4, -7, -7, -4, -7, -4, -5, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -4, 5, -5, 7, -7, 7, -7, 4 )
+polygon = PoolVector2Array( -7, -4, -4, -4, -4, -6, -1, -6, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -1, 6, -4, 6, -4, 4, -7, 4 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Ship" type="Area2D" parent="." groups=["Player"]]
+z_index = 2
+collision_layer = 32
+collision_mask = 32
+script = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ship"]
+root_node = NodePath("../..")
 "anims/Die Anim" = SubResource( 38 )
 anims/Down = SubResource( 5 )
 anims/IdleDown = SubResource( 22 )
@@ -283,7 +280,7 @@ anims/RESET = SubResource( 17 )
 anims/Right = SubResource( 7 )
 anims/Up = SubResource( 4 )
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="Ship"]
 tree_root = SubResource( 27 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
@@ -291,7 +288,15 @@ parameters/playback = SubResource( 3 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Turn/blend_position = Vector2( 1, 0 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="Ship"]
+visible = false
+shape = SubResource( 39 )
+
+[node name="Timer" type="Timer" parent="Ship"]
+wait_time = 0.1
+autostart = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Ship"]
 scale = Vector2( 2, 2 )
 emitting = false
 amount = 100
@@ -305,10 +310,20 @@ direction = Vector2( 1, -1 )
 spread = 100.0
 initial_velocity = 90.0
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
-[connection signal="area_entered" from="Ship" to="." method="_on_Ship_area_entered"]
-[connection signal="body_entered" from="Ship" to="." method="_on_Ship_body_entered"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ship"]
+stream = ExtResource( 3 )
+volume_db = -20.0
 
-[editable path="MobileJoystick"]
-[editable path="MobileJoystick/MobileControls"]
+[node name="MobileJoystick" parent="Ship" instance=ExtResource( 4 )]
+
+[node name="MobileControls" parent="Ship/MobileJoystick" instance=ExtResource( 5 )]
+
+[connection signal="area_entered" from="damage" to="Ship" method="_on_Ship_area_entered"]
+[connection signal="body_entered" from="damage" to="Ship" method="_on_Ship_body_entered"]
+[connection signal="force" from="Ship" to="." method="_on_Ship_force"]
+[connection signal="velocity" from="Ship" to="." method="_on_Ship_velocity"]
+[connection signal="timeout" from="Ship/Timer" to="Ship" method="_on_Timer_timeout"]
+[connection signal="finished" from="Ship/AudioStreamPlayer" to="Ship" method="_on_AudioStreamPlayer_finished"]
+
+[editable path="Ship/MobileJoystick"]
+[editable path="Ship/MobileJoystick/MobileControls"]
