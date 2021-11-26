@@ -1,6 +1,8 @@
 extends KinematicBody2D
 onready var HitEffect = preload("res://HitEffect.tscn")
 export var id = 1 setget set_id
+signal player_death
+signal remove_beam
 
 func set_id(value):
 	$Ship.id = value
@@ -16,3 +18,11 @@ func create_hit_effect():
 	var hitEffect = HitEffect.instance()
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
+
+
+func _on_Ship_player_death():
+	emit_signal("player_death")
+
+
+func _on_Ship_remove_beam(b):
+	emit_signal("remove_beam", b)

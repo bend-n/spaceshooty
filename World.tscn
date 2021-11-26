@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -8,8 +8,6 @@
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=6]
 [ext_resource path="res://HpUi.tscn" type="PackedScene" id=7]
 [ext_resource path="res://WeaponUi.tscn" type="PackedScene" id=8]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 4 )
@@ -60,9 +58,6 @@ __meta__ = {
 [node name="Ship" parent="." instance=ExtResource( 1 )]
 position = Vector2( 32, 136 )
 z_index = 1
-
-[node name="AnimationTree" parent="Ship/Ship" index="1"]
-parameters/playback = SubResource( 6 )
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 3 )]
 position = Vector2( 320, 0 )
@@ -124,8 +119,4 @@ cell_size = Vector2( 3, 3 )
 format = 1
 tile_data = PoolIntArray( 5177420, 0, 0, 5177421, 0, 0, 5177422, 0, 0, 5177423, 0, 0, 5177424, 0, 0, 5242956, 0, 0, 5242960, 0, 0, 5308492, 0, 0, 5308496, 0, 0, 5374028, 0, 0, 5374029, 0, 0, 5374030, 0, 0, 5374031, 0, 0, 5374032, 0, 0 )
 
-[connection signal="player_death" from="Ship/Ship" to="." method="_on_Ship_player_death"]
-
-[editable path="Ship"]
-[editable path="Ship/Ship/MobileJoystick"]
-[editable path="Ship/Ship/MobileJoystick/MobileControls"]
+[connection signal="player_death" from="Ship" to="." method="_on_Ship_player_death"]

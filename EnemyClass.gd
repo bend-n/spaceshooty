@@ -42,7 +42,7 @@ func _on_Enemy_body_entered(body):
 		var beam = get_overlapping_bodies()
 		if beam != null:
 			beaming = true
-			beam()
+
 		else:
 			beaming = false
 

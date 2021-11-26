@@ -10,6 +10,7 @@ func _ready():
 		var Player = player.instance()
 		self.add_child(Player)
 		Player.id = 2
+	connect("player_death", self, "_on_Ship_player_death")
 
 
 func set_score(value):

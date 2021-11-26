@@ -14,7 +14,7 @@ colors = PoolColorArray( 0.429688, 0.429688, 0.429688, 0.846847, 0.372549, 0.372
 
 [node name="RigidBody2D" type="RigidBody2D" groups=["pbullet"]]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 130
 mass = 40.0
 gravity_scale = 0.0
 script = ExtResource( 1 )

@@ -1,7 +1,8 @@
 extends Area2D
-
-var beammade = false
-var beam
+var b
+var Beam
+onready var beam = preload("res://LaserBeam.tscn")
+var beaming = false
 export var id = 1
 onready var animationState = $AnimationTree.get("parameters/playback")
 onready var HitEffect = preload("res://HitEffect.tscn")
@@ -33,6 +34,7 @@ func _ready() -> void:
 	$AnimationTree.active = true
 
 func _physics_process(delta):
+	shoot_beam()
 	if !target or not is_instance_valid(target):
 		find_target()
 	input_vector.x = Input.get_action_strength('right_%s' % id) - Input.get_action_strength('left_%s' % id)
@@ -64,12 +66,15 @@ func _physics_process(delta):
 		match playerstats.gun:
 			"lasers":
 				rockets()
+				beaming = false
 			"rockets":
 				splitshot()
+				beaming = false
 			"splitshot":
 				beam()
-				shoot_beam()
+				beaming = true
 			"beam":
+				beaming = false
 				lasers()
 	move()
 
@@ -113,17 +118,22 @@ func splitshot():
 	playerstats.gun = "splitshot"
 	print("BAP BAP BAP")
 
+# warning-ignore:function_conflicts_variable
 func beam():
-	enemy_damage.min_damage = .5
-	enemy_damage.max_damage = 2
+	enemy_damage.min_damage = 1
+	enemy_damage.max_damage = 4
 	movementpenalty = 20
-	beam = preload("res://LaserBeam.tscn")
 	playerstats.gun = "beam"
 
 func shoot_beam():
-	var b = beam.instance()
-	if beammade == false:
-		get_parent().add_child(b)
+	if beaming:
+		if Beam == null:
+			Beam = beam.instance()
+			add_child(Beam)
+			Beam.show_behind_parent = true
+	elif Beam != null:
+		Beam.queue_free()
+		Beam = null
 
 func move():
 	emit_signal("velocity", velocity)
