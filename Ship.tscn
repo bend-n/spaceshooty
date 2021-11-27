@@ -268,6 +268,7 @@ visible = false
 polygon = PoolVector2Array( -7, -4, -4, -4, -4, -6, -1, -6, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -1, 6, -4, 6, -4, 4, -7, 4 )
 
 [node name="Ship" type="Area2D" parent="." groups=["Player"]]
+show_behind_parent = true
 z_index = 2
 z_as_relative = false
 collision_layer = 32

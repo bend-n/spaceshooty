@@ -1,7 +1,7 @@
 extends Area2D
 var b
 var Beam
-onready var beam = preload("res://LaserBeam.tscn")
+onready var beam = preload("res://LaserBeamTest.tscn")
 var beaming = false
 export var id = 1
 onready var animationState = $AnimationTree.get("parameters/playback")

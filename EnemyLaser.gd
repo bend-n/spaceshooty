@@ -17,7 +17,3 @@ func create_hit_effect():
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
-
-func _on_Timer_timeout():
-	#set_collision_mask_bit(1, true)
-	pass

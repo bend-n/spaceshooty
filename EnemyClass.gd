@@ -32,17 +32,15 @@ func damage():
 		queue_free()
 
 func _on_Enemy_body_entered(body):
-	body.create_hit_effect()
 	if not body.is_in_group("laser"):
+		body.create_hit_effect()
 		if not body.is_in_group("Player"):
 			body.queue_free()
 			damage()
-
 	elif body.is_in_group("laser"):
 		var beam = get_overlapping_bodies()
 		if beam != null:
 			beaming = true
-
 		else:
 			beaming = false
 
