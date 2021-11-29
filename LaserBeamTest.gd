@@ -8,7 +8,7 @@ var max_bounces = 5
 func _ready():
 	on = true
 
-func _process(delta):
+func _process(_delta):
 	line.clear_points()
 	if on:
 		ray.clear_exceptions()
@@ -18,7 +18,6 @@ func _process(delta):
 		ray.cast_to = (get_global_mouse_position()- line.global_position).normalized() * 500
 		ray.force_raycast_update()
 		
-		var prev = null
 		var bounces = 0
 		
 		while true:

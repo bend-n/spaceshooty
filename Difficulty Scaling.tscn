@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://EasyEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://StronkEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://StronkUfo.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Boss2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://lightableenemy.tscn" type="PackedScene" id=9]
 
 [node name="Difficulty Scaling" type="Node2D"]
 
@@ -50,3 +51,7 @@
 [node name="Boss2" parent="fuckyou" instance=ExtResource( 8 )]
 
 [node name="Boss" parent="fuckyou" instance=ExtResource( 5 )]
+
+[node name="worse, even" type="Node2D" parent="."]
+
+[node name="Enemy" parent="worse, even" instance=ExtResource( 9 )]

@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name playerkinematic
 onready var HitEffect = preload("res://HitEffect.tscn")
 export var id = 1 setget set_id
 signal player_death
@@ -8,9 +9,11 @@ func set_id(value):
 	$Ship.id = value
 
 func _on_Ship_force(force):
+# warning-ignore:return_value_discarded
 	move_and_slide(force)
 
 func _on_Ship_velocity(velocity):
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity)
 
 func create_hit_effect():

@@ -2,7 +2,6 @@ extends RigidBody2D
 
 export var speed = 700
 export var steer_force = 50.0
-signal velocity
 var velocity = Vector2.ZERO
 var acceleration = Vector2.RIGHT
 var target = null

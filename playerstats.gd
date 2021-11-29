@@ -1,8 +1,10 @@
 extends Node
+class_name playerstat
 
-var splitshot = false
+var beam = true
+var splitshot = true
 var multiplayerlocal = false
-var rockets = false
+var rockets = true
 var lasers = true
 var gun = "lasers"
 export(int) var max_hp = 3 setget set_max_health

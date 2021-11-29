@@ -21,9 +21,9 @@ var FRICTION = 400
 var recoil = 40
 var input_vector = Vector2.ZERO
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
-onready var splitshotu = playerstats_1.splitshot
-onready var rocketsu = playerstats_1.rockets
-onready var lasersu = playerstats_1.lasers
+onready var splitshotu = playerstats_2.splitshot
+onready var rocketsu = playerstats_2.rockets
+onready var lasersu = playerstats_2.lasers
 var target = null
 signal velocity
 signal force
@@ -61,7 +61,7 @@ func _physics_process(delta):
 	else:
 		firing = false
 	if Input.is_action_just_pressed("change_gun_%s" % id):
-		match playerstats_1.gun:
+		match playerstats_2.gun:
 			"lasers":
 				rockets()
 				beaming = false
@@ -89,41 +89,41 @@ func find_target():
 		target = null
 
 func rockets():
-	if playerstats_1.rockets:
+	if playerstats_2.rockets:
 		timer.wait_time = .6
 		enemy_damage.min_damage = 10
 		enemy_damage.max_damage = 30
 		movementpenalty = 60
 		recoil = 200
-		playerstats_1.gun = "rockets"
+		playerstats_2.gun = "rockets"
 
 func lasers():
-	if playerstats_1.lasers:
+	if playerstats_2.lasers:
 		timer.wait_time = .1
 		enemy_damage.min_damage = 3
 		enemy_damage.max_damage = 6
 		movementpenalty = 20
 		recoil = 40
 		attack = preload("res://Laser.tscn")
-		playerstats_1.gun = "lasers"
+		playerstats_2.gun = "lasers"
 
 func splitshot():
-	if playerstats_1.splitshot:
+	if playerstats_2.splitshot:
 		timer.wait_time = 0.01
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1
 		recoil = 10
 		movementpenalty = 130
 		attack = preload("res://SplitShot.tscn")
-		playerstats_1.gun = "splitshot"
+		playerstats_2.gun = "splitshot"
 
 # warning-ignore:function_conflicts_variable
 func beam():
-	if playerstats_1.beam:
+	if playerstats_2.beam:
 		enemy_damage.min_damage = 1
 		enemy_damage.max_damage = 4
 		movementpenalty = 20
-		playerstats_1.gun = "beam"
+		playerstats_2.gun = "beam"
 
 func shoot_beam():
 	if beaming:
@@ -141,7 +141,7 @@ func move():
 
 func _on_Timer_timeout(): #shoot
 	if firing:
-		if playerstats_1.gun == "rockets":
+		if playerstats_2.gun == "rockets":
 			velocity.x -= recoil
 			var missiles = preload("res://Missile.tscn")
 			var m = missiles.instance()
@@ -149,7 +149,7 @@ func _on_Timer_timeout(): #shoot
 			main.add_child(m)
 			m.global_position = global_position
 			m.start(self.global_transform, target)
-		elif playerstats_1.gun == "beam":
+		elif playerstats_2.gun == "beam":
 			pass
 		else:
 			velocity.x -= recoil
@@ -179,8 +179,8 @@ func play():
 	hitSound.play()
 
 func _on_AudioStreamPlayer_finished():
-	playerstats_1.hp -= 1
-	if playerstats_1.hp <= 0:
+	playerstats_2.hp -= 1
+	if playerstats_2.hp <= 0:
 		$AnimationPlayer.play("Die Anim")
 
 

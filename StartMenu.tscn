@@ -1670,13 +1670,14 @@ __meta__ = {
 visible = false
 
 [node name="TextureButton" type="TextureButton" parent="."]
-anchor_left = 0.5
+anchor_left = 0.487
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 0.487
 anchor_bottom = 1.0
-margin_left = -20.0
-margin_top = -32.0
-margin_right = 12.0
+margin_left = -15.84
+margin_top = -40.0
+margin_right = 16.16
+margin_bottom = -8.0
 toggle_mode = true
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 7 )

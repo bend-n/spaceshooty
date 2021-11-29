@@ -38,6 +38,16 @@ _global_script_classes=[ {
 "class": "HardEnemy",
 "language": "GDScript",
 "path": "res://HardEnemy.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "playerkinematic",
+"language": "GDScript",
+"path": "res://Ship.gd"
+}, {
+"base": "Node",
+"class": "playerstat",
+"language": "GDScript",
+"path": "res://playerstats.gd"
 } ]
 _global_script_class_icons={
 "Boss": "",
@@ -45,7 +55,9 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyMedium": "",
 "EnemyUfo": "",
-"HardEnemy": ""
+"HardEnemy": "",
+"playerkinematic": "",
+"playerstat": ""
 }
 
 [application]
@@ -61,6 +73,8 @@ config/icon="res://icon.png"
 Music="*res://Music.tscn"
 SaveAndLoad="*res://Save&Load.gd"
 enemy_damage="*res://enemy_damage.gd"
+playerstats_1="*res://playerstats_1.gd"
+playerstats_2="*res://playerstats_2.gd"
 playerstats="*res://playerstats.gd"
 
 [display]
@@ -83,7 +97,7 @@ texture={
 "flags/anisotropic": false,
 "flags/filter": false,
 "flags/mipmaps": false,
-"flags/repeat": 1,
+"flags/repeat": 0,
 "flags/srgb": 2,
 "process/HDR_as_SRGB": false,
 "process/fix_alpha_border": true,

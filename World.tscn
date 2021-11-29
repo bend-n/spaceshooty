@@ -3,14 +3,16 @@
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://EnemySpawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://PixelRPG.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=6]
 [ext_resource path="res://HpUi.tscn" type="PackedScene" id=7]
 [ext_resource path="res://WeaponUi.tscn" type="PackedScene" id=8]
 
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://PixelRPG.ttf"
+
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 4 )
+font_data = SubResource( 6 )
 
 [sub_resource type="Theme" id=3]
 /fonts/font = SubResource( 2 )
@@ -75,6 +77,7 @@ __meta__ = {
 }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( -15, 0 )
 collision_layer = 8
 collision_mask = 16
@@ -112,6 +115,24 @@ margin_left = 40.0
 margin_top = 20.0
 margin_right = -260.0
 margin_bottom = -144.0
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="HpUi" parent="CanvasLayer2" instance=ExtResource( 7 )]
+visible = false
+margin_left = 264.0
+margin_top = 159.0
+margin_right = -13.0
+margin_bottom = -10.0
+using_id_2 = true
+
+[node name="WeaponUi" parent="CanvasLayer2" instance=ExtResource( 8 )]
+visible = false
+margin_left = 12.0
+margin_top = 153.0
+margin_right = -288.0
+margin_bottom = -11.0
+using_id_2 = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 5 )

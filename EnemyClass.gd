@@ -13,10 +13,12 @@ var target_destination = Vector2.ZERO
 var damagetobesubtracted 
 export var stop_pos = Vector2(200, 0)
 onready var tween = $Tween
-
+export var litable = false
 func _ready():
 	timer.wait_time = shootspeed
 	target_destination = global_position
+	if litable == true:
+		self.visible = false
 
 func _process(delta):
 	if global_position.x > stop_pos.x:
@@ -38,6 +40,7 @@ func _on_Enemy_body_entered(body):
 			body.queue_free()
 			damage()
 	elif body.is_in_group("laser"):
+		self.visible = true
 		var beam = get_overlapping_bodies()
 		if beam != null:
 			beaming = true
