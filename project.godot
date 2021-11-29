@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://HardEnemy.gd"
 }, {
+"base": "Area2D",
+"class": "playerarea2d",
+"language": "GDScript",
+"path": "res://ShipArea2d.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "playerkinematic",
 "language": "GDScript",
@@ -56,6 +61,7 @@ _global_script_class_icons={
 "EnemyMedium": "",
 "EnemyUfo": "",
 "HardEnemy": "",
+"playerarea2d": "",
 "playerkinematic": "",
 "playerstat": ""
 }

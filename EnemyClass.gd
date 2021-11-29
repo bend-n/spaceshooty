@@ -14,6 +14,7 @@ var damagetobesubtracted
 export var stop_pos = Vector2(200, 0)
 onready var tween = $Tween
 export var litable = false
+
 func _ready():
 	timer.wait_time = shootspeed
 	target_destination = global_position
@@ -43,17 +44,8 @@ func _on_Enemy_body_entered(body):
 		self.visible = true
 		var beam = get_overlapping_bodies()
 		if beam != null:
-			beaming = true
-		else:
-			beaming = false
-
-func _on_laser_timer_timeout():
-	if beaming == true:
-		beam()
-
-func beam():
-	damage()
-
+			yield(get_tree().create_timer(.4), "timeout")
+			damage()
 
 func add_to_score():
 	var main = get_tree().current_scene

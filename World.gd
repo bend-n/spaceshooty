@@ -2,19 +2,20 @@ extends Node
 
 var deaths = 0
 var score = 0 setget set_score
-
+var USE_TOUCH = OS.has_touchscreen_ui_hint()
 onready var scoreLabel = $ScoreLabel
 onready var player = preload("res://Ship2.tscn")
 
 func _ready():
 	if playerstats.multiplayerlocal:
-		$CanvasLayer2/HpUi.visible = true
-		$CanvasLayer2/WeaponUi.visible = true
 		var Player = player.instance()
 		self.add_child(Player)
+		Player.global_position = Vector2(10, 10)
 		Player.id = 2
 # warning-ignore:return_value_discarded
 		Player.connect("player_death", self, "_on_Ship_player_death")
+		$CanvasLayer2/HpUi.visible = true
+		$CanvasLayer2/WeaponUi.visible = true
 
 func set_score(value):
 	score = value
