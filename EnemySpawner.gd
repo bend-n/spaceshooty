@@ -1,7 +1,6 @@
 extends Node2D
 
-#The array where you will input your ranges in the format minimum, maximum, difficulty value. it must always
-#have this format or it will crash or something
+#min, max, level
 var onscreenmax = 3
 var onscreen = 0
 var score_ranges : Array = [
@@ -11,8 +10,7 @@ var score_ranges : Array = [
 	[2500, 5000, 4],
 	[5001, 7000, 5],
 	[7001, 8000, 6],
-	[8001, 10000, 7],
-	[10001, 20000, 8]
+	[8001, 10000, 7]
 ]
 onready var timer = $Enemytimer
 onready var spawnPoints = $SpawnPoints

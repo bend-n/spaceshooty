@@ -47,6 +47,21 @@ func _on_Enemy_body_entered(body):
 			yield(get_tree().create_timer(.4), "timeout")
 			damage()
 
+func _on_Enemy_area_entered(area):
+	if not area.is_in_group("laser"):
+		print("hi")
+		area.create_hit_effect()
+		if not area.is_in_group("Player"):
+			area.queue_free()
+			damage()
+
+	elif area.is_in_group("laser"):
+		self.visible = true
+		var beam = get_overlapping_bodies()
+		if beam != null:
+			yield(get_tree().create_timer(.4), "timeout")
+			damage()
+
 func add_to_score():
 	var main = get_tree().current_scene
 	if main.is_in_group("World"):
@@ -60,7 +75,6 @@ func create_explosion():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
-	
 
 func _on_Timer_timeout():
 	var laser = Laser.instance()

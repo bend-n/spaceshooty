@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://ship.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://MobileJoystick.tscn" type="PackedScene" id=4]
 [ext_resource path="res://MobileControls.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ShipArea2d.gd" type="Script" id=6]
+[ext_resource path="res://damage.gd" type="Script" id=7]
 
 [sub_resource type="Animation" id=38]
 resource_name = "Die Anim"
@@ -262,6 +263,7 @@ hframes = 9
 frame = 1
 
 [node name="damage" type="Area2D" parent="."]
+script = ExtResource( 7 )
 
 [node name="Collision2" type="CollisionPolygon2D" parent="damage"]
 visible = false
@@ -294,6 +296,7 @@ parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Turn/blend_position = Vector2( 0, 0 )
 
 [node name="Collision" type="CollisionShape2D" parent="Ship"]
+visible = false
 shape = SubResource( 39 )
 
 [node name="Timer" type="Timer" parent="Ship"]

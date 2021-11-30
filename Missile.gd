@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 
 export var speed = 700
 export var steer_force = 50.0
@@ -6,6 +6,7 @@ var velocity = Vector2.ZERO
 var acceleration = Vector2.RIGHT
 var target = null
 const HitEffect = preload("res://HitEffect.tscn")
+
 
 func start(_transform, _target):
 	global_transform = _transform
@@ -25,7 +26,7 @@ func _physics_process(delta):
 	acceleration += seek()
 	velocity += acceleration * delta
 	rotation = velocity.angle()
-	add_central_force(velocity * speed * delta)
+	position += velocity * delta
 
 func create_hit_effect():
 	var main = get_tree().current_scene

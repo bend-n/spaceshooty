@@ -1,5 +1,5 @@
 extends Area2D
-class_name playerarea2d
+
 var b
 
 var Beam
@@ -44,7 +44,6 @@ func _ready():
 	beamu = playerstats.beam
 
 func _physics_process(delta):
-	shoot_beam()
 	if !target or not is_instance_valid(target):
 		find_target()
 	input_vector.x = Input.get_action_strength('right_%s' % id) - Input.get_action_strength('left_%s' % id)
@@ -74,15 +73,9 @@ func _physics_process(delta):
 		match playerstats.gun:
 			"lasers":
 				rockets()
-				beaming = false
 			"rockets":
 				splitshot()
-				beaming = false
 			"splitshot":
-				beam()
-				beaming = true
-			"beam":
-				beaming = false
 				flak()
 			"flak":
 				lasers()
@@ -90,7 +83,7 @@ func _physics_process(delta):
 	move()
 
 func find_target():
-	var units = get_overlapping_bodies()
+	var units = get_overlapping_areas()
 	if units.size() > 0:
 		var closest = units[0]
 		for unit in units:
@@ -112,7 +105,7 @@ func flak():
 
 func rockets():
 	if rocketsu:
-		timer.wait_time = .6
+		timer.wait_time = 1
 		enemy_damage.min_damage = 10
 		enemy_damage.max_damage = 30
 		movementpenalty = 60
@@ -134,28 +127,28 @@ func splitshot():
 		timer.wait_time = 0.01
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1
-		recoil = 10
+		recoil = 9
 		movementpenalty = 130
 		attack = preload("res://SplitShot.tscn")
 		playerstats.gun = "splitshot"
 
 # warning-ignore:function_conflicts_variable
-func beam():
-	if beamu:
-		enemy_damage.min_damage = 1
-		enemy_damage.max_damage = 4
-		movementpenalty = 20
-		playerstats.gun = "beam"
-
-func shoot_beam():
-	if beaming:
-		if Beam == null:
-			Beam = beam.instance()
-			add_child(Beam)
-			Beam.show_behind_parent = true
-	elif Beam != null:
-		Beam.queue_free()
-		Beam = null
+#func beam():
+#	if beamu:
+#		enemy_damage.min_damage = 1
+#		enemy_damage.max_damage = 4
+#		movementpenalty = 20
+#		playerstats.gun = "beam"
+#
+#func shoot_beam():
+#	if beaming:
+#		if Beam == null:
+#			Beam = beam.instance()
+#			add_child(Beam)
+#			Beam.show_behind_parent = true
+#	elif Beam != null:
+#		Beam.queue_free()
+#		Beam = null
 
 func move():
 	emit_signal("velocity", velocity)

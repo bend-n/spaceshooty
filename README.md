@@ -1,2 +1,4 @@
 # spaceshooty
- spaceshoot
+ spaceshoot.
+ 
+ buy me a coffeee: https://ko-fi.com/bendn

@@ -55,3 +55,4 @@
 [node name="worse, even" type="Node2D" parent="."]
 
 [node name="Enemy" parent="worse, even" instance=ExtResource( 9 )]
+litable = false

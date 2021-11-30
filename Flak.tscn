@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Laser.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Laser-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://PlayerMissle.png" type="Texture" id=3]
 [ext_resource path="res://smallparticle.png" type="Texture" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=17]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 2
@@ -94,8 +96,9 @@ resource_local_to_scene = true
 extents = Vector2( 1, 1 )
 
 [node name="Flak" instance=ExtResource( 1 )]
-linear_velocity = Vector2( 5, 0 )
-speed = 600
+mass = 30.0
+linear_velocity = Vector2( 15, 0 )
+speed = 1000
 spreadmaxpos = 30
 spreadmaxneg = 0
 spreadminneg = -30
@@ -103,16 +106,17 @@ scalingrand = true
 minscalingrand = 2
 
 [node name="Laser" parent="." index="0"]
+material = SubResource( 17 )
 frames = SubResource( 15 )
 animation = "New Anim 1"
 frame = 0
 
 [node name="Collision" parent="." index="1"]
-position = Vector2( -1, 0 )
+position = Vector2( 0, 0 )
 shape = SubResource( 16 )
 
 [node name="Timer2" type="Timer" parent="." index="5"]
-wait_time = 1.5
+wait_time = 2.0
 one_shot = true
 autostart = true
 
