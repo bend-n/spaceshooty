@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -7,15 +7,6 @@
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=6]
 [ext_resource path="res://HpUi.tscn" type="PackedScene" id=7]
 [ext_resource path="res://WeaponUi.tscn" type="PackedScene" id=8]
-
-[sub_resource type="DynamicFontData" id=6]
-font_path = "res://PixelRPG.ttf"
-
-[sub_resource type="DynamicFont" id=2]
-font_data = SubResource( 6 )
-
-[sub_resource type="Theme" id=3]
-/fonts/font = SubResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 19.125, 183 )
@@ -68,7 +59,6 @@ position = Vector2( 320, 0 )
 anchor_right = 1.0
 margin_top = 5.0
 margin_bottom = 11.0
-theme = SubResource( 3 )
 custom_fonts/font = ExtResource( 5 )
 text = "Score = 0"
 align = 1
