@@ -116,24 +116,6 @@ margin_top = 20.0
 margin_right = -260.0
 margin_bottom = -144.0
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
-[node name="HpUi" parent="CanvasLayer2" instance=ExtResource( 7 )]
-visible = false
-margin_left = 264.0
-margin_top = 159.0
-margin_right = -13.0
-margin_bottom = -10.0
-using_id_2 = true
-
-[node name="WeaponUi" parent="CanvasLayer2" instance=ExtResource( 8 )]
-visible = false
-margin_left = 12.0
-margin_top = 153.0
-margin_right = -288.0
-margin_bottom = -11.0
-using_id_2 = true
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 5 )
 cell_size = Vector2( 3, 3 )

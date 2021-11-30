@@ -268,7 +268,6 @@ visible = false
 polygon = PoolVector2Array( -7, -4, -4, -4, -4, -6, -1, -6, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -1, 6, -4, 6, -4, 4, -7, 4 )
 
 [node name="Ship" type="Area2D" parent="." groups=["Player"]]
-show_behind_parent = true
 z_index = 2
 z_as_relative = false
 collision_layer = 32
@@ -295,7 +294,6 @@ parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Turn/blend_position = Vector2( 0, 0 )
 
 [node name="Collision" type="CollisionShape2D" parent="Ship"]
-visible = false
 shape = SubResource( 39 )
 
 [node name="Timer" type="Timer" parent="Ship"]
@@ -303,6 +301,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Ship"]
+position = Vector2( -12, -19 )
 scale = Vector2( 2, 2 )
 emitting = false
 amount = 100

@@ -1,4 +1,5 @@
 extends Node
+var USE_TOUCH = OS.has_touchscreen_ui_hint()
 
 onready var highscoreLabel = $Label
 
@@ -11,11 +12,10 @@ func _process(_delta):
 	var save_data = SaveAndLoad.load_data_from_file()
 	highscoreLabel.text = "Highscore = " + str(save_data.highscore)
 
-var USE_TOUCH = OS.has_touchscreen_ui_hint()
+
 func _ready() -> void:
+	if USE_TOUCH:
+		$TextureButton.visible = false
 	$AnimatedSprite.play("default")
 	$MobileControls/Attack.visible = USE_TOUCH
 
-
-func _on_TextureButton_toggled(button_pressed):
-	playerstats.multiplayerlocal = button_pressed

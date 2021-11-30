@@ -1,11 +1,12 @@
 extends Node
-class_name playerstat
+class_name playerstatz
 
 var beam = true
 var splitshot = true
 var multiplayerlocal = false
 var rockets = true
 var lasers = true
+var flak = true
 var gun = "lasers"
 export(int) var max_hp = 3 setget set_max_health
 var hp = max_hp setget set_health

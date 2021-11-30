@@ -8,6 +8,9 @@ export var spreadmaxpos:int
 export var spreadmaxneg:int
 export var spreadminneg:int
 export var spread = true
+export var scalingrand = false
+export var minscalingrand = 1
+export var maxscalingrand = 3
 var target = null 
 var rotation_pos
 var rotation_neg
@@ -20,6 +23,10 @@ var choosing = 0
 
 func _ready():
 	randomize() 
+	if scalingrand:
+		var rand = rand_range(minscalingrand, maxscalingrand)
+		$Laser.scale.x = rand
+		$Laser.scale.y = rand
 	var animatedSprite = $Laser
 	animatedSprite.frame = rand_range(0, 13)
 	if spread:
@@ -50,3 +57,4 @@ func _physics_process(delta):
 func _on_Timer_timeout():
 	if spread:
 		linear_velocity.x = 0
+

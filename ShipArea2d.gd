@@ -1,7 +1,7 @@
 extends Area2D
 class_name playerarea2d
 var b
-var playerstats
+
 var Beam
 onready var beam = preload("res://LaserBeamTest.tscn")
 var beaming = false
@@ -26,6 +26,8 @@ var USE_TOUCH = OS.has_touchscreen_ui_hint()
 onready var splitshotu
 onready var rocketsu
 onready var lasersu 
+onready var flaku
+onready var beamu
 var target = null
 signal velocity
 signal force
@@ -35,13 +37,11 @@ func _ready():
 	$MobileJoystick/MobileControls/Attack.visible = USE_TOUCH
 	$"MobileJoystick/MobileControls/Change gun".visible = USE_TOUCH
 	$AnimationTree.active = true
-	if id == 1:
-		playerstats = playerstats_1
-	elif id == 2:
-		playerstats = playerstats_2
 	lasersu = playerstats.lasers
 	rocketsu = playerstats.rockets
 	splitshotu = playerstats.splitshot
+	flaku = playerstats.flak
+	beamu = playerstats.beam
 
 func _physics_process(delta):
 	shoot_beam()
@@ -83,6 +83,8 @@ func _physics_process(delta):
 				beaming = true
 			"beam":
 				beaming = false
+				flak()
+			"flak":
 				lasers()
 		
 	move()
@@ -98,8 +100,18 @@ func find_target():
 	else:
 		target = null
 
+func flak():
+	if flaku:
+		timer.wait_time = .0007
+		enemy_damage.min_damage = 15
+		enemy_damage.max_damage = 50
+		movementpenalty = 0
+		recoil = 3
+		attack = preload("res://Flak.tscn")
+		playerstats.gun = "flak"
+
 func rockets():
-	if playerstats.rockets:
+	if rocketsu:
 		timer.wait_time = .6
 		enemy_damage.min_damage = 10
 		enemy_damage.max_damage = 30
@@ -108,7 +120,7 @@ func rockets():
 		playerstats.gun = "rockets"
 
 func lasers():
-	if playerstats.lasers:
+	if lasersu:
 		timer.wait_time = .1
 		enemy_damage.min_damage = 3
 		enemy_damage.max_damage = 6
@@ -118,7 +130,7 @@ func lasers():
 		playerstats.gun = "lasers"
 
 func splitshot():
-	if playerstats.splitshot:
+	if splitshotu:
 		timer.wait_time = 0.01
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1
@@ -129,7 +141,7 @@ func splitshot():
 
 # warning-ignore:function_conflicts_variable
 func beam():
-	if playerstats.beam:
+	if beamu:
 		enemy_damage.min_damage = 1
 		enemy_damage.max_damage = 4
 		movementpenalty = 20

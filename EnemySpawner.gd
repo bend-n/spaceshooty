@@ -11,7 +11,8 @@ var score_ranges : Array = [
 	[2500, 5000, 4],
 	[5001, 7000, 5],
 	[7001, 8000, 6],
-	[8001, 20000, 7]
+	[8001, 10000, 7],
+	[10001, 20000, 8]
 ]
 onready var timer = $Enemytimer
 onready var spawnPoints = $SpawnPoints

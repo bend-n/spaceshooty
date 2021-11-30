@@ -1,1 +1,0 @@
-extends playerarea2d
