@@ -5,7 +5,9 @@ var score = 0 setget set_score
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
 onready var scoreLabel = $ScoreLabel
 
-
+func _process(delta):
+	if Input.is_action_just_pressed("ui_home"):
+		self.score = 5000
 
 func set_score(value):
 	score = value
