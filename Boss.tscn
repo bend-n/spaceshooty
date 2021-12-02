@@ -11,12 +11,14 @@ extents = Vector2( 4.5, 4.5 )
 script = ExtResource( 2 )
 ARMOR = 75
 score_on_kill = 200
-SPEED = 1
+SPEED = 10
 shootspeed = 0.2
+stop_pos = Vector2( 100, 0 )
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
 animation = "New Anim 2"
+frame = 1
 
 [node name="Timer" parent="." index="2"]
 wait_time = 2.0

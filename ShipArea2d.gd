@@ -46,8 +46,8 @@ func _ready():
 func _physics_process(delta):
 	if !target or not is_instance_valid(target):
 		find_target()
-	input_vector.x = Input.get_action_strength('right_%s' % id) - Input.get_action_strength('left_%s' % id)
-	input_vector.y = Input.get_action_strength('down_%s' % id) - Input.get_action_strength('up_%s' % id)
+	input_vector.x = Input.get_axis('left_%s' % id, 'right_%s' % id)
+	input_vector.y = Input.get_axis('up_%s' % id, 'down_%s' % id)
 	input_vector = input_vector.normalized()
 	if $MobileJoystick/TouchScreenButton.in_use:
 		input_vector = $MobileJoystick/TouchScreenButton.force
@@ -109,7 +109,7 @@ func rockets():
 		enemy_damage.min_damage = 10
 		enemy_damage.max_damage = 30
 		movementpenalty = 60
-		recoil = 200
+		recoil = 300
 		playerstats.gun = "rockets"
 
 func lasers():
@@ -131,24 +131,6 @@ func splitshot():
 		movementpenalty = 130
 		attack = preload("res://SplitShot.tscn")
 		playerstats.gun = "splitshot"
-
-# warning-ignore:function_conflicts_variable
-#func beam():
-#	if beamu:
-#		enemy_damage.min_damage = 1
-#		enemy_damage.max_damage = 4
-#		movementpenalty = 20
-#		playerstats.gun = "beam"
-#
-#func shoot_beam():
-#	if beaming:
-#		if Beam == null:
-#			Beam = beam.instance()
-#			add_child(Beam)
-#			Beam.show_behind_parent = true
-#	elif Beam != null:
-#		Beam.queue_free()
-#		Beam = null
 
 func move():
 	emit_signal("velocity", velocity)

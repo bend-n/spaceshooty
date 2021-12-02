@@ -8,51 +8,66 @@
 [ext_resource path="res://StronkEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://StronkUfo.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Boss2.tscn" type="PackedScene" id=8]
-[ext_resource path="res://lightableenemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://FInalBOss.tscn" type="PackedScene" id=9]
 
 [node name="Difficulty Scaling" type="Node2D"]
 
 [node name="Difficulty_Easy" type="Node2D" parent="."]
 
 [node name="EnemyEasy" parent="Difficulty_Easy" instance=ExtResource( 1 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="Difficulty_Medium" type="Node2D" parent="."]
 
 [node name="Enemy" parent="Difficulty_Medium" instance=ExtResource( 2 )]
 
 [node name="EnemyEasy" parent="Difficulty_Medium" instance=ExtResource( 1 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="Difficulty_Hard" type="Node2D" parent="."]
 
 [node name="Enemy" parent="Difficulty_Hard" instance=ExtResource( 2 )]
 
 [node name="HardEnemy" parent="Difficulty_Hard" instance=ExtResource( 3 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="Enemy2" parent="Difficulty_Hard" instance=ExtResource( 4 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="Difficulty_Boss" type="Node2D" parent="."]
 
 [node name="Boss" parent="Difficulty_Boss" instance=ExtResource( 5 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="Difficulty_Impossible" type="Node2D" parent="."]
 
 [node name="StronkEnemy" parent="Difficulty_Impossible" instance=ExtResource( 6 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="StronkUfo" parent="Difficulty_Impossible" instance=ExtResource( 7 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="Boss" parent="Difficulty_Impossible" instance=ExtResource( 5 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="Congrats_you beat the game now die" type="Node2D" parent="."]
 
 [node name="Boss2" parent="Congrats_you beat the game now die" instance=ExtResource( 8 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="fuckyou" type="Node2D" parent="."]
 
 [node name="Boss2" parent="fuckyou" instance=ExtResource( 8 )]
+stop_pos = Vector2( 200, 0 )
 
 [node name="Boss" parent="fuckyou" instance=ExtResource( 5 )]
+stop_pos = Vector2( 200, 0 )
 
-[node name="worse, even" type="Node2D" parent="."]
+[node name="LAST BOSS EVER" type="Node2D" parent="."]
 
-[node name="Enemy" parent="worse, even" instance=ExtResource( 9 )]
-litable = false
+[node name="FInalBOss" parent="LAST BOSS EVER" instance=ExtResource( 9 )]
+score_on_kill = 1000
+
+[node name="IF YOUR STILL ALIVE, YOU ARENT NOW" type="Node2D" parent="."]
+
+[node name="FInalBOss" parent="IF YOUR STILL ALIVE, YOU ARENT NOW" instance=ExtResource( 9 )]

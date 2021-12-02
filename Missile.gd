@@ -4,9 +4,18 @@ export var speed = 700
 export var steer_force = 50.0
 var velocity = Vector2.ZERO
 var acceleration = Vector2.RIGHT
+export var enemy = false
 var target = null
 const HitEffect = preload("res://HitEffect.tscn")
+export var initial_velocity = 200
 
+func _ready():
+	if enemy:
+		velocity = Vector2(-initial_velocity, 0)
+		acceleration = Vector2.LEFT
+	else:
+		velocity = Vector2(initial_velocity, 0)
+		acceleration = Vector2.RIGHT
 
 func start(_transform, _target):
 	global_transform = _transform
@@ -21,7 +30,7 @@ func seek():
 			var desired = (target.position - position).normalized() * speed
 			steer = (desired - velocity).normalized() * steer_force
 	return steer
-	
+
 func _physics_process(delta):
 	acceleration += seek()
 	velocity += acceleration * delta

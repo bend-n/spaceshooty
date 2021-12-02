@@ -16,12 +16,17 @@ var rotation_pos
 var rotation_neg
 var to_rotate
 var dir = Vector2.ZERO
-var velocity
+var velocity = Vector2.ZERO
+export var initial_velocity = 0
+export var particles = false
 
 const HitEffect = preload("res://HitEffect.tscn")
 var choosing = 0
 
 func _ready():
+	velocity.x += initial_velocity
+	if particles:
+		$CPUParticles2D.emitting = true
 	randomize() 
 	if scalingrand:
 		var rand = rand_range(minscalingrand, maxscalingrand)

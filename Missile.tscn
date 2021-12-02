@@ -17,8 +17,8 @@ colors = PoolColorArray( 0.429688, 0.429688, 0.429688, 0.846847, 0.372549, 0.372
 collision_layer = 0
 collision_mask = 130
 script = ExtResource( 1 )
-speed = 400
-steer_force = 25.0
+speed = 500
+steer_force = 75.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -31,7 +31,8 @@ shape = SubResource( 1 )
 show_behind_parent = true
 position = Vector2( -7, 0 )
 rotation = 3.14159
-amount = 15
+amount = 14
+lifetime = 2.0
 preprocess = 0.5
 speed_scale = 2.0
 explosiveness = 0.2

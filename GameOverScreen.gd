@@ -1,12 +1,13 @@
 extends Node
-
+export var hole = false
 onready var highscoreLabel = $HighscoreLabel
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
 
 func _ready():
 	set_highscore_label()
 	$TouchScreenButton.visible = USE_TOUCH
-	$AnimatedSprite.play("hole")
+	if hole:
+		$AnimatedSprite.play("hole")
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Laser.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Laser-Sheet.png" type="Texture" id=2]
@@ -95,6 +95,10 @@ animations = [ {
 resource_local_to_scene = true
 extents = Vector2( 1, 1 )
 
+[sub_resource type="Gradient" id=18]
+offsets = PoolRealArray( 0, 0.755319, 1 )
+colors = PoolColorArray( 0.397949, 0.397949, 0.397949, 1, 1, 1, 1, 0.529412, 1, 1, 1, 0.192157 )
+
 [node name="Flak" instance=ExtResource( 1 )]
 mass = 30.0
 linear_velocity = Vector2( 15, 0 )
@@ -104,6 +108,8 @@ spreadmaxneg = 0
 spreadminneg = -30
 scalingrand = true
 minscalingrand = 2
+initial_velocity = 50
+particles = true
 
 [node name="Laser" parent="." index="0"]
 material = SubResource( 17 )
@@ -119,5 +125,20 @@ shape = SubResource( 16 )
 wait_time = 2.0
 one_shot = true
 autostart = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="6"]
+scale = Vector2( 2, 2 )
+amount = 1
+preprocess = 1.0
+explosiveness = 0.4
+randomness = 0.2
+direction = Vector2( -1, 0 )
+spread = 10.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.2
+angular_velocity = 80.0
+angular_velocity_random = 1.0
+color_ramp = SubResource( 18 )
 
 [connection signal="timeout" from="Timer2" to="." method="queue_free"]

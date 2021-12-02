@@ -326,6 +326,9 @@ volume_db = -20.0
 
 [node name="MobileControls" parent="Ship/MobileJoystick" instance=ExtResource( 5 )]
 
+[node name="Change gun" parent="Ship/MobileJoystick/MobileControls" index="1"]
+action = "change_gun_1"
+
 [connection signal="area_entered" from="damage" to="Ship" method="_on_Ship_area_entered"]
 [connection signal="body_entered" from="damage" to="Ship" method="_on_Ship_body_entered"]
 [connection signal="force" from="Ship" to="." method="_on_Ship_force"]

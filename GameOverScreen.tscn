@@ -2024,6 +2024,7 @@ radius = 30.0
 
 [node name="GameOverScreen" type="Node"]
 script = ExtResource( 3 )
+hole = true
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0

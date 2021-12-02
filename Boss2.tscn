@@ -13,6 +13,7 @@ score_on_kill = 400
 Laser = ExtResource( 2 )
 SPEED = 5
 shootspeed = 1.0
+stop_pos = Vector2( 300, 0 )
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708

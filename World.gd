@@ -7,11 +7,13 @@ onready var scoreLabel = $ScoreLabel
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_home"):
-		self.score = 5000
+		self.score = 20000
 
 func set_score(value):
 	score = value
 	update_score_label()
+	if score >= 30000:
+		get_tree().change_scene("res://Win.tscn")
 
 func update_score_label():
 	scoreLabel.text = "Score = " + str(score)

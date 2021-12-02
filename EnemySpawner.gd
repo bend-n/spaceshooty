@@ -1,5 +1,6 @@
 extends Node2D
 
+var nexthing = 0
 #min, max, level
 var onscreenmax = 3
 var onscreen = 0
@@ -10,7 +11,8 @@ var score_ranges : Array = [
 	[2500, 5000, 4],
 	[5001, 7000, 5],
 	[7001, 8000, 6],
-	[8001, 10000, 7]
+	[8001, 30000, 7],
+	[30001, 40000, 8]
 ]
 onready var timer = $Enemytimer
 onready var spawnPoints = $SpawnPoints
@@ -21,7 +23,6 @@ onready var main = get_node("../EnemyHolder")
 func _ready():
 	difficulty_levels = load("res://Difficulty Scaling.tscn").instance().get_children();
 	current_difficulty_level = difficulty_levels[0]
-
 
 func spawn_enemy_on_current_difficulty():
 	onscreen = main.get_child_count()
@@ -39,34 +40,26 @@ func get_spawn_position():
 	points.shuffle()
 	return points[0].global_position
 
-
-func _on_Timer_timeout():
+func _physics_process(delta):
 	spawn_enemy_on_current_difficulty()
-
-
-
-func _on_process_timeout():
 	var world = get_tree().current_scene
 	for i in score_ranges.size():
 		if world.score in range(score_ranges[i][0], score_ranges[i][1], 1):
 			#set your dificulty to score_ranges[i][2]
 			diff_levels(score_ranges[i][2])
-			if score_ranges[i][2] == 1:
-				timer.wait_time = 2
-			elif score_ranges[i][2] == 2:
-				timer.wait_time = 4
-			elif score_ranges[i][2] == 3:
-				timer.wait_time = 3
+			if score_ranges[i][2] == 3:
 				onscreenmax = 1
 			elif score_ranges[i][2] == 4:
-				timer.wait_time = 5
 				onscreenmax = 9
 			elif score_ranges[i][2] == 5:
-				timer.wait_time = 2
 				onscreenmax = 1
+			elif score_ranges[i][2] == 6:
+				onscreenmax = 9
+			elif score_ranges[i][2] == 7:
+				onscreenmax = 0
 			else:
-				timer.wait_time = 1
 				onscreenmax = 5
+
 
 func diff_levels(value):
 	current_difficulty_level = difficulty_levels[value]
