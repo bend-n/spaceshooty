@@ -11,6 +11,7 @@ export var spread = true
 export var scalingrand = false
 export var minscalingrand = 1
 export var maxscalingrand = 3
+export var FRICTION = 300
 var target = null 
 var rotation_pos
 var rotation_neg
@@ -62,4 +63,3 @@ func _physics_process(delta):
 func _on_Timer_timeout():
 	if spread:
 		linear_velocity.x = 0
-

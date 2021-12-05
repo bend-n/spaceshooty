@@ -1,10 +1,6 @@
 extends Area2D
 
-var b
-
-var Beam
-onready var beam = preload("res://LaserBeamTest.tscn")
-var beaming = false
+var walled = false
 export var id = 1
 onready var animationState = $AnimationTree.get("parameters/playback")
 onready var HitEffect = preload("res://HitEffect.tscn")
@@ -136,25 +132,6 @@ func move():
 	emit_signal("velocity", velocity)
 
 
-func _on_Timer_timeout(): #shoot
-	if firing:
-		if playerstats.gun == "rockets":
-			velocity.x -= recoil
-			var missiles = preload("res://Missile.tscn")
-			var m = missiles.instance()
-			var main = get_tree().current_scene
-			main.add_child(m)
-			m.global_position = global_position
-			m.start(self.global_transform, target)
-		elif playerstats.gun == "beam":
-			pass
-		else:
-			velocity.x -= recoil
-			var laser = attack.instance()
-			var main = get_tree().current_scene
-			main.add_child(laser)
-			laser.global_position = global_position
-
 
 func _exit_tree():
 	var main = get_tree().current_scene
@@ -190,3 +167,24 @@ func create_hit_effect():
 
 func _on_TouchScreenButton_force(force):
 	emit_signal("force", force)
+
+func _on_Timer_timeout(): #shoot
+	if firing:
+		if playerstats.gun == "rockets":
+			if walled == false:
+				velocity.x -= recoil
+			var missiles = preload("res://Missile.tscn")
+			var m = missiles.instance()
+			var main = get_tree().current_scene
+			main.add_child(m)
+			m.global_position = global_position
+			m.start(self.global_transform, target)
+		elif playerstats.gun == "beam":
+			pass
+		else:
+			if walled == false:
+				velocity.x -= recoil
+			var laser = attack.instance()
+			var main = get_tree().current_scene
+			main.add_child(laser)
+			laser.global_position = global_position
