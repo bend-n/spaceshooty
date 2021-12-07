@@ -91,7 +91,7 @@ func _on_Timer_timeout():
 		var main = get_tree().current_scene
 		main.add_child(m)
 		m.global_position = global_position
-		m.start(self.global_transform, target)
+		m.start(transform.x, target)
 
 func _on_sidestep_timeout():
 	var choosing = randi() %2
