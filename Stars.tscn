@@ -2,14 +2,16 @@
 
 [node name="Stars" type="CPUParticles2D"]
 position = Vector2( 320, 90 )
-amount = 200
-lifetime = 7.0
-preprocess = 7.0
+amount = 190
+lifetime = 6.5
+preprocess = 6.5
 emission_shape = 2
 emission_rect_extents = Vector2( 1, 90 )
 spread = 0.0
 gravity = Vector2( 0, 0 )
 initial_velocity = -100.0
 initial_velocity_random = 0.5
+angular_velocity = 10.0
+angular_velocity_random = 1.0
 scale_amount = 3.0
 scale_amount_random = 0.5

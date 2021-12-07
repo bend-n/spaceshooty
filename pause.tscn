@@ -55,8 +55,6 @@ __meta__ = {
 [node name="mainmenu" type="Button" parent="ColorRect/VBoxContainer"]
 margin_right = 82.0
 margin_bottom = 15.0
-focus_neighbour_top = NodePath("../options")
-focus_neighbour_bottom = NodePath("../exit")
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 1 )
@@ -73,7 +71,6 @@ __meta__ = {
 margin_top = 19.0
 margin_right = 82.0
 margin_bottom = 34.0
-focus_neighbour_bottom = NodePath("../mainmenu")
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 1 )
@@ -81,23 +78,6 @@ custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )
 text = "Options"
-align = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="exit" type="Button" parent="ColorRect/VBoxContainer"]
-margin_top = 38.0
-margin_right = 82.0
-margin_bottom = 53.0
-focus_neighbour_top = NodePath("../mainmenu")
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 1 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = SubResource( 1 )
-text = "Exit"
 align = 0
 __meta__ = {
 "_edit_use_anchors_": false

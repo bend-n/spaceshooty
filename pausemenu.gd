@@ -9,10 +9,12 @@ func _input(event):
 		if new_pause_state:
 			$ColorRect/VBoxContainer/mainmenu.grab_focus()
 
-func _process(delta):
+func _process(_delta):
 	focused = get_focus_owner()
 	if Input.is_action_just_pressed("ui_accept"):
 		if focused == $ColorRect/VBoxContainer/mainmenu:
+# warning-ignore:return_value_discarded
 			get_tree().change_scene("res://StartMenu.tscn")
 		elif $ColorRect/VBoxContainer/options:
 			pass
+
