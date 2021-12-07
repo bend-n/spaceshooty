@@ -46,6 +46,7 @@ texture = ExtResource( 4 )
 vframes = 2
 
 [node name="ufo" type="Sprite" parent="Sprite Holders"]
+visible = false
 position = Vector2( 2, 176 )
 texture = ExtResource( 5 )
 
@@ -55,6 +56,7 @@ position = Vector2( -16, 176 )
 texture = ExtResource( 6 )
 
 [node name="hardy" type="Sprite" parent="Sprite Holders"]
+visible = false
 position = Vector2( -16, 176 )
 rotation = -1.5708
 texture = ExtResource( 8 )

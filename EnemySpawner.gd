@@ -33,6 +33,7 @@ var current_difficulty_level
 onready var main = get_node("../EnemyHolder")
 
 func _ready():
+	visible_then_not($"Sprite Holders/octopus")
 	difficulty_levels = load("res://Difficulty Scaling.tscn").instance().get_children();
 	current_difficulty_level = difficulty_levels[0]
 
@@ -81,7 +82,7 @@ func _physics_process(delta):
 				4:
 					if not count4 >= 1:
 						count4 += 1
-						onscreenmax = 9
+						onscreenmax = 4
 						$Label.text = "Hats off to ye!"
 						$Label.visible = true
 						yield(get_tree().create_timer(6), "timeout")
