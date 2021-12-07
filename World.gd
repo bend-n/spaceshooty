@@ -1,5 +1,6 @@
 extends Node
 
+var count = 0
 var score = 0 setget set_score
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
 onready var scoreLabel = $ScoreLabel
@@ -12,6 +13,13 @@ func _input(event):
 func set_score(value):
 	score = value
 	update_score_label()
+	if score >= 10000:
+		if count != 1:
+			count = 1
+			var save_data = SaveAndLoad.load_data_from_file()
+			save_data.unlocked2 = true
+			SaveAndLoad.save_data_to_file(save_data)
+			print("saved?")
 	if score >= 30000:
 # warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Win.tscn")

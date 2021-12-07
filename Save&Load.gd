@@ -1,8 +1,14 @@
 extends Node
 
-const SAVE_DATA_PATH = "res://save_data.json"
+const SAVE_DATA_PATH = "user://save_data.json"
+
+
 var default_save_data = {
-	highscore = 0
+	highscore = 0,
+	unlocked1 = true,
+	unlocked2 = false,
+	unlocked3 = false,
+	unlocked4 = false
 }
 
 func save_data_to_file(save_data):
