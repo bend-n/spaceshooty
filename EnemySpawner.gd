@@ -1,5 +1,16 @@
 extends Node2D
 
+var count1 = 0
+var count2 = 0
+var count3 = 0
+var count4 = 0
+var count5 = 0
+var count6 = 0
+var count7 = 0
+var count8 = 0
+
+
+onready var label = $Label
 var nexthing = 0
 #min, max, level
 var onscreenmax = 3
@@ -9,6 +20,7 @@ var score_ranges : Array = [
 	[200, 749, 2],
 	[750, 2499, 3],
 	[2500, 5000, 4],
+	[5001, 7000, 5],
 	[5001, 7000, 5],
 	[7001, 8000, 6],
 	[8001, 30000, 7],
@@ -47,19 +59,69 @@ func _physics_process(delta):
 		if world.score in range(score_ranges[i][0], score_ranges[i][1], 1):
 			#set your dificulty to score_ranges[i][2]
 			diff_levels(score_ranges[i][2])
-			if score_ranges[i][2] == 3:
-				onscreenmax = 1
-			elif score_ranges[i][2] == 4:
-				onscreenmax = 9
-			elif score_ranges[i][2] == 5:
-				onscreenmax = 1
-			elif score_ranges[i][2] == 6:
-				onscreenmax = 9
-			elif score_ranges[i][2] == 7:
-				onscreenmax = 0
-			else:
-				onscreenmax = 5
-
+			match score_ranges[i][2]:
+				1:
+					if not count1 >= 1:
+						count1 += 1
+						print("hi")
+						visible_then_not($"Sprite Holders/basicenemy")
+				2:
+					if not count2 >= 1:
+						count2 += 1
+						visible_then_not($"Sprite Holders/hardy")
+						visible_then_not($"Sprite Holders/ufo")
+				3:
+					if not count3 >= 1:
+						count3 += 1
+						onscreenmax = 1
+						$Label.text = "First boss = "
+						visible_then_not($"Sprite Holders/squid")
+						yield(get_tree().create_timer(6), "timeout")
+						$Label.text = "Next up ="
+				4:
+					if not count4 >= 1:
+						count4 += 1
+						onscreenmax = 9
+						$Label.text = "Hats off to ye!"
+						$Label.visible = true
+						yield(get_tree().create_timer(6), "timeout")
+						$Label.visible = false
+				5:
+					if not count5 >= 1:
+						count5 += 1
+						onscreenmax = 1
+						$Label.text = "Second boss = "
+						visible_then_not($"Sprite Holders/boss")
+						yield(get_tree().create_timer(6), "timeout")
+				6:
+					if not count6 >= 1:
+						count6 += 1
+						onscreenmax = 9
+						$Label.text = "Random bullshit go!"
+						$Label.visible = true
+						yield(get_tree().create_timer(6), "timeout")
+						$Label.visible = false
+				7:
+					if not count7 >= 1:
+						count7 += 1
+						onscreenmax = 0
+						$Label.text = "Last boss = "
+						visible_then_not($"Sprite Holders/finale")
+						$Label.text = "You should commit die now."
+				8:
+					if not count8 >= 1:
+						count8 += 1
+						onscreenmax = 5
+						$Label.visible = true
+						yield(get_tree().create_timer(6), "timeout")
+						$Label.visible = false
 
 func diff_levels(value):
 	current_difficulty_level = difficulty_levels[value]
+
+func visible_then_not(sprite):
+	$Label.visible = true
+	sprite.visible = true
+	yield(get_tree().create_timer(5), "timeout")
+	sprite.visible = false
+	$Label.visible = false

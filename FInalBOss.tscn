@@ -8,7 +8,6 @@
 radius = 8.0
 
 [node name="FInalBOss" type="Area2D"]
-position = Vector2( 241, 76 )
 collision_layer = 34
 script = ExtResource( 1 )
 missile = true

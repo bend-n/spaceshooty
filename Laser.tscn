@@ -79,14 +79,14 @@ animations = [ {
 "name": "default",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "New Anim",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "New Anim 1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "New Anim",
 "speed": 5.0
 } ]
 
@@ -112,7 +112,7 @@ FRICTION = 150
 
 [node name="Laser" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
-frame = 8
+frame = 5
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
