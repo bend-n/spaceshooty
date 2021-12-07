@@ -53,8 +53,8 @@ func _on_Enemy_body_entered(body):
 
 func _on_Enemy_area_entered(area):
 	if not area.is_in_group("laser"):
-		area.create_hit_effect()
 		if not area.is_in_group("Player"):
+			area.create_hit_effect()
 			area.queue_free()
 			damage()
 

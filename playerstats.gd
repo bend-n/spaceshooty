@@ -10,6 +10,7 @@ var flak = true
 var gun = "lasers"
 export(int) var max_hp = 3 setget set_max_health
 var hp = max_hp setget set_health
+var recent_score :int
 
 signal no_hp 
 signal hp_changed(value)

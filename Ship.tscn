@@ -262,7 +262,7 @@ texture = ExtResource( 2 )
 hframes = 9
 frame = 1
 
-[node name="damage" type="Area2D" parent="."]
+[node name="damage" type="Area2D" parent="." groups=["Player"]]
 script = ExtResource( 7 )
 
 [node name="Collision2" type="CollisionPolygon2D" parent="damage"]
@@ -299,10 +299,6 @@ parameters/Turn/blend_position = Vector2( 0, 0 )
 visible = false
 shape = SubResource( 39 )
 
-[node name="Timer" type="Timer" parent="Ship"]
-wait_time = 0.1
-autostart = true
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Ship"]
 position = Vector2( -12, -19 )
 scale = Vector2( 2, 2 )
@@ -329,12 +325,13 @@ volume_db = -20.0
 [node name="Change gun" parent="Ship/MobileJoystick/MobileControls" index="1"]
 action = "change_gun_1"
 
+[node name="Timer" type="Timer" parent="Ship"]
+
 [connection signal="area_entered" from="damage" to="Ship" method="_on_Ship_area_entered"]
 [connection signal="body_entered" from="damage" to="Ship" method="_on_Ship_body_entered"]
 [connection signal="force" from="Ship" to="." method="_on_Ship_force"]
 [connection signal="player_death" from="Ship" to="." method="_on_Ship_player_death"]
 [connection signal="velocity" from="Ship" to="." method="_on_Ship_velocity"]
-[connection signal="timeout" from="Ship/Timer" to="Ship" method="_on_Timer_timeout"]
 [connection signal="finished" from="Ship/AudioStreamPlayer" to="Ship" method="_on_AudioStreamPlayer_finished"]
 
 [editable path="Ship/MobileJoystick"]

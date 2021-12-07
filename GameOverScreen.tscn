@@ -1,4 +1,4 @@
-[gd_scene load_steps=410 format=2]
+[gd_scene load_steps=411 format=2]
 
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://(16)04B_30__.TTF" type="DynamicFontData" id=4]
 [ext_resource path="res://changegun.png" type="Texture" id=5]
 [ext_resource path="res://blackhoole.png" type="Texture" id=6]
+[ext_resource path="res://alagard.tres" type="DynamicFont" id=7]
 
 [sub_resource type="AtlasTexture" id=54]
 flags = 2
@@ -2059,10 +2060,24 @@ __meta__ = {
 [node name="HighscoreLabel" type="Label" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 320.0
+margin_right = 312.0
 margin_bottom = 25.0
+custom_fonts/font = ExtResource( 7 )
+text = "Highscore = "
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="."]
+margin_left = -16.0
+margin_top = 32.0
+margin_right = 296.0
+margin_bottom = 49.0
 custom_fonts/font = ExtResource( 1 )
-text = "Highscore ="
+text = "Score = "
 align = 1
 valign = 1
 autowrap = true

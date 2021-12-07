@@ -26,7 +26,6 @@ var score_ranges : Array = [
 	[8001, 30000, 7],
 	[30001, 40000, 8]
 ]
-onready var timer = $Enemytimer
 onready var spawnPoints = $SpawnPoints
 var difficulty_levels:Array
 var current_difficulty_level
@@ -53,7 +52,7 @@ func get_spawn_position():
 	points.shuffle()
 	return points[0].global_position
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	spawn_enemy_on_current_difficulty()
 	var world = get_tree().current_scene
 	for i in score_ranges.size():
@@ -108,7 +107,7 @@ func _physics_process(delta):
 						onscreenmax = 0
 						$Label.text = "Last boss = "
 						visible_then_not($"Sprite Holders/finale")
-						$Label.text = "You should commit die now."
+						$Label.text = "Y r u alive!!!"
 				8:
 					if not count8 >= 1:
 						count8 += 1

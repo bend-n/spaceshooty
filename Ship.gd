@@ -23,17 +23,12 @@ func create_hit_effect():
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
 
-func _process(delta):
+func _process(_delta):
 	if self.is_on_wall():
-		var walled = true
 		$Ship.walled = true
 	else:
-		var walled = false
 		$Ship.walled = false
 
 func _on_Ship_player_death():
 	emit_signal("player_death")
 
-
-func _on_Ship_remove_beam(b):
-	emit_signal("remove_beam", b)

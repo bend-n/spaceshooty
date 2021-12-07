@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://EnemySpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://pause.tscn" type="PackedScene" id=4]
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=6]
 [ext_resource path="res://HpUi.tscn" type="PackedScene" id=7]
@@ -94,16 +95,19 @@ shape = SubResource( 4 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HpUi" parent="CanvasLayer" instance=ExtResource( 7 )]
-margin_left = 264.0
+margin_left = 269.0
 margin_top = 11.0
-margin_right = -13.0
+margin_right = -7.0
 margin_bottom = -158.0
 
 [node name="WeaponUi" parent="CanvasLayer" instance=ExtResource( 8 )]
-margin_left = 40.0
-margin_top = 20.0
-margin_right = -260.0
-margin_bottom = -144.0
+margin_left = 51.0
+margin_top = 7.0
+margin_right = -249.0
+margin_bottom = -157.0
+
+[node name="pause" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 5 )

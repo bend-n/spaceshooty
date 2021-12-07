@@ -4,6 +4,7 @@ onready var highscoreLabel = $HighscoreLabel
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
 
 func _ready():
+	$Score.text = ("Score = " + str(playerstats.recent_score))
 	set_highscore_label()
 	$TouchScreenButton.visible = USE_TOUCH
 	if hole:
