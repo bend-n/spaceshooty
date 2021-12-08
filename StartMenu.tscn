@@ -1,10 +1,11 @@
-[gd_scene load_steps=407 format=2]
+[gd_scene load_steps=409 format=2]
 
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
 [ext_resource path="res://StartMenu.gd" type="Script" id=2]
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MobileControls.tscn" type="PackedScene" id=4]
 [ext_resource path="res://blackhoole.png" type="Texture" id=5]
+[ext_resource path="res://Paskowy.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 2
@@ -2014,6 +2015,10 @@ animations = [ {
 "speed": 40.0
 } ]
 
+[sub_resource type="DynamicFont" id=402]
+size = 26
+font_data = ExtResource( 6 )
+
 [node name="StartMenu" type="Node"]
 script = ExtResource( 2 )
 
@@ -2039,9 +2044,9 @@ __meta__ = {
 }
 
 [node name="Highscorelabel" type="Label" parent="CenterContainer"]
-margin_left = 67.0
+margin_left = 60.0
 margin_top = 71.0
-margin_right = 253.0
+margin_right = 260.0
 margin_bottom = 108.0
 custom_fonts/font = ExtResource( 1 )
 text = "Press space
@@ -2054,8 +2059,8 @@ valign = 1
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0
 margin_left = 8.0
-margin_top = 8.0
-margin_bottom = 25.0
+margin_top = 15.0
+margin_bottom = 32.0
 custom_fonts/font = ExtResource( 1 )
 text = "highscore = "
 __meta__ = {
@@ -2066,5 +2071,16 @@ __meta__ = {
 
 [node name="Change gun" parent="MobileControls" index="1"]
 visible = false
+
+[node name="productions- inc" type="Label" parent="."]
+margin_left = 218.0
+margin_top = -21.0
+margin_right = 315.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 402 )
+text = "bendn productions"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [editable path="MobileControls"]
