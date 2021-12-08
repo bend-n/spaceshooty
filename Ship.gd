@@ -4,7 +4,6 @@ class_name playerkinematic
 onready var HitEffect = preload("res://HitEffect.tscn")
 export var id = 1 setget set_id
 signal player_death
-signal remove_beam
 
 func set_id(value):
 	$Ship.id = value

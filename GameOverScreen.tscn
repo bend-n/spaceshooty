@@ -6,7 +6,7 @@
 [ext_resource path="res://(16)04B_30__.TTF" type="DynamicFontData" id=4]
 [ext_resource path="res://changegun.png" type="Texture" id=5]
 [ext_resource path="res://blackhoole.png" type="Texture" id=6]
-[ext_resource path="res://alagard.tres" type="DynamicFont" id=7]
+[ext_resource path="res://04b-19.tres" type="DynamicFont" id=7]
 
 [sub_resource type="AtlasTexture" id=54]
 flags = 2

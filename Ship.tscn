@@ -262,7 +262,7 @@ texture = ExtResource( 2 )
 hframes = 9
 frame = 1
 
-[node name="damage" type="Area2D" parent="." groups=["Player"]]
+[node name="damage" type="Area2D" parent="." groups=["Player", "player"]]
 script = ExtResource( 7 )
 
 [node name="Collision2" type="CollisionPolygon2D" parent="damage"]

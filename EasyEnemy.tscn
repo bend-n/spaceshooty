@@ -5,10 +5,12 @@
 [ext_resource path="res://EasyEnemy.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 2
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
+flags = 2
 atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
@@ -35,6 +37,6 @@ shootspeed = 10.0
 frames = SubResource( 2 )
 frame = 1
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 0.5, 0 )
 shape = SubResource( 1 )

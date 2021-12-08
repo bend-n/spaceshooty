@@ -1,8 +1,6 @@
 extends Control
-var focused
 
-func _ready():
-	$ColorRect/settings.hide()
+var setting = false
 
 func _input(event):
 	if event.is_action_pressed("pause"):
@@ -11,18 +9,33 @@ func _input(event):
 		visible = new_pause_state
 		if new_pause_state:
 			$ColorRect/VBoxContainer/mainmenu.grab_focus()
-
-func _process(_delta):
-	focused = get_focus_owner()
-	if Input.is_action_just_pressed("ui_accept"):
-		if focused == $ColorRect/VBoxContainer/mainmenu:
-# warning-ignore:return_value_discarded
-			get_tree().change_scene("res://StartMenu.tscn")
-		elif $ColorRect/VBoxContainer/options:
-			$ColorRect/settings.called()
+		elif new_pause_state == false:
+			$ColorRect/settings.hide()
 
 func _exit_tree():
 	get_tree().paused = false
 
 func _on_settings_back():
+	$ColorRect/settings.visible = false
+	yield(get_tree().create_timer(.3), "timeout")
 	$ColorRect/VBoxContainer/mainmenu.grab_focus()
+	setting = false
+
+func update_settings(settings: Dictionary) -> void:
+	OS.window_fullscreen = settings.fullscreen
+	OS.set_window_size(settings.resolution)
+	OS.vsync_enabled = settings.vsync
+
+func _on_settings_apply_button_pressed(settings) -> void:
+	update_settings(settings)
+
+func _on_mainmenu_gui_input(event):
+	if event.is_action("ui_accept"):
+# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://StartMenu.tscn")
+
+func _on_options_gui_input(event):
+	if event.is_action("ui_accept"):
+		if setting != true:
+			setting = true
+			$ColorRect/settings.called()
