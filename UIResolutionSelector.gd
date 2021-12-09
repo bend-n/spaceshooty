@@ -1,6 +1,6 @@
 # Scene with an OptionButton to select the resolution from a list of options
 extends Control
-
+var focused_now
 # Emitted when the selected resolution changes.
 signal resolution_changed(new_resolution)
 
@@ -20,3 +20,11 @@ func _on_OptionButton_item_selected(_index: int) -> void:
 	# Call the `_update_selected_item` function when the user selects
 	# a new item in the `OptionButton`
 	_update_selected_item(option_button.text)
+
+
+func _on_OptionButton_item_focused(index):
+	focused_now = index
+
+
+func _on_OptionButton_gui_input(event):
+	if event.is_action("ui_accept") and focused_now != null: _on_OptionButton_item_selected(focused_now)

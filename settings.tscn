@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://settings.gd" type="Script" id=1]
 [ext_resource path="res://stop.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://UIResolutionSelector.tscn" type="PackedScene" id=8]
 [ext_resource path="res://buttontheme.tres" type="Theme" id=9]
 [ext_resource path="res://new_styleboxflat.tres" type="StyleBox" id=10]
+[ext_resource path="res://input_menu/InputMenu.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.898039, 0.898039, 0.898039, 0.854902 )
@@ -52,28 +53,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Button" parent="ColorRect"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 72.0
-margin_bottom = 31.0
-focus_neighbour_left = NodePath("../VolumeSlider")
-focus_neighbour_top = NodePath("../VolumeSlider")
-focus_neighbour_right = NodePath("../VBoxContainer/fullscreen")
-focus_neighbour_bottom = NodePath("../VolumeSlider")
-focus_next = NodePath("../VolumeSlider")
-focus_previous = NodePath("../VBoxContainer/fullscreen")
-theme = ExtResource( 9 )
-text = "Back"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="VolumeLabel" type="Label" parent="ColorRect"]
-margin_left = 112.0
-margin_top = 50.0
-margin_right = 165.0
-margin_bottom = 65.0
+margin_left = 64.0
+margin_top = 40.0
+margin_right = 117.0
+margin_bottom = 55.0
 custom_fonts/font = ExtResource( 3 )
 text = "volume"
 __meta__ = {
@@ -82,9 +66,9 @@ __meta__ = {
 
 [node name="VolumeSlider" type="HSlider" parent="ColorRect"]
 margin_left = 16.0
-margin_top = 48.0
-margin_right = 104.0
-margin_bottom = 68.0
+margin_top = 16.0
+margin_right = 116.0
+margin_bottom = 33.0
 focus_neighbour_top = NodePath("../Back")
 focus_next = NodePath("../VBoxContainer/fullscreen")
 focus_previous = NodePath("../Back")
@@ -100,34 +84,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Back" type="Button" parent="ColorRect"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 48.0
+margin_bottom = 96.0
+theme = ExtResource( 9 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
 margin_left = 200.0
-margin_top = 8.0
-margin_right = 240.0
-margin_bottom = 48.0
+margin_top = 9.0
+margin_right = 314.0
+margin_bottom = 120.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="fullscreen" parent="ColorRect/VBoxContainer" instance=ExtResource( 7 )]
 margin_top = 0.0
-margin_right = 92.0
+margin_right = 114.0
 margin_bottom = 16.0
 title = "Fullscreen"
 
 [node name="vsync" parent="ColorRect/VBoxContainer" instance=ExtResource( 7 )]
 margin_top = 20.0
-margin_right = 92.0
+margin_right = 114.0
 margin_bottom = 36.0
 title = "Vsync"
 
 [node name="UIResolutionSelector" parent="ColorRect/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 40.0
-margin_right = 92.0
+margin_right = 114.0
 margin_bottom = 54.0
 
-[node name="Label" type="Label" parent="ColorRect"]
-margin_left = 16.0
+[node name="pause2" type="Label" parent="ColorRect"]
+margin_left = 6.0
 margin_top = 155.0
 margin_right = 288.0
 margin_bottom = 172.0
@@ -138,7 +133,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="ColorRect"]
+[node name="pause" type="Label" parent="ColorRect"]
 margin_left = 28.0
 margin_top = 127.0
 margin_right = 310.0
@@ -154,9 +149,24 @@ position = Vector2( 303, 164 )
 scale = Vector2( 1, 0.987089 )
 texture = ExtResource( 2 )
 
-[connection signal="gui_input" from="ColorRect/Back" to="." method="_on_Back_gui_input"]
+[node name="controls" type="Button" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_neighbour_left = NodePath("../VolumeSlider")
+focus_neighbour_right = NodePath("../VBoxContainer")
+theme = ExtResource( 9 )
+text = "control"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InputMenu" parent="ColorRect/controls" instance=ExtResource( 11 )]
+visible = false
+
 [connection signal="gui_input" from="ColorRect/VolumeSlider" to="ColorRect/VolumeSlider" method="_on_VolumeSlider_gui_input"]
 [connection signal="value_changed" from="ColorRect/VolumeSlider" to="ColorRect/VolumeSlider" method="_on_value_changed"]
+[connection signal="gui_input" from="ColorRect/Back" to="." method="_on_Back_gui_input"]
 [connection signal="toggled" from="ColorRect/VBoxContainer/fullscreen" to="." method="_on_UIFullscreenCheckbox_toggled"]
 [connection signal="toggled" from="ColorRect/VBoxContainer/vsync" to="." method="_on_UIVsyncCheckbox_toggled"]
 [connection signal="resolution_changed" from="ColorRect/VBoxContainer/UIResolutionSelector" to="." method="_on_UIResolutionSelector_resolution_changed"]
+[connection signal="gui_input" from="ColorRect/controls" to="ColorRect/controls/InputMenu" method="_on_controls_gui_input"]

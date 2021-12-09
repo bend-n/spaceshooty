@@ -1,20 +1,23 @@
 extends RigidBody2D
 const HitEffect = preload("res://HitEffect.tscn")
-onready var player = get_tree().get_nodes_in_group("Player").front()
+#onready var player = get_tree().get_nodes_in_group("Player").front()
+var player
 export var speed = 500.0
 export var accelaration = 5.0
-export var turn_speed = 5.0
+export var turn_speed = 4
 export var turn_accelaration = 0.5
+export var initial_velocity = 200
+var count = 0
+var dir = Vector2.ZERO
+var velocity = Vector2.ZERO
 
-func _physics_process(_delta):
-	if is_instance_valid(player):
-		angular_velocity = move_toward(
-			angular_velocity, 
-			get_angle_to(player.global_position) * turn_speed, 
-			turn_accelaration)
-		linear_velocity = linear_velocity.move_toward(
-			Vector2.RIGHT.rotated(global_rotation) * speed, 
-			accelaration)
+func _start(_target):
+	player = _target
+
+func _physics_process(delta):
+	dir = Vector2.RIGHT.rotated(rotation)
+	velocity = dir * speed * delta
+	add_central_force(velocity)
 
 func create_hit_effect():
 	var main = get_tree().current_scene

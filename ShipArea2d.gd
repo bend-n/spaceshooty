@@ -41,13 +41,11 @@ func _ready():
 	beamu = playerstats.beam
 
 func _physics_process(delta):
-	if !target or not is_instance_valid(target):
-		find_target()
+	if !target or not is_instance_valid(target): find_target()
 	input_vector.x = Input.get_axis('left_%s' % id, 'right_%s' % id)
 	input_vector.y = Input.get_axis('up_%s' % id, 'down_%s' % id)
 	input_vector = input_vector.normalized()
-	if $MobileJoystick/TouchScreenButton.in_use:
-		input_vector = $MobileJoystick/TouchScreenButton.force
+	if $MobileJoystick/TouchScreenButton.in_use: input_vector = $MobileJoystick/TouchScreenButton.force
 	#makes a input vector based off of inputs, and supports controllers
 	if input_vector != Vector2.ZERO:#moves ya
 		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
@@ -57,26 +55,17 @@ func _physics_process(delta):
 		#stops you
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	
-	if i_am_in_cooldown:
-		SPEED = movementpenalty
-	else:
-		SPEED = 100
-		
+	if i_am_in_cooldown: SPEED = movementpenalty
+	else: SPEED = 100
 	if not i_am_in_cooldown and Input.is_action_pressed('shoot_%s' % id):
 		fire()
 		_go_into_cooldown()
-		
 	if Input.is_action_just_pressed("change_gun_%s" % id):
 		match playerstats.gun:
-			"lasers":
-				rockets()
-			"rockets":
-				splitshot()
-			"splitshot":
-				flak()
-			"flak":
-				lasers()
+			"lasers": rockets()
+			"rockets": splitshot()
+			"splitshot": flak()
+			"flak": lasers()
 	move()
 
 func find_target():
@@ -84,8 +73,7 @@ func find_target():
 	if units.size() > 0:
 		var closest = units[0]
 		for unit in units:
-			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
-				closest = unit
+			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position): closest = unit
 		target = closest
 	else:
 		target = null
@@ -154,8 +142,7 @@ func play():
 
 func _on_AudioStreamPlayer_finished():
 	playerstats.hp -= 1
-	if playerstats.hp <= 0:
-		$AnimationPlayer.play("Die Anim")
+	if playerstats.hp <= 0: $AnimationPlayer.play("Die Anim")
 
 
 func create_hit_effect():
@@ -175,17 +162,17 @@ func _go_into_cooldown():
 
 func fire(): #shoot
 	if playerstats.gun == "rockets":
-		if walled == false:
-			velocity.x -= recoil
-		var missiles = preload("res://Missile.tscn")
+		if walled == false: velocity.x -= recoil
+		else: velocity.x -= recoil / 10
+		var missiles = preload("res://missile.tscn")
 		var m = missiles.instance()
 		var main = get_tree().current_scene
 		main.add_child(m)
 		m.global_position = global_position
-		m.start(self.global_transform, target)
+		m._start(target)
 	else:
-		if walled == false:
-			velocity.x -= recoil
+		if walled == false: velocity.x -= recoil
+		else: velocity.x -= recoil / 10
 		var laser = attack.instance()
 		var main = get_tree().current_scene
 		main.add_child(laser)

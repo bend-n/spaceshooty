@@ -13,11 +13,14 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="."]
 margin_top = 13.0
+margin_right = 38.0
 margin_bottom = 27.0
+theme = ExtResource( 5 )
+text = "Res ="
 
 [node name="OptionButton" type="OptionButton" parent="."]
-margin_left = 4.0
-margin_right = 76.0
+margin_left = 42.0
+margin_right = 114.0
 margin_bottom = 40.0
 theme = ExtResource( 5 )
 custom_constants/arrow_margin = 0
@@ -25,4 +28,6 @@ text = "1280x720"
 items = [ "640x300", null, false, 0, null, "1280x720", null, false, 1, null, "1920x1080", null, false, 2, null ]
 selected = 1
 
+[connection signal="gui_input" from="OptionButton" to="." method="_on_OptionButton_gui_input"]
+[connection signal="item_focused" from="OptionButton" to="." method="_on_OptionButton_item_focused"]
 [connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]

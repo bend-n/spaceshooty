@@ -1,17 +1,30 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://missile.gd" type="Script" id=1]
-[ext_resource path="res://EnemyMissile.png" type="Texture" id=2]
+[ext_resource path="res://PlayerMissle.png" type="Texture" id=2]
+[ext_resource path="res://Laser.wav" type="AudioStream" id=3]
 
 [node name="missile" type="RigidBody2D"]
 position = Vector2( 284, 88 )
-collision_layer = 192
+collision_layer = 0
+collision_mask = 130
+mass = 40.0
 gravity_scale = 0.0
 script = ExtResource( 1 )
+turn_speed = 20
 
 [node name="Sprite" type="Sprite" parent="."]
-rotation = 3.14159
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( -1, 1 )
 polygon = PoolVector2Array( -7, 1, -6, 2, 3, 2, 3, 3, 4, 4, 5, 4, 7, 2, 7, -2, 5, -4, 4, -4, 3, -3, 3, -2, -6, -2, -7, -1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -20.0
+autoplay = true
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="queue_free"]

@@ -23,10 +23,8 @@ func create_hit_effect():
 	hitEffect.global_position = global_position
 
 func _process(_delta):
-	if self.is_on_wall():
-		$Ship.walled = true
-	else:
-		$Ship.walled = false
+	if self.is_on_wall(): $Ship.walled = true
+	else: $Ship.walled = false
 
 func _on_Ship_player_death():
 	emit_signal("player_death")

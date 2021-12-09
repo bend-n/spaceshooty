@@ -26,3 +26,4 @@ func _on_UIFullscreenCheckbox_toggled(is_button_pressed: bool) -> void:
 func _on_UIVsyncCheckbox_toggled(is_button_pressed: bool) -> void:
 	_settings.vsync = is_button_pressed
 	emit_signal("apply_button_pressed", _settings)
+

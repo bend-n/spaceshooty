@@ -2,15 +2,15 @@
 
 [ext_resource path="res://FInalBOss.gd" type="Script" id=1]
 [ext_resource path="res://bossfinal.png" type="Texture" id=2]
-[ext_resource path="res://EnemyMissile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Fireball.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
 
 [node name="FInalBOss" type="Area2D"]
+position = Vector2( 270, 73 )
 collision_layer = 34
 script = ExtResource( 1 )
-missile = true
 ARMOR = 500
 score_on_kill = 500
 Laser = ExtResource( 3 )
