@@ -1,6 +1,5 @@
 extends RigidBody2D
 
-export var homing = false
 export var steer_force = 50.0
 export var speed = 400
 export var spreadminpos:int
@@ -26,13 +25,14 @@ var choosing = 0
 
 func _ready():
 	velocity.x += initial_velocity
-	if particles:
-		$CPUParticles2D.emitting = true
+	if particles: $CPUParticles2D.emitting = true
 	randomize() 
 	if scalingrand:
 		var rand = rand_range(minscalingrand, maxscalingrand)
 		$Laser.scale.x = rand
 		$Laser.scale.y = rand
+		$Collision.scale.x = rand
+		$Collision.scale.y = rand
 	var animatedSprite = $Laser
 	animatedSprite.frame = rand_range(0, 13)
 	if spread:
@@ -48,18 +48,11 @@ func create_hit_effect():
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
 
-
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
-
 func _physics_process(delta):
-	if spread or homing:
+	if spread:
 		dir = Vector2.RIGHT.rotated(rotation)
 		velocity = dir * speed * delta
 		add_central_force(velocity)
-
-
-func _on_Timer_timeout():
-	if spread:
-		linear_velocity.x = 0
