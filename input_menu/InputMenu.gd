@@ -3,6 +3,7 @@ extends Control
 onready var _action_list = get_node("ColorRect/Column/ScrollContainer/ActionList")
 
 func _ready():
+# warning-ignore:return_value_discarded
 	$InputMapper.connect('profile_changed', self, 'rebuild')
 	$ColorRect/Column/ProfilesMenu.initialize($InputMapper)
 	$InputMapper.change_profile($ColorRect/Column/ProfilesMenu.selected)

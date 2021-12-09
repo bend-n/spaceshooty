@@ -6,6 +6,7 @@ onready var highscoreLabel = $Label
 
 func _process(_delta):
 	if on:
+# warning-ignore:return_value_discarded
 		if Input.is_action_just_pressed("shoot_1"): get_tree().change_scene("res://World.tscn")
 		if Input.is_action_just_pressed("ui_cancel"): get_tree().quit()
 	var save_data = SaveAndLoad.load_data_from_file()

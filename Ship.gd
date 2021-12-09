@@ -4,8 +4,10 @@ class_name playerkinematic
 onready var HitEffect = preload("res://HitEffect.tscn")
 signal player_death
 
+# warning-ignore:return_value_discarded
 func _on_Ship_force(force): move_and_slide(force)
 
+# warning-ignore:return_value_discarded
 func _on_Ship_velocity(velocity): move_and_slide(velocity)
 
 func create_hit_effect():

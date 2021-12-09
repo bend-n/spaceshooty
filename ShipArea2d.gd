@@ -107,10 +107,10 @@ func lasers():
 		playerstats.gun = "lasers"
 func splitshot():
 	if splitshotu:
-		wait_time = 0.009
+		wait_time = 0.003
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1
-		recoil = 9
+		recoil = 40
 		movementpenalty = 130
 		attack = preload("res://SplitShot.tscn")
 		playerstats.gun = "splitshot"
