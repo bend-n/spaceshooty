@@ -7,13 +7,10 @@ func _input(event):
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
 		visible = new_pause_state
-		if new_pause_state:
-			$ColorRect/VBoxContainer/mainmenu.grab_focus()
-		elif new_pause_state == false:
-			$ColorRect/settings.hide()
+		if new_pause_state: $ColorRect/VBoxContainer/mainmenu.grab_focus()
+		elif new_pause_state == false: $ColorRect/settings.hide()
 
-func _exit_tree():
-	get_tree().paused = false
+func _exit_tree(): get_tree().paused = false
 
 func _on_settings_back():
 	$ColorRect/settings.visible = false
@@ -29,10 +26,7 @@ func update_settings(settings: Dictionary) -> void:
 func _on_settings_apply_button_pressed(settings) -> void:
 	update_settings(settings)
 
-func _on_mainmenu_gui_input(event):
-	if event.is_action("ui_accept"):
-# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://StartMenu.tscn")
+func _on_mainmenu_gui_input(event): if event.is_action("ui_accept"): get_tree().change_scene("res://StartMenu.tscn")
 
 func _on_options_gui_input(event):
 	if event.is_action("ui_accept"):

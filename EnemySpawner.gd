@@ -63,7 +63,6 @@ func _physics_process(_delta):
 				1:
 					if not count1 >= 1:
 						count1 += 1
-						print("hi")
 						visible_then_not($"Sprite Holders/basicenemy")
 				2:
 					if not count2 >= 1:
@@ -116,8 +115,7 @@ func _physics_process(_delta):
 						yield(get_tree().create_timer(6), "timeout")
 						$Label.visible = false
 
-func diff_levels(value):
-	current_difficulty_level = difficulty_levels[value]
+func diff_levels(value): current_difficulty_level = difficulty_levels[value]
 
 func visible_then_not(sprite):
 	$Label.visible = true

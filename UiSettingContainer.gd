@@ -6,8 +6,7 @@ signal toggled(is_button_pressed)
 
 export var title := "" setget set_title
 
-func _on_CheckBox_toggled(button_pressed: bool) -> void:
-	emit_signal("toggled", button_pressed)
+func _on_CheckBox_toggled(button_pressed: bool) -> void: emit_signal("toggled", button_pressed)
 
 
 

@@ -5,6 +5,26 @@
 [ext_resource path="res://EnemyLaser.gd" type="Script" id=3]
 [ext_resource path="res://blackandwhitefball-Sheet.png" type="Texture" id=4]
 
+[sub_resource type="AtlasTexture" id=29]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 19, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 38, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 57, 0, 19, 11 )
+
 [sub_resource type="AtlasTexture" id=16]
 flags = 2
 atlas = ExtResource( 1 )
@@ -70,38 +90,18 @@ flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=29]
-flags = 2
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 19, 11 )
-
-[sub_resource type="AtlasTexture" id=30]
-flags = 2
-atlas = ExtResource( 4 )
-region = Rect2( 19, 0, 19, 11 )
-
-[sub_resource type="AtlasTexture" id=31]
-flags = 2
-atlas = ExtResource( 4 )
-region = Rect2( 38, 0, 19, 11 )
-
-[sub_resource type="AtlasTexture" id=32]
-flags = 2
-atlas = ExtResource( 4 )
-region = Rect2( 57, 0, 19, 11 )
-
 [sub_resource type="SpriteFrames" id=14]
 resource_local_to_scene = true
 animations = [ {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
-"loop": true,
-"name": "New Anim",
-"speed": 25.0
-}, {
 "frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
 "loop": true,
 "name": "New Anim 1",
 "speed": 15.0
+}, {
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 25.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=15]

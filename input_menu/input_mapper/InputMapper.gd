@@ -32,8 +32,7 @@ func change_profile(id):
 	var profile = get(profiles[id])
 	var is_customizable = true if id == 2 else false
 	
-	for action_name in profile.keys():
-		change_action_key(action_name, profile[action_name])
+	for action_name in profile.keys(): change_action_key(action_name, profile[action_name])
 	emit_signal('profile_changed', profile, is_customizable)
 	return profile
 
@@ -47,11 +46,8 @@ func change_action_key(action_name, key_scancode):
 
 func erase_action_events(action_name):
 	var input_events = InputMap.get_action_list(action_name)
-	for event in input_events:
-		InputMap.action_erase_event(action_name, event)
+	for event in input_events: InputMap.action_erase_event(action_name, event)
 
-func get_selected_profile():
-	return get(profiles[current_profile_id])
+func get_selected_profile(): return get(profiles[current_profile_id])
 
-func _on_ProfilesMenu_item_selected(ID):
-	change_profile(ID)
+func _on_ProfilesMenu_item_selected(ID): change_profile(ID)

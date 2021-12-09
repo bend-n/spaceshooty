@@ -24,9 +24,7 @@ func set_max_health(value):
 func set_health(value):
 	hp = value
 	emit_signal("hp_changed", hp)
-	if hp <= 0:
-		emit_signal("no_hp")
+	if hp <= 0: emit_signal("no_hp")
 
 
-func _ready():
-	self.hp = max_hp
+func _ready(): self.hp = max_hp

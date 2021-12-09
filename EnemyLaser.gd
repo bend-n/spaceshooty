@@ -13,7 +13,5 @@ func create_hit_effect():
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
 
-
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+func _on_VisibilityNotifier2D_screen_exited(): queue_free()
 

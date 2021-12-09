@@ -1,10 +1,8 @@
 extends TouchScreenButton
 
-func angle_to_vec (angle: float) -> Vector2:
-	return Vector2(cos(angle), sin(angle))
+func angle_to_vec (angle: float) -> Vector2: return Vector2(cos(angle), sin(angle))
 
-func weighted_average (a: Vector2, b: Vector2, weight: float) -> Vector2:
-	return a * weight + b * (1.0 - weight)
+func weighted_average (a: Vector2, b: Vector2, weight: float) -> Vector2: return a * weight + b * (1.0 - weight)
 
 var radius: float
 var center: Vector2

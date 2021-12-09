@@ -96,7 +96,6 @@ func rockets():
 		movementpenalty = 60
 		recoil = 300
 		playerstats.gun = "rockets"
-
 func lasers():
 	if lasersu:
 		wait_time = .1
@@ -106,7 +105,6 @@ func lasers():
 		recoil = 40
 		attack = preload("res://Laser.tscn")
 		playerstats.gun = "lasers"
-
 func splitshot():
 	if splitshotu:
 		wait_time = 0.009
@@ -116,9 +114,7 @@ func splitshot():
 		movementpenalty = 130
 		attack = preload("res://SplitShot.tscn")
 		playerstats.gun = "splitshot"
-
-func move():
-	emit_signal("velocity", velocity)
+func move(): emit_signal("velocity", velocity)
 
 func _exit_tree():
 	var main = get_tree().current_scene
@@ -127,15 +123,13 @@ func _exit_tree():
 	explosionEffect.global_position = global_position
 	emit_signal("player_death")
 
-func _on_Ship_area_entered(area):
-	if not area.is_in_group("pbullet") or is_in_group("Player"):
-		area.queue_free()
-		play()
+func _on_Ship_area_entered(area): if not area.is_in_group("pbullet") or is_in_group("Player"): qfreenplay(area)
 
-func _on_Ship_body_entered(body):
-	if not body.is_in_group("Player") or is_in_group("pbullet"):
-		body.queue_free()
-		play()
+func qfreenplay(q):
+	q.queue_free()
+	play()
+
+func _on_Ship_body_entered(body): if not body.is_in_group("Player") or is_in_group("pbullet"): qfreenplay(body)
 
 func play():
 	hitSound.play()
@@ -151,8 +145,7 @@ func create_hit_effect():
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
 
-func _on_TouchScreenButton_force(force):
-	emit_signal("force", force)
+func _on_TouchScreenButton_force(force): emit_signal("force", force)
 
 func _go_into_cooldown():
   i_am_in_cooldown = true

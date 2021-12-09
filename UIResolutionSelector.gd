@@ -16,15 +16,8 @@ func _update_selected_item(text: String) -> void:
 	emit_signal("resolution_changed", Vector2(values[0], values[1]))
 
 
-func _on_OptionButton_item_selected(_index: int) -> void:
-	# Call the `_update_selected_item` function when the user selects
-	# a new item in the `OptionButton`
-	_update_selected_item(option_button.text)
+func _on_OptionButton_item_selected(_index: int) -> void: _update_selected_item(option_button.text)
 
+func _on_OptionButton_item_focused(index): focused_now = index
 
-func _on_OptionButton_item_focused(index):
-	focused_now = index
-
-
-func _on_OptionButton_gui_input(event):
-	if event.is_action("ui_accept") and focused_now != null: _on_OptionButton_item_selected(focused_now)
+func _on_OptionButton_gui_input(event): if event.is_action("ui_accept") and focused_now != null: _on_OptionButton_item_selected(focused_now)
