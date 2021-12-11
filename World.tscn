@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=6]
 [ext_resource path="res://HpUi.tscn" type="PackedScene" id=7]
 [ext_resource path="res://WeaponUi.tscn" type="PackedScene" id=8]
+[ext_resource path="res://camera.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 19.125, 183 )
@@ -39,7 +40,11 @@ extents = Vector2( 19.125, 183 )
 [node name="World" type="Node" groups=["World"]]
 script = ExtResource( 2 )
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer2"]
+show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
@@ -47,19 +52,70 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Stars" parent="." instance=ExtResource( 6 )]
+[node name="HpUi" parent="CanvasLayer2" instance=ExtResource( 7 )]
+margin_left = 269.0
+margin_top = 11.0
+margin_right = -7.0
+margin_bottom = -158.0
+
+[node name="WeaponUi" parent="CanvasLayer2" instance=ExtResource( 8 )]
+margin_left = 35.0
+margin_top = 5.0
+margin_right = -265.0
+margin_bottom = -159.0
+
+[node name="pause" parent="CanvasLayer2" instance=ExtResource( 4 )]
+visible = false
 
 [node name="Ship" parent="." instance=ExtResource( 1 )]
 position = Vector2( 30, 90 )
 z_index = 1
 
-[node name="EnemySpawner" parent="." instance=ExtResource( 3 )]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ship"]
+remote_path = NodePath("../../CanvasLayer/Camera2D")
+
+[node name="EnemyHolder" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Stars" parent="CanvasLayer" instance=ExtResource( 6 )]
+
+[node name="EnemySpawner" parent="CanvasLayer" instance=ExtResource( 3 )]
 position = Vector2( 320, 0 )
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="walls" type="StaticBody2D" parent="CanvasLayer"]
+position = Vector2( -15, 0 )
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/walls"]
+position = Vector2( -3, 80 )
+shape = SubResource( 4 )
+
+[node name="left" type="Position2D" parent="CanvasLayer/walls/CollisionShape2D"]
+position = Vector2( 19, -79 )
+
+[node name="bottom" type="Position2D" parent="CanvasLayer/walls/CollisionShape2D"]
+position = Vector2( 19, 100 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/walls"]
+position = Vector2( 353, 90 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/walls"]
+position = Vector2( 175, 198 )
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/walls"]
+position = Vector2( 175, -18 )
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
 anchor_right = 1.0
 margin_top = 5.0
-margin_bottom = 11.0
+margin_bottom = 22.0
 custom_fonts/font = ExtResource( 5 )
 text = "Score = 0"
 align = 1
@@ -67,47 +123,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( -15, 0 )
-collision_layer = 8
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -3, 80 )
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 353, 90 )
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 175, 198 )
-rotation = 1.5708
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 175, -18 )
-rotation = 1.5708
-shape = SubResource( 4 )
-
-[node name="EnemyHolder" type="Node2D" parent="."]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HpUi" parent="CanvasLayer" instance=ExtResource( 7 )]
-margin_left = 269.0
-margin_top = 11.0
-margin_right = -7.0
-margin_bottom = -158.0
-
-[node name="WeaponUi" parent="CanvasLayer" instance=ExtResource( 8 )]
-margin_left = 51.0
-margin_top = 7.0
-margin_right = -249.0
-margin_bottom = -157.0
-
-[node name="pause" parent="CanvasLayer" instance=ExtResource( 4 )]
-visible = false
+[node name="Camera2D" parent="CanvasLayer" instance=ExtResource( 9 )]
+current = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 5 )

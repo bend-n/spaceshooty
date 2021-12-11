@@ -1,6 +1,8 @@
 extends Control
 
 onready var _action_list = get_node("ColorRect/Column/ScrollContainer/ActionList")
+signal controls
+signal uncontrolled
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -30,5 +32,16 @@ func _on_InputLine_change_button_pressed(action_name, line):
 func _on_controls_gui_input(event):
 	if event.is_action("ui_accept"):
 		yield(get_tree().create_timer(.3), "timeout")
-		self.show()
-		$ColorRect/Column/ScrollContainer/ActionList.grab_focus()
+		$"../pause2".hide()
+		$"../pause".hide()
+		emit_signal("controls")
+		show()
+
+func _on_Button_gui_input(event):
+	if event.is_action("ui_accept"):
+		hide()
+		yield(get_tree().create_timer(.3), "timeout")
+		$"../pause2".show()
+		$"../pause".show()
+		$"../VBoxContainer/Back".grab_focus()
+		emit_signal("uncontrolled")

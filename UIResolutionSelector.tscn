@@ -11,16 +11,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-margin_top = 13.0
-margin_right = 38.0
-margin_bottom = 27.0
-theme = ExtResource( 5 )
-text = "Res ="
-
 [node name="OptionButton" type="OptionButton" parent="."]
-margin_left = 42.0
-margin_right = 114.0
+margin_right = 72.0
 margin_bottom = 40.0
 theme = ExtResource( 5 )
 custom_constants/arrow_margin = 0

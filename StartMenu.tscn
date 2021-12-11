@@ -1,4 +1,4 @@
-[gd_scene load_steps=409 format=2]
+[gd_scene load_steps=411 format=2]
 
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
 [ext_resource path="res://StartMenu.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://MobileControls.tscn" type="PackedScene" id=4]
 [ext_resource path="res://blackhoole.png" type="Texture" id=5]
 [ext_resource path="res://Paskowy.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://buttontheme.tres" type="Theme" id=7]
+[ext_resource path="res://pause.tscn" type="PackedScene" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 2
@@ -2039,15 +2041,17 @@ flip_h = true
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 21.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Highscorelabel" type="Label" parent="CenterContainer"]
-margin_left = 60.0
+margin_left = 49.0
 margin_top = 71.0
-margin_right = 260.0
+margin_right = 249.0
 margin_bottom = 108.0
+custom_colors/font_color_shadow = Color( 0.760784, 0.760784, 0.760784, 0.560784 )
 custom_fonts/font = ExtResource( 1 )
 text = "Press space
 press escape :<"
@@ -2069,6 +2073,9 @@ __meta__ = {
 
 [node name="MobileControls" parent="." instance=ExtResource( 4 )]
 
+[node name="Attack" parent="MobileControls" index="0"]
+visible = false
+
 [node name="Change gun" parent="MobileControls" index="1"]
 visible = false
 
@@ -2082,5 +2089,27 @@ text = "bendn productions"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="settings" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -56.0
+margin_top = -28.0
+margin_right = 88.0
+margin_bottom = -11.0
+theme = ExtResource( 7 )
+text = "options = backspace"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pause" parent="." instance=ExtResource( 8 )]
+visible = false
+trigger = "options"
+pausing = false
 
 [editable path="MobileControls"]

@@ -8,7 +8,8 @@ signal player_death
 func _on_Ship_force(force): move_and_slide(force)
 
 # warning-ignore:return_value_discarded
-func _on_Ship_velocity(velocity): move_and_slide(velocity)
+func _on_Ship_velocity(velocity): 
+	move_and_slide(velocity)
 
 func create_hit_effect():
 	var main = get_tree().current_scene

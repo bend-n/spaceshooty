@@ -1,9 +1,11 @@
 extends Area2D
 
+var counter
 var i_am_in_cooldown:bool
 var wait_time = .1
 var walled = false
 export var id = 1
+export var fireoffset = 2
 onready var animationState = $AnimationTree.get("parameters/playback")
 onready var HitEffect = preload("res://HitEffect.tscn")
 onready var hitSound = $AudioStreamPlayer
@@ -24,6 +26,7 @@ onready var rocketsu
 onready var lasersu 
 onready var flaku
 onready var beamu
+onready var fire = $"../Fire"
 var target = null
 signal velocity
 signal force
@@ -47,6 +50,13 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized()
 	if $MobileJoystick/TouchScreenButton.in_use: input_vector = $MobileJoystick/TouchScreenButton.force
 	#makes a input vector based off of inputs, and supports controllers
+	# fire particle code
+	var fire_dir = input_vector * -1
+	fire.direction = fire_dir
+	
+	if input_vector.x > 0 or input_vector.y != 0: fire.emitting = true
+	else: fire.emitting = false
+	
 	if input_vector != Vector2.ZERO:#moves ya
 		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
 		$AnimationTree.set("parameters/Turn/blend_position", input_vector)
@@ -57,9 +67,7 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	if i_am_in_cooldown: SPEED = movementpenalty
 	else: SPEED = 100
-	if not i_am_in_cooldown and Input.is_action_pressed('shoot_%s' % id):
-		fire()
-		_go_into_cooldown()
+	if not i_am_in_cooldown and Input.is_action_pressed('shoot_%s' % id): fire()
 	if Input.is_action_just_pressed("change_gun_%s" % id):
 		match playerstats.gun:
 			"lasers": rockets()
@@ -154,6 +162,7 @@ func _go_into_cooldown():
   i_am_in_cooldown = false
 
 func fire(): #shoot
+	_go_into_cooldown()
 	if playerstats.gun == "rockets":
 		if walled == false: velocity.x -= recoil
 		else: velocity.x -= recoil / 10

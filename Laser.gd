@@ -2,6 +2,7 @@ extends RigidBody2D
 
 export var steer_force = 50.0
 export var speed = 400
+export var max_speed = 500
 export var spreadminpos:int
 export var spreadmaxpos:int
 export var spreadmaxneg:int
@@ -54,4 +55,5 @@ func _physics_process(delta):
 	if spread:
 		dir = Vector2.RIGHT.rotated(rotation)
 		velocity = dir * speed * delta
+		velocity = velocity.clamped(max_speed)
 		add_central_force(velocity)

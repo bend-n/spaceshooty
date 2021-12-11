@@ -3,7 +3,7 @@ extends Node
 var count = 0
 var score = 0 setget set_score
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
-onready var scoreLabel = $ScoreLabel
+onready var scoreLabel = $CanvasLayer/ScoreLabel
 
 func _input(event):
 	if event.is_action("ui_home"):
@@ -35,7 +35,7 @@ func update_save_data():
 
 func _on_Ship_player_death():
 	playerstats.recent_score = score
-	$CanvasLayer/HpUi.visible = false
+	$CanvasLayer2/HpUi.visible = false
 	playerstats.hp = playerstats.max_hp
 	update_save_data()
 	yield(get_tree().create_timer(1), "timeout")
