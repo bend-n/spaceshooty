@@ -1,9 +1,10 @@
 [gd_scene format=2]
 
 [node name="Stars" type="CPUParticles2D"]
+pause_mode = 2
 position = Vector2( 320, 90 )
 amount = 150
-lifetime = 6.5
+lifetime = 6.0
 preprocess = 6.5
 emission_shape = 2
 emission_rect_extents = Vector2( 1, 90 )

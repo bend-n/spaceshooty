@@ -92,10 +92,7 @@ spreadminneg = -10
 
 [node name="Laser" parent="." index="0"]
 frames = SubResource( 15 )
-frame = 0
+frame = 7
 
 [node name="Collision" parent="." index="1"]
 shape = SubResource( 16 )
-
-[node name="Timer" parent="." index="4"]
-wait_time = 0.2

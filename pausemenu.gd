@@ -1,9 +1,19 @@
 extends Control
 
 var setting = false
+export var trigger = "pause"
+export var pausing = true
+
+func _ready():
+	$ColorRect/settings/ColorRect/pause.visible = pausing
+	$ColorRect/settings/ColorRect/pause2.visible = pausing
+	$ColorRect/pause1.visible = pausing
+	$ColorRect/pause2.visible = pausing
+	$ColorRect/pause_icon.visible = pausing
+	$ColorRect/settings/ColorRect/pause_icon.visible = pausing
 
 func _input(event):
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed(trigger):
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
 		visible = new_pause_state
@@ -26,6 +36,7 @@ func update_settings(settings: Dictionary) -> void:
 func _on_settings_apply_button_pressed(settings) -> void:
 	update_settings(settings)
 
+# warning-ignore:return_value_discarded
 func _on_mainmenu_gui_input(event): if event.is_action("ui_accept"): get_tree().change_scene("res://StartMenu.tscn")
 
 func _on_options_gui_input(event):

@@ -111,7 +111,7 @@ FRICTION = 150
 
 [node name="Laser" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
-frame = 7
+frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -128,5 +128,7 @@ volume_db = -20.0
 autoplay = true
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Timer2" type="Timer" parent="."]
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

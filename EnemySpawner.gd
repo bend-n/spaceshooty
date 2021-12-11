@@ -29,7 +29,7 @@ var score_ranges : Array = [
 onready var spawnPoints = $SpawnPoints
 var difficulty_levels:Array
 var current_difficulty_level
-onready var main = get_node("../EnemyHolder")
+onready var main = get_node("../../EnemyHolder")
 
 func _ready():
 	visible_then_not($"Sprite Holders/octopus")
@@ -42,7 +42,6 @@ func spawn_enemy_on_current_difficulty():
 		var choices = current_difficulty_level.get_children()
 		var to_spawn = choices[randi() % choices.size()]
 		var clone = to_spawn.duplicate()
-		main = get_node("../EnemyHolder")
 		var spawn_position = get_spawn_position()
 		main.add_child(clone)
 		clone.global_position = spawn_position

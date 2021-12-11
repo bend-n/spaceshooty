@@ -15,7 +15,7 @@ __meta__ = {
 
 [node name="Action" type="Label" parent="."]
 margin_top = 25.0
-margin_right = 92.0
+margin_right = 104.0
 margin_bottom = 39.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -23,9 +23,9 @@ theme = ExtResource( 2 )
 text = "Up"
 
 [node name="Key" type="Label" parent="."]
-margin_left = 96.0
+margin_left = 108.0
 margin_top = 25.0
-margin_right = 188.0
+margin_right = 212.0
 margin_bottom = 39.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -35,13 +35,13 @@ align = 1
 valign = 1
 
 [node name="ChangeButton" type="Button" parent="."]
-margin_left = 192.0
+margin_left = 216.0
+margin_top = 25.0
 margin_right = 320.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 128, 64 )
+margin_bottom = 39.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme = ExtResource( 2 )
-text = "Change"
+text = "Change button"
 
 [connection signal="pressed" from="ChangeButton" to="." method="_on_ChangeButton_pressed"]

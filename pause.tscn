@@ -18,7 +18,7 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.588235 )
+color = Color( 0, 0, 0, 0.584314 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -31,14 +31,14 @@ texture = ExtResource( 1 )
 anchor_bottom = 1.0
 margin_left = 14.0
 margin_top = 16.0
-margin_right = 96.0
-margin_bottom = -12.0
+margin_right = 88.0
+margin_bottom = -60.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="mainmenu" type="Button" parent="ColorRect/VBoxContainer"]
-margin_right = 82.0
+margin_right = 74.0
 margin_bottom = 14.0
 theme = ExtResource( 3 )
 text = "Main menu"
@@ -49,7 +49,7 @@ __meta__ = {
 
 [node name="options" type="Button" parent="ColorRect/VBoxContainer"]
 margin_top = 18.0
-margin_right = 82.0
+margin_right = 74.0
 margin_bottom = 32.0
 theme = ExtResource( 3 )
 text = "Options"
@@ -60,7 +60,7 @@ __meta__ = {
 
 [node name="exit" type="Button" parent="ColorRect/VBoxContainer"]
 margin_top = 36.0
-margin_right = 82.0
+margin_right = 74.0
 margin_bottom = 50.0
 theme = ExtResource( 3 )
 text = "exit"
@@ -72,7 +72,7 @@ __meta__ = {
 [node name="settings" parent="ColorRect" instance=ExtResource( 6 )]
 visible = false
 
-[node name="Label" type="Label" parent="ColorRect"]
+[node name="pause1" type="Label" parent="ColorRect"]
 margin_left = 16.0
 margin_top = 155.0
 margin_right = 288.0
@@ -84,11 +84,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="ColorRect"]
+[node name="pause2" type="Label" parent="ColorRect"]
 margin_left = 28.0
-margin_top = 127.0
+margin_top = 133.0
 margin_right = 310.0
-margin_bottom = 144.0
+margin_bottom = 150.0
 custom_fonts/font = ExtResource( 4 )
 text = "Press esc to unpause"
 __meta__ = {

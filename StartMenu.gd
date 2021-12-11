@@ -4,18 +4,21 @@ var on = false
 
 onready var highscoreLabel = $Label
 
-func _process(_delta):
+func _input(event):
 	if on:
-		if Input.is_action_just_pressed("shoot_1"): get_tree().change_scene("res://World.tscn")
-		if Input.is_action_just_pressed("ui_cancel"): get_tree().quit()
-	var save_data = SaveAndLoad.load_data_from_file()
-	highscoreLabel.text = "Highscore = " + str(save_data.highscore)
+# warning-ignore:return_value_discarded
+		if event.is_action("shoot_1"): get_tree().change_scene("res://World.tscn")
+		if event.is_action("ui_cancel"): get_tree().quit()
+		if event.is_action("options"): $pause.show()
 
 func _ready():
-	if USE_TOUCH: $TextureButton.visible = false
+	var save_data = SaveAndLoad.load_data_from_file()
+	highscoreLabel.text = "Highscore = " + str(save_data.highscore)
+	if USE_TOUCH: $MobileControls/Attack.visible = true
 	$AnimatedSprite.play("default")
 	$MobileControls/Attack.visible = USE_TOUCH
 	yield(get_tree().create_timer(.3), "timeout")
 	on = true
+	
 	
 
