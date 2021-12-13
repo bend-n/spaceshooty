@@ -66,10 +66,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 8, 7, 6, 5, 4, 3, 2, 1 ]
+"values": [ 7, 6, 5, 4, 3, 2, 1 ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -275,7 +275,6 @@ z_index = 2
 z_as_relative = false
 texture = ExtResource( 2 )
 hframes = 9
-frame = 1
 
 [node name="damage" type="Area2D" parent="." groups=["Player", "player"]]
 script = ExtResource( 7 )

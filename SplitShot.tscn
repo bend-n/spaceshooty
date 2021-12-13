@@ -88,6 +88,7 @@ spreadminpos = 10
 spreadmaxpos = -20
 spreadmaxneg = -20
 spreadminneg = -10
+trail_rare = false
 rarity_max = 10
 
 [node name="Laser" parent="." index="1"]

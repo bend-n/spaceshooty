@@ -30,6 +30,8 @@ const Trail = preload("res://Trail.tscn")
 var choosing = 0
 
 func _ready():
+	$LaserSound.pitch_scale = randf() + 0.4
+	$LaserSound.play()
 	$Laser.playing = true
 	if trail:
 		if trail_rare:

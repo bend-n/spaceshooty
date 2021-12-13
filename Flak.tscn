@@ -110,7 +110,6 @@ spreadminneg = -5
 scalingrand = true
 initial_velocity = 50
 trail = false
-trail_rare = false
 
 [node name="Glow" parent="." index="0"]
 self_modulate = Color( 0.694118, 0.756863, 1, 0.384314 )

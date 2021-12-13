@@ -118,10 +118,11 @@ spreadmaxneg = -3
 FRICTION = 150
 particles = true
 trail = true
+trail_rare = false
 rarity_max = 3
 
 [node name="Glow" type="Sprite" parent="."]
-self_modulate = Color( 0.619608, 0.698039, 1, 0.623529 )
+self_modulate = Color( 0.619608, 0.698039, 1, 1 )
 material = SubResource( 17 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
