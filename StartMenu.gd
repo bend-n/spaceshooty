@@ -7,7 +7,7 @@ onready var highscoreLabel = $Label
 func _input(event):
 	if on:
 # warning-ignore:return_value_discarded
-		if event.is_action("shoot_1"): get_tree().change_scene("res://World.tscn")
+		if event.is_action("shoot_1"): Game.transition("res://World.tscn")
 		if event.is_action("ui_cancel"): get_tree().quit()
 		if event.is_action("options"): $pause.show()
 

@@ -15,6 +15,7 @@ var nexthing = 0
 #min, max, level
 var onscreenmax = 3
 var onscreen = 0
+var announcing = true
 var dev_mode = playerstats.dev_mode
 var score_ranges : Array = [
 	[50, 200, 1],
@@ -38,15 +39,16 @@ func _ready():
 	current_difficulty_level = difficulty_levels[0]
 
 func spawn_enemy_on_current_difficulty():
-	if not dev_mode:
-		onscreen = main.get_child_count()
-		if onscreen <= onscreenmax:
-			var choices = current_difficulty_level.get_children()
-			var to_spawn = choices[randi() % choices.size()]
-			var clone = to_spawn.duplicate()
-			var spawn_position = get_spawn_position()
-			main.add_child(clone)
-			clone.global_position = spawn_position
+	if not announcing:
+		if not dev_mode:
+			onscreen = main.get_child_count()
+			if onscreen <= onscreenmax:
+				var choices = current_difficulty_level.get_children()
+				var to_spawn = choices[randi() % choices.size()]
+				var clone = to_spawn.duplicate()
+				var spawn_position = get_spawn_position()
+				main.add_child(clone)
+				clone.global_position = spawn_position
 
 func get_spawn_position():
 	var points = spawnPoints.get_children()
@@ -54,7 +56,6 @@ func get_spawn_position():
 	return points[0].global_position
 
 func _physics_process(_delta):
-	spawn_enemy_on_current_difficulty()
 	var world = get_tree().current_scene
 	for i in score_ranges.size():
 		if world.score in range(score_ranges[i][0], score_ranges[i][1], 1):
@@ -119,8 +120,10 @@ func _physics_process(_delta):
 func diff_levels(value): current_difficulty_level = difficulty_levels[value]
 
 func visible_then_not(sprite):
+	announcing = true
 	$Label.visible = true
 	sprite.visible = true
 	yield(get_tree().create_timer(5), "timeout")
 	sprite.visible = false
 	$Label.visible = false
+	announcing = false

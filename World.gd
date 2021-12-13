@@ -27,7 +27,7 @@ func set_score(value):
 			print("saved?")
 	if score >= 30000:
 # warning-ignore:return_value_discarded
-		get_tree().change_scene("res://Win.tscn")
+		Game.transition("res://Win.tscn")
 
 func update_score_label():
 	scoreLabel.text = "Score = " + str(score)
@@ -45,4 +45,4 @@ func _on_Ship_player_death():
 	update_save_data()
 	yield(get_tree().create_timer(1), "timeout")
 # warning-ignore:return_value_discarded
-	get_tree().change_scene("res://GameOverScreen.tscn")
+	Game.transition("res://GameOverScreen.tscn")

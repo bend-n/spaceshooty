@@ -1,19 +1,16 @@
-# Scene with a checkbox to switch settings with boolean values
-tool
-extends Control
-
-signal toggled(is_button_pressed)
-
-export var title := "" setget set_title
-
-func _on_CheckBox_toggled(button_pressed: bool) -> void: emit_signal("toggled", button_pressed)
+extends CheckBox
 
 
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
 
-func set_title(value: String) -> void:
-	title = value
-	# Wait until the scene is ready if `label` is null.
-	if not $CheckBox:
-		yield(self, "ready")
-	# Update the label's text
-	$CheckBox.text = title
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass

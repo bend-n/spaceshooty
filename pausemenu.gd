@@ -43,7 +43,7 @@ func _on_settings_apply_button_pressed(settings) -> void:
 	update_settings(settings)
 
 # warning-ignore:return_value_discarded
-func _on_mainmenu_gui_input(event): if event.is_action("ui_accept"): get_tree().change_scene("res://StartMenu.tscn")
+func _on_mainmenu_gui_input(event): if event.is_action("ui_accept"): Game.transition("res://StartMenu.tscn")
 
 func _on_options_gui_input(event):
 	if event.is_action("ui_accept"):

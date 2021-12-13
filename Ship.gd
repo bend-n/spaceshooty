@@ -4,6 +4,9 @@ class_name playerkinematic
 onready var HitEffect = preload("res://HitEffect.tscn")
 signal player_death
 
+func _ready():
+	$Ship/AnimationTree.active = true
+
 # warning-ignore:return_value_discarded
 func _on_Ship_force(force): move_and_slide(force)
 

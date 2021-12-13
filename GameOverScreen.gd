@@ -11,7 +11,7 @@ func _ready():
 	var save_data = SaveAndLoad.load_data_from_file()
 	if playerstats.recent_score >= save_data.highscore: $HighscoreLabel.hide()
 
-func _input(event): if event.is_action("ui_cancel"): get_tree().change_scene("res://StartMenu.tscn")
+func _input(event): if event.is_action("ui_cancel"): Game.transition("res://StartMenu.tscn")
 
 func set_highscore_label():
 	var save_data = SaveAndLoad.load_data_from_file()

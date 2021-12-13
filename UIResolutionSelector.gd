@@ -1,12 +1,8 @@
 # Scene with an OptionButton to select the resolution from a list of options
-extends Control
+extends OptionButton
 var focused_now
 # Emitted when the selected resolution changes.
 signal resolution_changed(new_resolution)
-
-# We store a reference to the OptionButton to get the selected option later
-onready var option_button: OptionButton = $OptionButton
-
 
 func _update_selected_item(text: String) -> void:
 	# The resolution options are written in the form "XRESxYRES".
@@ -15,8 +11,7 @@ func _update_selected_item(text: String) -> void:
 	# Emit a signal for informing the newly selected resolution
 	emit_signal("resolution_changed", Vector2(values[0], values[1]))
 
-
-func _on_OptionButton_item_selected(_index: int) -> void: _update_selected_item(option_button.text)
+func _on_OptionButton_item_selected(_index: int) -> void: _update_selected_item(self.text)
 
 func _on_OptionButton_item_focused(index): focused_now = index
 

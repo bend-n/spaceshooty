@@ -87,14 +87,14 @@ animations = [ {
 "name": "default",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "New Anim 1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "New Anim",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "New Anim 1",
 "speed": 5.0
 } ]
 
@@ -115,7 +115,6 @@ __meta__ = {
 }
 spreadmaxpos = 3
 spreadmaxneg = -3
-FRICTION = 150
 particles = true
 trail = true
 trail_rare = false
@@ -132,7 +131,7 @@ gravity = Vector2( 0, 0 )
 color_ramp = SubResource( 16 )
 
 [node name="Glow" type="Sprite" parent="."]
-self_modulate = Color( 0.619608, 0.698039, 1, 1 )
+self_modulate = Color( 0.619608, 0.698039, 1, 0.498039 )
 material = SubResource( 17 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
