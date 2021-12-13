@@ -145,8 +145,8 @@ func lasers():
 func splitshot():
 	if splitshotu:
 		wait_time = 0.003
-		shake_intensity = .03
-		shake_duration = .02
+		shake_intensity = .2
+		shake_duration = .2
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1
 		recoil = 40

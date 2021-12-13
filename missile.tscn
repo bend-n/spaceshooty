@@ -2,7 +2,7 @@
 
 [ext_resource path="res://missile.gd" type="Script" id=1]
 [ext_resource path="res://PlayerMissle.png" type="Texture" id=2]
-[ext_resource path="res://Laser.wav" type="AudioStream" id=3]
+[ext_resource path="res://missile.wav" type="AudioStream" id=3]
 [ext_resource path="res://Trail.tscn" type="PackedScene" id=4]
 [ext_resource path="res://glow.png" type="Texture" id=5]
 

@@ -88,11 +88,11 @@ spreadminpos = 10
 spreadmaxpos = -20
 spreadmaxneg = -20
 spreadminneg = -10
-rarity_max = 20
+rarity_max = 10
 
-[node name="Laser" parent="." index="0"]
+[node name="Laser" parent="." index="1"]
 frames = SubResource( 15 )
 frame = 11
 
-[node name="Collision" parent="." index="1"]
+[node name="Collision" parent="." index="2"]
 shape = SubResource( 16 )
