@@ -54,6 +54,7 @@ __meta__ = {
 }
 
 [node name="Stars" parent="ColorRect" instance=ExtResource( 12 )]
+emitting = false
 
 [node name="រេសោលុតិោនរេរេសោលេហ" type="Label" parent="ColorRect"]
 margin_left = 90.0

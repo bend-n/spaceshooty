@@ -156,6 +156,7 @@ autowrap = true
 uppercase = true
 
 [node name="Stars" parent="ColorRect" instance=ExtResource( 3 )]
+emitting = false
 
 [node name="InputMapper" parent="." instance=ExtResource( 2 )]
 

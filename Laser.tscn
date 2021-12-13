@@ -1,10 +1,14 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Laser.wav" type="AudioStream" id=1]
 [ext_resource path="res://Laser-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Laser.gd" type="Script" id=3]
 [ext_resource path="res://PlayerMissle.png" type="Texture" id=4]
 [ext_resource path="res://smallparticle.png" type="Texture" id=5]
+[ext_resource path="res://glow.png" type="Texture" id=6]
+
+[sub_resource type="CanvasItemMaterial" id=17]
+blend_mode = 1
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 2
@@ -79,20 +83,24 @@ animations = [ {
 "name": "default",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "New Anim 1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "New Anim",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "New Anim 1",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 4.5, 4 )
+
+[sub_resource type="Gradient" id=16]
+offsets = PoolRealArray( 0, 0.744681 )
+colors = PoolColorArray( 1, 1, 1, 0.0745098, 1, 1, 1, 1 )
 
 [node name="Laser" type="RigidBody2D" groups=["pbullet"]]
 show_behind_parent = true
@@ -108,11 +116,18 @@ __meta__ = {
 spreadmaxpos = 3
 spreadmaxneg = -3
 FRICTION = 150
+particles = true
+trail = true
+rarity_max = 3
+
+[node name="Glow" type="Sprite" parent="."]
+self_modulate = Color( 0.619608, 0.698039, 1, 0.623529 )
+material = SubResource( 17 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
 
 [node name="Laser" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
-frame = 1
-playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 0 )
@@ -130,5 +145,16 @@ autoplay = true
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Timer2" type="Timer" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 4
+lifetime = 3.0
+emission_shape = 2
+emission_rect_extents = Vector2( 3, 3 )
+direction = Vector2( -1, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 30.0
+color_ramp = SubResource( 16 )
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

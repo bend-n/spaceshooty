@@ -20,11 +20,27 @@ var dir = Vector2.ZERO
 var velocity = Vector2.ZERO
 export var initial_velocity = 0
 export var particles = false
+export var trail = false
+export var trail_rare = true
+export var rarity_min = 1
+export var rarity_max = 5
 
 const HitEffect = preload("res://HitEffect.tscn")
+const Trail = preload("res://Trail.tscn")
 var choosing = 0
 
 func _ready():
+	$Laser.playing = true
+	if trail:
+		if trail_rare:
+			var chance = rand_range(rarity_min, rarity_max)
+			chance = round(chance)
+			if chance == 1:
+				var trailinstance = Trail.instance()
+				self.add_child(trailinstance)
+		else:
+			var trailinstance = Trail.instance()
+			self.add_child(trailinstance)
 	velocity.x += initial_velocity
 	if particles: $CPUParticles2D.emitting = true
 	randomize() 
@@ -56,4 +72,6 @@ func _physics_process(delta):
 		dir = Vector2.RIGHT.rotated(rotation)
 		velocity = dir * speed * delta
 		velocity = velocity.clamped(max_speed)
+		if particles:
+			$CPUParticles2D.direction = velocity * -1
 		add_central_force(velocity)

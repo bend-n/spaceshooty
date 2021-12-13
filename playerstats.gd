@@ -1,6 +1,7 @@
 extends Node
 class_name playerstatz
 
+var dev_mode = false
 var beam = true
 var splitshot = true
 var multiplayerlocal = false

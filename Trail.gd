@@ -6,7 +6,7 @@ export var THICKNESS = 2.0
 var points = []
 var frame = 0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if frame % 3 == 0:
 		points.push_front(global_position)
 		if points.size() > MAX_LENGTH: points.pop_back()

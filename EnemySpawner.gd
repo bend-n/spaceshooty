@@ -15,6 +15,7 @@ var nexthing = 0
 #min, max, level
 var onscreenmax = 3
 var onscreen = 0
+var dev_mode = playerstats.dev_mode
 var score_ranges : Array = [
 	[50, 200, 1],
 	[200, 749, 2],
@@ -29,7 +30,7 @@ var score_ranges : Array = [
 onready var spawnPoints = $SpawnPoints
 var difficulty_levels:Array
 var current_difficulty_level
-onready var main = get_node("../../EnemyHolder")
+onready var main = get_node("../../../EnemyHolder")
 
 func _ready():
 	visible_then_not($"Sprite Holders/octopus")
@@ -37,14 +38,15 @@ func _ready():
 	current_difficulty_level = difficulty_levels[0]
 
 func spawn_enemy_on_current_difficulty():
-	onscreen = main.get_child_count()
-	if onscreen <= onscreenmax:
-		var choices = current_difficulty_level.get_children()
-		var to_spawn = choices[randi() % choices.size()]
-		var clone = to_spawn.duplicate()
-		var spawn_position = get_spawn_position()
-		main.add_child(clone)
-		clone.global_position = spawn_position
+	if not dev_mode:
+		onscreen = main.get_child_count()
+		if onscreen <= onscreenmax:
+			var choices = current_difficulty_level.get_children()
+			var to_spawn = choices[randi() % choices.size()]
+			var clone = to_spawn.duplicate()
+			var spawn_position = get_spawn_position()
+			main.add_child(clone)
+			clone.global_position = spawn_position
 
 func get_spawn_position():
 	var points = spawnPoints.get_children()

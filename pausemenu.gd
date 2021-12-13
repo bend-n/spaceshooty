@@ -17,8 +17,14 @@ func _input(event):
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
 		visible = new_pause_state
-		if new_pause_state: $ColorRect/VBoxContainer/mainmenu.grab_focus()
-		elif new_pause_state == false: $ColorRect/settings.hide()
+		if new_pause_state: 
+			$ColorRect/VBoxContainer/mainmenu.grab_focus()
+			$ColorRect/settings/ColorRect/Stars.emitting = true
+			$ColorRect/settings/ColorRect/InputMenu/ColorRect/Stars.emitting = true
+		elif new_pause_state == false: 
+			$ColorRect/settings.hide()
+			$ColorRect/settings/ColorRect/Stars.emitting = false
+			$ColorRect/settings/ColorRect/InputMenu/ColorRect/Stars.emitting = false
 
 func _exit_tree(): get_tree().paused = false
 

@@ -67,3 +67,6 @@ position = Vector2( 24, 24 )
 normal = ExtResource( 5 )
 shape = SubResource( 2 )
 action = "ui_cancel"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 160, 90 )

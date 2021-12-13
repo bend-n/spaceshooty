@@ -5,4 +5,5 @@
 [node name="Camera2D" type="Camera2D"]
 position = Vector2( 30, 90 )
 current = true
+smoothing_speed = 0.5
 script = ExtResource( 1 )

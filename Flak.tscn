@@ -80,14 +80,14 @@ animations = [ {
 "name": "default",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "New Anim 1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "New Anim",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "New Anim 1",
 "speed": 5.0
 } ]
 
@@ -103,38 +103,42 @@ colors = PoolColorArray( 0.397949, 0.397949, 0.397949, 1, 1, 1, 1, 0.529412, 1, 
 mass = 30.0
 linear_velocity = Vector2( 15, 0 )
 speed = 1000
-spreadmaxpos = 30
-spreadmaxneg = 0
-spreadminneg = -30
+spreadminpos = 5
+spreadmaxpos = 40
+spreadmaxneg = -40
+spreadminneg = -5
 scalingrand = true
-minscalingrand = 2
 initial_velocity = 50
-particles = true
+trail = false
+trail_rare = false
 
-[node name="Laser" parent="." index="0"]
+[node name="Glow" parent="." index="0"]
+self_modulate = Color( 0.694118, 0.756863, 1, 0.384314 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Laser" parent="." index="1"]
 material = SubResource( 17 )
 frames = SubResource( 15 )
 animation = "New Anim 1"
-frame = 0
 
-[node name="Collision" parent="." index="1"]
+[node name="Collision" parent="." index="2"]
 position = Vector2( 0, 0 )
 shape = SubResource( 16 )
 
-[node name="Timer2" parent="." index="5"]
+[node name="Timer2" parent="." index="6"]
 wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="6"]
+[node name="CPUParticles2D" parent="." index="7"]
 scale = Vector2( 2, 2 )
 amount = 1
+lifetime = 1.0
 preprocess = 1.0
 explosiveness = 0.4
 randomness = 0.2
-direction = Vector2( -1, 0 )
+emission_shape = 0
 spread = 10.0
-gravity = Vector2( 0, 0 )
 initial_velocity = 10.0
 initial_velocity_random = 0.2
 angular_velocity = 80.0

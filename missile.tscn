@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://missile.gd" type="Script" id=1]
 [ext_resource path="res://PlayerMissle.png" type="Texture" id=2]
 [ext_resource path="res://Laser.wav" type="AudioStream" id=3]
+[ext_resource path="res://Trail.tscn" type="PackedScene" id=4]
+[ext_resource path="res://glow.png" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
 
 [node name="missile" type="RigidBody2D"]
 position = Vector2( 284, 88 )
@@ -10,17 +15,17 @@ collision_layer = 0
 collision_mask = 130
 mass = 40.0
 gravity_scale = 0.0
-linear_velocity = Vector2( 50, 0 )
 script = ExtResource( 1 )
-accelaration = 200
-turn_speed = 20
-initial_velocity = 400
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="Glow" type="Sprite" parent="."]
+self_modulate = Color( 0.47451, 0.729412, 1, 1 )
+material = SubResource( 1 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-scale = Vector2( -1, 1 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
 polygon = PoolVector2Array( -7, 1, -6, 2, 3, 2, 3, 3, 4, 4, 5, 4, 7, 2, 7, -2, 5, -4, 4, -4, 3, -3, 3, -2, -6, -2, -7, -1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
@@ -29,5 +34,11 @@ polygon = PoolVector2Array( -7, 1, -6, 2, 3, 2, 3, 3, 4, 4, 5, 4, 7, 2, 7, -2, 5
 stream = ExtResource( 3 )
 volume_db = -20.0
 autoplay = true
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Trail" parent="." instance=ExtResource( 4 )]
+position = Vector2( -5, 0 )
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="queue_free"]

@@ -76,6 +76,7 @@ Music="*res://Music.tscn"
 SaveAndLoad="*res://Save&Load.gd"
 enemy_damage="*res://enemy_damage.gd"
 playerstats="*res://playerstats.gd"
+Shake="*res://shake.gd"
 
 [display]
 
@@ -227,10 +228,6 @@ options={
  ]
 }
 
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-
 [layer_names]
 
 2d_render/layer_1="player"
@@ -242,6 +239,10 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_6="targeted"
 2d_physics/layer_12="ui"
 3d_physics/layer_12="ui"
+
+[physics]
+
+2d/physics_engine="GodotPhysics"
 
 [rendering]
 

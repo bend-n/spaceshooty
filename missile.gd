@@ -1,28 +1,30 @@
 extends RigidBody2D
+
+
+export(float) var TERMINAL_VELOCITY := 300.0
+export(float) var CONSTANT_THRUST := 200.0
+export(float) var TURN_STRENGTH := 15
+onready var target_last_position
+var TARGET 
+
+func start(_target):
+	TARGET = _target
+	target_last_position = TARGET.global_position
+
+func _physics_process(delta: float) -> void:
+	if is_instance_valid(TARGET):
+		var target_position = TARGET.global_position + (TARGET.global_position - target_last_position)/delta
+		target_last_position = TARGET.global_position
+		var direction: Vector2 = global_position.direction_to(target_position - linear_velocity)
+		var attenuate_turning: float = global_transform.y.dot(direction.rotated(angular_velocity*delta))
+		apply_torque_impulse(TURN_STRENGTH * attenuate_turning)
+		var apply_thrust := Vector2()
+		if linear_velocity.length() < TERMINAL_VELOCITY:
+			var attenuate_thrust: float = clamp(global_transform.x.dot(direction), 0, 1)
+			apply_thrust = global_transform.x * CONSTANT_THRUST * attenuate_thrust
+			apply_central_impulse(apply_thrust)
+
 const HitEffect = preload("res://HitEffect.tscn")
-#onready var player = get_tree().get_nodes_in_group("Player").front()
-var player
-export var speed = 500.0
-export var accelaration = 500
-export var turn_speed = 4
-export var turn_accelaration = 0.5
-export var initial_velocity = 200
-var count = 0
-var dir = Vector2.ZERO
-var velocity = Vector2.ZERO
-
-func _start(_target): player = _target
-
-func _ready(): 
-	velocity.x += initial_velocity
-	yield(get_tree().create_timer(.2), "timeout")
-	linear_velocity.x = 0
-
-func _physics_process(delta):
-	dir = Vector2.RIGHT.rotated(rotation)
-	velocity = dir * speed * accelaration * delta
-	add_central_force(velocity)
-
 func create_hit_effect():
 	var main = get_tree().current_scene
 	var hitEffect = HitEffect.instance()

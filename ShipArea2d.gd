@@ -30,6 +30,9 @@ onready var fire = $"../Fire"
 var target = null
 signal velocity
 signal force
+var thrusting_last_frame = false
+var shake_intensity = .3
+var shake_duration = .2
 
 func _ready():
 	playerstats.gun = "lasers"
@@ -57,6 +60,26 @@ func _physics_process(delta):
 	if input_vector.x > 0 or input_vector.y != 0: fire.emitting = true
 	else: fire.emitting = false
 	
+	
+	if input_vector != Vector2.ZERO:
+		if not thrusting_last_frame:
+			$thrustsfxin.playing = true
+
+		if not $thrustsfxloop.playing:
+			$thrustsfxloop.playing = true
+
+		if $thrustsfxend.playing: pass
+
+		thrusting_last_frame = true
+	else:
+		if thrusting_last_frame:
+			$thrustsfxloop.playing = false
+			$thrustsfxend.playing = true
+
+			if $thrustsfxin.playing:
+				$thrustsfxin.playing = false
+
+		thrusting_last_frame = false
 	if input_vector != Vector2.ZERO:#moves ya
 		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
 		$AnimationTree.set("parameters/Turn/blend_position", input_vector)
@@ -67,7 +90,7 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	if i_am_in_cooldown: SPEED = movementpenalty
 	else: SPEED = 100
-	if not i_am_in_cooldown and Input.is_action_pressed('shoot_%s' % id): fire()
+	if not i_am_in_cooldown and Input.is_action_pressed('shoot_%s' % id): shoot()
 	if Input.is_action_just_pressed("change_gun_%s" % id):
 		match playerstats.gun:
 			"lasers": rockets()
@@ -88,7 +111,9 @@ func find_target():
 
 func flak():
 	if flaku:
-		wait_time = .0007
+		wait_time = .001
+		shake_intensity = .03
+		shake_duration = .04
 		enemy_damage.min_damage = 15
 		enemy_damage.max_damage = 50
 		movementpenalty = 0
@@ -98,6 +123,8 @@ func flak():
 
 func rockets():
 	if rocketsu:
+		shake_intensity = .4
+		shake_duration = .3
 		wait_time = 1
 		enemy_damage.min_damage = 10
 		enemy_damage.max_damage = 30
@@ -106,6 +133,8 @@ func rockets():
 		playerstats.gun = "rockets"
 func lasers():
 	if lasersu:
+		shake_intensity = .3
+		shake_duration = .2
 		wait_time = .1
 		enemy_damage.min_damage = 3
 		enemy_damage.max_damage = 6
@@ -116,6 +145,8 @@ func lasers():
 func splitshot():
 	if splitshotu:
 		wait_time = 0.003
+		shake_intensity = .03
+		shake_duration = .02
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1
 		recoil = 40
@@ -161,8 +192,10 @@ func _go_into_cooldown():
   yield(timer, "timeout")
   i_am_in_cooldown = false
 
-func fire(): #shoot
+func shoot(): #shoot
 	_go_into_cooldown()
+
+	Shake.shake(shake_intensity, shake_duration)
 	if playerstats.gun == "rockets":
 		if walled == false: velocity.x -= recoil
 		else: velocity.x -= recoil / 10
@@ -171,7 +204,7 @@ func fire(): #shoot
 		var main = get_tree().current_scene
 		main.add_child(m)
 		m.global_position = global_position
-		m._start(target)
+		m.start(target)
 	else:
 		if walled == false: velocity.x -= recoil
 		else: velocity.x -= recoil / 10
