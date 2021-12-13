@@ -22,7 +22,6 @@ func _draw():
 	var s = float(points.size())
 	var adjusted = PoolVector2Array()
 	var colors = PoolColorArray()
-	
 	for i in range(s):
 		adjusted.append(points[i] - global_position)
 		c.a = lerp(1.0, 0.0, i/s)
