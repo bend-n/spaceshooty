@@ -97,5 +97,6 @@ __meta__ = {
 
 [connection signal="gui_input" from="ColorRect/VBoxContainer/mainmenu" to="." method="_on_mainmenu_gui_input"]
 [connection signal="gui_input" from="ColorRect/VBoxContainer/options" to="." method="_on_options_gui_input"]
+[connection signal="gui_input" from="ColorRect/VBoxContainer/exit" to="." method="_on_exit_gui_input"]
 [connection signal="apply_button_pressed" from="ColorRect/settings" to="." method="_on_settings_apply_button_pressed"]
 [connection signal="back" from="ColorRect/settings" to="." method="_on_settings_back"]

@@ -9,7 +9,8 @@ var TARGET
 
 func start(_target):
 	TARGET = _target
-	target_last_position = TARGET.global_position
+	if is_instance_valid(TARGET):
+		target_last_position = TARGET.global_position
 
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(TARGET):
@@ -24,9 +25,20 @@ func _physics_process(delta: float) -> void:
 			apply_thrust = global_transform.x * CONSTANT_THRUST * attenuate_thrust
 			apply_central_impulse(apply_thrust)
 
+const ExplosionEffect = preload("res://ExplosionEffect.tscn")
 const HitEffect = preload("res://HitEffect.tscn")
+
 func create_hit_effect():
 	var main = get_tree().current_scene
 	var hitEffect = HitEffect.instance()
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
+
+func create_explosion():
+	var main = get_tree().current_scene
+	var explosionEffect = ExplosionEffect.instance()
+	main.add_child(explosionEffect)
+	explosionEffect.global_position = global_position
+
+func _exit_tree():
+	create_explosion()

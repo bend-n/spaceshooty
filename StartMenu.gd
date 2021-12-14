@@ -8,7 +8,7 @@ func _input(event):
 	if on:
 # warning-ignore:return_value_discarded
 		if event.is_action("shoot_1"): Game.transition("res://World.tscn")
-		if event.is_action("ui_cancel"): get_tree().quit()
+		if event.is_action("ui_cancel"): Game.exit()
 		if event.is_action("options"): $pause.show()
 
 func _ready():
@@ -19,6 +19,3 @@ func _ready():
 	$MobileControls/Attack.visible = USE_TOUCH
 	yield(get_tree().create_timer(.3), "timeout")
 	on = true
-	
-	
-

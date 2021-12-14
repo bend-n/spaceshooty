@@ -50,3 +50,5 @@ func _on_options_gui_input(event):
 		if setting != true:
 			setting = true
 			$ColorRect/settings.called()
+
+func _on_exit_gui_input(event): if event.is_action("ui_accept"): Game.exit()

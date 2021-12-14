@@ -1,4 +1,4 @@
-[gd_scene load_steps=411 format=2]
+[gd_scene load_steps=412 format=2]
 
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
 [ext_resource path="res://StartMenu.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Paskowy.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://buttontheme.tres" type="Theme" id=7]
 [ext_resource path="res://pause.tscn" type="PackedScene" id=8]
+
+[sub_resource type="ShaderMaterial" id=403]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 2
@@ -2034,6 +2036,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 403 )
 position = Vector2( 42, 138 )
 frames = SubResource( 401 )
 flip_h = true

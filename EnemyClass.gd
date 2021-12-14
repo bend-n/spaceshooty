@@ -85,6 +85,7 @@ func _on_Timer_timeout():
 		var main = get_tree().current_scene
 		main.add_child(laser)
 		laser.global_position = global_position
+		laser.apply_impulse(Vector2.ZERO, Vector2(-50, 0))
 	else:
 		var missiles = preload("res://missile.tscn")
 		var m = missiles.instance()

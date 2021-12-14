@@ -97,7 +97,7 @@ position = Vector2( 19, -79 )
 position = Vector2( 19, 100 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer2/Background/walls"]
-position = Vector2( 353, 90 )
+position = Vector2( 378, 90 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer2/Background/walls"]

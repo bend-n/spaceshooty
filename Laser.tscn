@@ -87,14 +87,14 @@ animations = [ {
 "name": "default",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "New Anim",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "New Anim 1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "New Anim",
 "speed": 5.0
 } ]
 
@@ -104,6 +104,7 @@ extents = Vector2( 4.5, 4 )
 
 [node name="Laser" type="RigidBody2D" groups=["pbullet"]]
 show_behind_parent = true
+light_mask = 32769
 collision_layer = 0
 collision_mask = 130
 mass = 5.0

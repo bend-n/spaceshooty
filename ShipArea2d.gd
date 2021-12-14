@@ -27,11 +27,14 @@ onready var lasersu
 onready var flaku
 onready var beamu
 onready var fire = $"../Fire"
+var amount = 5
 var target = null
+var firing = false
 signal velocity
 signal force
 var thrusting_last_frame = false
 var shake_intensity = .3
+var quant = 30
 var shake_duration = .2
 
 func _ready():
@@ -88,9 +91,13 @@ func _physics_process(delta):
 		#stops you
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	if i_am_in_cooldown: SPEED = movementpenalty
+	if firing:
+		SPEED = movementpenalty
+		if not i_am_in_cooldown:
+			if randi() % quant == quant - 1: Glitch.apply(.1, amount)
 	else: SPEED = 100
 	if not i_am_in_cooldown and Input.is_action_pressed('shoot_%s' % id): shoot()
+	elif not Input.is_action_pressed('shoot_%s' % id): firing = false
 	if Input.is_action_just_pressed("change_gun_%s" % id):
 		match playerstats.gun:
 			"lasers": rockets()
@@ -117,7 +124,9 @@ func flak():
 		enemy_damage.min_damage = 15
 		enemy_damage.max_damage = 50
 		movementpenalty = 0
-		recoil = 3
+		quant = 20
+		amount = 4
+		recoil = 1
 		attack = preload("res://Flak.tscn")
 		playerstats.gun = "flak"
 
@@ -126,30 +135,36 @@ func rockets():
 		shake_intensity = .4
 		shake_duration = .3
 		wait_time = 1
+		amount = 10
+		quant = 2
 		enemy_damage.min_damage = 10
 		enemy_damage.max_damage = 30
 		movementpenalty = 60
-		recoil = 300
+		recoil = 200
 		playerstats.gun = "rockets"
 func lasers():
 	if lasersu:
+		amount = 5
 		shake_intensity = .3
 		shake_duration = .2
 		wait_time = .1
+		quant = 15
 		enemy_damage.min_damage = 3
 		enemy_damage.max_damage = 6
 		movementpenalty = 20
-		recoil = 40
+		recoil = 20
 		attack = preload("res://Laser.tscn")
 		playerstats.gun = "lasers"
 func splitshot():
 	if splitshotu:
+		quant = 20
 		wait_time = 0.003
 		shake_intensity = .2
+		amount = 7
 		shake_duration = .2
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1
-		recoil = 40
+		recoil = 20
 		movementpenalty = 130
 		attack = preload("res://SplitShot.tscn")
 		playerstats.gun = "splitshot"
@@ -194,7 +209,7 @@ func _go_into_cooldown():
 
 func shoot(): #shoot
 	_go_into_cooldown()
-
+	if !firing: firing = true
 	Shake.shake(shake_intensity, shake_duration)
 	if playerstats.gun == "rockets":
 		if walled == false: velocity.x -= recoil

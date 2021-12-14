@@ -45,10 +45,18 @@ func spawn_enemy_on_current_difficulty():
 			if onscreen <= onscreenmax:
 				var choices = current_difficulty_level.get_children()
 				var to_spawn = choices[randi() % choices.size()]
-				var clone = to_spawn.duplicate()
-				var spawn_position = get_spawn_position()
-				main.add_child(clone)
-				clone.global_position = spawn_position
+				if to_spawn.name == "Drone":
+					if randi() % 6 == 5:
+						var clone = to_spawn.duplicate()
+						var spawn_position = get_spawn_position()
+						main.add_child(clone)
+						clone.global_position = spawn_position
+				else:
+					var clone = to_spawn.duplicate()
+					var spawn_position = get_spawn_position()
+					main.add_child(clone)
+					clone.global_position = spawn_position
+
 
 func get_spawn_position():
 	var points = spawnPoints.get_children()

@@ -84,6 +84,7 @@ enemy_damage="*res://enemy_damage.gd"
 playerstats="*res://playerstats.gd"
 Shake="*res://shake.gd"
 Game="*res://Game.tscn"
+Glitch="*res://Glitch.tscn"
 
 [display]
 

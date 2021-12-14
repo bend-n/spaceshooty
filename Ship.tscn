@@ -356,7 +356,7 @@ start_node = "Idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
 [sub_resource type="CircleShape2D" id=39]
-radius = 318.496
+radius = 374.065
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["Player"]]
 z_index = 2

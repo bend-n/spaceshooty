@@ -107,10 +107,13 @@ __meta__ = {
 
 [node name="UIResolutionSelector" parent="ColorRect/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 20.0
+margin_right = 67.0
 margin_bottom = 34.0
 focus_neighbour_top = NodePath("../VolumeSlider")
 focus_neighbour_bottom = NodePath("../fullscreen")
 size_flags_horizontal = 0
+text = "640x300"
+selected = 0
 
 [node name="fullscreen" parent="ColorRect/VBoxContainer" instance=ExtResource( 7 )]
 margin_top = 38.0

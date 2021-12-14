@@ -6,6 +6,9 @@ var just_called = false
 func halfway():
 	emit_signal("transition_halfway")
 
+func exit():
+	get_tree().quit()
+
 func transition(to = null):
 	if just_called == false:
 		just_called = true
