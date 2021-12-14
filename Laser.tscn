@@ -9,7 +9,7 @@
 
 [sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.744681 )
-colors = PoolColorArray( 1, 1, 1, 0.0745098, 1, 1, 1, 1 )
+colors = PoolColorArray( 0.2, 0.701961, 1, 0.32549, 0.289062, 0.650085, 1, 1 )
 
 [sub_resource type="CanvasItemMaterial" id=17]
 blend_mode = 1
@@ -122,10 +122,12 @@ trail_rare = false
 rarity_max = 3
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-lifetime = 3.0
+emitting = false
+amount = 60
+lifetime = 7.0
 local_coords = false
 emission_shape = 2
-emission_rect_extents = Vector2( 3, 3 )
+emission_rect_extents = Vector2( 4, 4 )
 direction = Vector2( -1, 0 )
 spread = 0.0
 gravity = Vector2( 0, 0 )
