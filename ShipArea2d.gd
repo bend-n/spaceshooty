@@ -164,7 +164,7 @@ func splitshot():
 		shake_duration = .2
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1
-		recoil = 20
+		recoil = 14
 		movementpenalty = 130
 		attack = preload("res://SplitShot.tscn")
 		playerstats.gun = "splitshot"
