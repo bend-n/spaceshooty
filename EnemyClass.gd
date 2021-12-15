@@ -18,7 +18,7 @@ onready var tween = $Tween
 export var litable = false
 
 func _ready():
-	target = get_node("../../Ship")
+	target = $"../../Ship"
 	timer.wait_time = shootspeed
 	target_destination = global_position
 	if litable == true:

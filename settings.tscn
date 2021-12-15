@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://settings.gd" type="Script" id=1]
 [ext_resource path="res://stop.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://UIResolutionSelector.tscn" type="PackedScene" id=8]
 [ext_resource path="res://buttontheme.tres" type="Theme" id=9]
 [ext_resource path="res://new_styleboxflat.tres" type="StyleBox" id=10]
-[ext_resource path="res://input_menu/InputMenu.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Stars.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -187,15 +186,9 @@ position = Vector2( 303, 164 )
 scale = Vector2( 1, 0.987089 )
 texture = ExtResource( 2 )
 
-[node name="InputMenu" parent="ColorRect" instance=ExtResource( 11 )]
-visible = false
-
 [connection signal="gui_input" from="ColorRect/VBoxContainer/VolumeSlider" to="ColorRect/VBoxContainer/VolumeSlider" method="_on_VolumeSlider_gui_input"]
 [connection signal="value_changed" from="ColorRect/VBoxContainer/VolumeSlider" to="ColorRect/VBoxContainer/VolumeSlider" method="_on_value_changed"]
 [connection signal="resolution_changed" from="ColorRect/VBoxContainer/UIResolutionSelector" to="." method="_on_UIResolutionSelector_resolution_changed"]
 [connection signal="toggled" from="ColorRect/VBoxContainer/fullscreen" to="." method="_on_UIFullscreenCheckbox_toggled"]
 [connection signal="toggled" from="ColorRect/VBoxContainer/vsync" to="." method="_on_UIVsyncCheckbox_toggled"]
 [connection signal="gui_input" from="ColorRect/VBoxContainer/Back" to="." method="_on_Back_gui_input"]
-[connection signal="gui_input" from="ColorRect/VBoxContainer/controls" to="ColorRect/InputMenu" method="_on_controls_gui_input"]
-[connection signal="controls" from="ColorRect/InputMenu" to="." method="_on_InputMenu_controls"]
-[connection signal="uncontrolled" from="ColorRect/InputMenu" to="." method="_on_InputMenu_uncontrolled"]

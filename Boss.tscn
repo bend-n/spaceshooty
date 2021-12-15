@@ -20,9 +20,9 @@ rotation = 1.5708
 animation = "New Anim 2"
 frame = 1
 
-[node name="Timer" parent="." index="2"]
-wait_time = 2.0
-
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( -0.5, 0 )
 shape = SubResource( 1 )
+
+[node name="Timer" parent="." index="3"]
+wait_time = 2.0

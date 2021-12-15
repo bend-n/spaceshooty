@@ -27,7 +27,7 @@ onready var lasersu
 onready var flaku
 onready var beamu
 onready var fire = $"../Fire"
-var amount = 5
+var amount = 1
 var target = null
 var firing = false
 signal velocity
@@ -125,7 +125,7 @@ func flak():
 		enemy_damage.max_damage = 50
 		movementpenalty = 0
 		quant = 20
-		amount = 4
+		amount = .5
 		recoil = 1
 		attack = preload("res://Flak.tscn")
 		playerstats.gun = "flak"
@@ -135,7 +135,7 @@ func rockets():
 		shake_intensity = .4
 		shake_duration = .3
 		wait_time = 1
-		amount = 10
+		amount = 1
 		quant = 2
 		enemy_damage.min_damage = 10
 		enemy_damage.max_damage = 30
@@ -144,7 +144,7 @@ func rockets():
 		playerstats.gun = "rockets"
 func lasers():
 	if lasersu:
-		amount = 5
+		amount = 1
 		shake_intensity = .3
 		shake_duration = .2
 		wait_time = .1
@@ -160,7 +160,7 @@ func splitshot():
 		quant = 20
 		wait_time = 0.003
 		shake_intensity = .2
-		amount = 7
+		amount = .5
 		shake_duration = .2
 		enemy_damage.min_damage = .2
 		enemy_damage.max_damage = 1

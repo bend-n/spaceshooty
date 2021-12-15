@@ -12,11 +12,10 @@ export var MAX_THRUST = 25
 
 
 func _integrate_forces(state):
-	if not alive:
-		return
-
-	if asleep:
-		return
+	if not alive: return
+	
+	
+	if asleep: return
 
 	var delta = state.get_step()
 

@@ -6,7 +6,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/apply = false
-shader_param/offset = 5.0
+shader_param/offset = 1.0
 
 [node name="Glitch" type="CanvasLayer"]
 layer = 8
