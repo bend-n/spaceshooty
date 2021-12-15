@@ -21,3 +21,8 @@ func transition(to = null):
 			get_tree().change_scene(to)
 		get_tree().paused = false
 		just_called = false
+
+var title = "Spaceshooty"
+
+func _process(delta):
+	OS.set_window_title(title + " | fps: " + str(Engine.get_frames_per_second()))

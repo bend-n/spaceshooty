@@ -18,6 +18,7 @@ export var trail = false
 export var trail_rare = true
 export var rarity_min = 1
 export var rarity_max = 5
+export var spark_qty = 60
 
 var rotation_pos
 var rotation_neg
@@ -30,6 +31,7 @@ const Trail = preload("res://Trail.tscn")
 var choosing = 0
 
 func _ready():
+	$CPUParticles2D.amount = spark_qty
 	$LaserSound.pitch_scale = randf() + 0.4
 	$LaserSound.play()
 	$Laser.playing = true

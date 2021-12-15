@@ -90,6 +90,7 @@ spreadmaxneg = -20
 spreadminneg = -10
 trail_rare = true
 rarity_max = 10
+spark_qty = 20
 
 [node name="Laser" parent="." index="2"]
 frames = SubResource( 15 )

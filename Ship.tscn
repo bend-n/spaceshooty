@@ -17,7 +17,7 @@
 resource_name = "Die Anim"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Ship/CPUParticles2D:emitting")
+tracks/0/path = NodePath("CPUParticles2D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -255,22 +255,20 @@ z_as_relative = false
 texture = ExtResource( 2 )
 hframes = 9
 
-[node name="damage" type="Area2D" parent="." groups=["Player", "player"]]
-script = ExtResource( 7 )
+[node name="Timer" type="Timer" parent="."]
 
-[node name="Collision2" type="CollisionPolygon2D" parent="damage"]
-visible = false
-polygon = PoolVector2Array( -7, -4, -4, -4, -4, -6, -1, -6, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -1, 6, -4, 6, -4, 4, -7, 4 )
+[node name="thrustsfxin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 
-[node name="Ship" type="Area2D" parent="." groups=["Player"]]
-z_index = 2
-z_as_relative = false
-collision_layer = 32
-collision_mask = 32
-script = ExtResource( 6 )
+[node name="thrustsfxloop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -8.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Ship"]
-root_node = NodePath("../..")
+[node name="thrustsfxend" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -4.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/Die Anim" = SubResource( 38 )
 anims/Down = SubResource( 5 )
 anims/IdleDown = SubResource( 22 )
@@ -280,18 +278,14 @@ anims/RESET = SubResource( 40 )
 anims/Right = SubResource( 7 )
 anims/Up = SubResource( 4 )
 
-[node name="AnimationTree" type="AnimationTree" parent="Ship"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 27 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 3 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Turn/blend_position = Vector2( 0, 0 )
 
-[node name="Collision" type="CollisionShape2D" parent="Ship"]
-visible = false
-shape = SubResource( 39 )
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Ship"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( -12, -19 )
 scale = Vector2( 2, 2 )
 emitting = false
@@ -306,36 +300,38 @@ direction = Vector2( 1, -1 )
 spread = 100.0
 initial_velocity = 90.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ship"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -20.0
 
-[node name="MobileJoystick" parent="Ship" instance=ExtResource( 4 )]
+[node name="MobileJoystick" parent="." instance=ExtResource( 4 )]
 
-[node name="MobileControls" parent="Ship/MobileJoystick" instance=ExtResource( 5 )]
+[node name="MobileControls" parent="MobileJoystick" instance=ExtResource( 5 )]
 
-[node name="Change gun" parent="Ship/MobileJoystick/MobileControls" index="1"]
+[node name="Change gun" parent="MobileJoystick/MobileControls" index="1"]
 action = "change_gun_1"
 
-[node name="Timer" type="Timer" parent="Ship"]
+[node name="damage" type="Area2D" parent="." groups=["Player", "player"]]
+script = ExtResource( 7 )
 
-[node name="thrustsfxin" type="AudioStreamPlayer" parent="Ship"]
-stream = ExtResource( 10 )
+[node name="Collision2" type="CollisionPolygon2D" parent="damage"]
+visible = false
+polygon = PoolVector2Array( -7, -4, -4, -4, -4, -6, -1, -6, 2, -2, 5, -2, 7, -1, 7, 1, 5, 2, 2, 2, -1, 6, -4, 6, -4, 4, -7, 4 )
 
-[node name="thrustsfxloop" type="AudioStreamPlayer" parent="Ship"]
-stream = ExtResource( 11 )
-volume_db = -8.0
+[node name="target_getter" type="Area2D" parent="." groups=["Player"]]
+z_index = 2
+z_as_relative = false
+collision_layer = 32
+collision_mask = 32
+script = ExtResource( 6 )
 
-[node name="thrustsfxend" type="AudioStreamPlayer" parent="Ship"]
-stream = ExtResource( 12 )
-volume_db = -4.0
+[node name="Collision" type="CollisionShape2D" parent="target_getter"]
+visible = false
+shape = SubResource( 39 )
 
-[connection signal="area_entered" from="damage" to="Ship" method="_on_Ship_area_entered"]
-[connection signal="body_entered" from="damage" to="Ship" method="_on_Ship_body_entered"]
-[connection signal="force" from="Ship" to="." method="_on_Ship_force"]
-[connection signal="player_death" from="Ship" to="." method="_on_Ship_player_death"]
-[connection signal="velocity" from="Ship" to="." method="_on_Ship_velocity"]
-[connection signal="finished" from="Ship/AudioStreamPlayer" to="Ship" method="_on_AudioStreamPlayer_finished"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+[connection signal="area_entered" from="damage" to="." method="_on_Ship_area_entered"]
+[connection signal="body_entered" from="damage" to="." method="_on_Ship_body_entered"]
 
-[editable path="Ship/MobileJoystick"]
-[editable path="Ship/MobileJoystick/MobileControls"]
+[editable path="MobileJoystick"]
+[editable path="MobileJoystick/MobileControls"]

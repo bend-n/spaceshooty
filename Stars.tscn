@@ -12,7 +12,5 @@ spread = 0.0
 gravity = Vector2( 0, 0 )
 initial_velocity = -100.0
 initial_velocity_random = 0.5
-angular_velocity = 10.0
-angular_velocity_random = 1.0
 scale_amount = 2.0
 scale_amount_random = 0.5
