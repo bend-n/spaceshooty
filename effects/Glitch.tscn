@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://effects/glitch.tres" type="Shader" id=1]
+[ext_resource path="res://effects/Glitch.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/apply = false
+shader_param/offset = 1.0
+
+[node name="Glitch" type="CanvasLayer"]
+layer = 8
+script = ExtResource( 3 )
+
+[node name="shaderholder" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

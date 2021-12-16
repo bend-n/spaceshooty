@@ -12,47 +12,47 @@ _global_script_classes=[ {
 "base": "Enemy",
 "class": "Boss",
 "language": "GDScript",
-"path": "res://Boss.gd"
+"path": "res://enemy/scripts/Boss.gd"
 }, {
 "base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://Laser.gd"
+"path": "res://bullets/scripts/Laser.gd"
 }, {
 "base": "Enemy",
 "class": "EasyEnemy",
 "language": "GDScript",
-"path": "res://EasyEnemy.gd"
+"path": "res://enemy/scripts/EasyEnemy.gd"
 }, {
 "base": "Area2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://EnemyClass.gd"
+"path": "res://enemy/scripts/EnemyClass.gd"
 }, {
 "base": "Enemy",
 "class": "EnemyMedium",
 "language": "GDScript",
-"path": "res://Enemy.gd"
+"path": "res://enemy/scripts/Enemy.gd"
 }, {
 "base": "Enemy",
 "class": "EnemyUfo",
 "language": "GDScript",
-"path": "res://UFO.gd"
+"path": "res://enemy/scripts/UFO.gd"
 }, {
 "base": "Enemy",
 "class": "HardEnemy",
 "language": "GDScript",
-"path": "res://HardEnemy.gd"
+"path": "res://enemy/scripts/HardEnemy.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "playerkinematic",
 "language": "GDScript",
-"path": "res://Ship.gd"
+"path": "res://player/scripts/Ship.gd"
 }, {
 "base": "Node",
 "class": "playerstatz",
 "language": "GDScript",
-"path": "res://playerstats.gd"
+"path": "res://player/scripts/playerstats.gd"
 } ]
 _global_script_class_icons={
 "Boss": "",
@@ -69,23 +69,23 @@ _global_script_class_icons={
 [application]
 
 config/name="Space Shooter"
-run/main_scene="res://StartMenu.tscn"
-boot_splash/image="res://icon.png"
+run/main_scene="res://ui/scenes/StartMenu.tscn"
+boot_splash/image="res://sprites/icon.png"
 boot_splash/use_filter=false
 boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 0.0509804 )
-config/icon="res://icon.png"
-config/macos_native_icon="res://icon.png"
-config/windows_native_icon="res://icon.png"
+config/icon="res://sprites/icon.png"
+config/macos_native_icon="res://sprites/icon.png"
+config/windows_native_icon="res://sprites/icon.png"
 
 [autoload]
 
-Music="*res://Music.tscn"
-SaveAndLoad="*res://Save&Load.gd"
-enemy_damage="*res://enemy_damage.gd"
-playerstats="*res://playerstats.gd"
-Shake="*res://shake.gd"
-Game="*res://Game.tscn"
-Glitch="*res://Glitch.tscn"
+Music="*res://sounds/Music.tscn"
+SaveAndLoad="*res://other/Save&Load.gd"
+enemy_damage="*res://enemy/scripts/enemy_damage.gd"
+playerstats="*res://player/scripts/playerstats.gd"
+Shake="*res://effects/shake.gd"
+Game="*res://effects/Game.tscn"
+Glitch="*res://effects/Glitch.tscn"
 
 [display]
 
@@ -97,7 +97,7 @@ window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
 window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
-mouse_cursor/custom_image="res://cursor.png"
+mouse_cursor/custom_image="res://sprites/cursor.png"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -293,5 +293,4 @@ vram_compression/import_pvrtc=true
 quality/shadows/filter_mode=2
 quality/shadows/filter_mode.mobile=2
 quality/filters/anisotropic_filter_level=1
-environment/default_environment="res://default_env.tres"
 quality/dynamic_fonts/use_oversampling=false

@@ -4,6 +4,7 @@
 export.cfg
 export_presets.cfg
 .png.import
+sprites/aseprites
 
 # Mono-specific ignores
 .mono/

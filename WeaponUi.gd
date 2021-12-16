@@ -1,9 +1,0 @@
-extends Control
-
-
-func _process(_delta) -> void:
-	$Beam.visible = playerstats.gun == "beam"
-	$Laser.visible = playerstats.gun == "lasers"
-	$Flak.visible = playerstats.gun == "flak"
-	$Split.visible = playerstats.gun == "splitshot"
-	$Rocket.visible = playerstats.gun == "rockets"

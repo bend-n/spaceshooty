@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://enemy/scenes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://enemy/scripts/EasyEnemy.gd" type="Script" id=2]
+[ext_resource path="res://sprites/EasyEnemy.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.5
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 4.5, 7 )
+
+[node name="octopus" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+ARMOR = 10
+score_on_kill = 5
+SPEED = 15
+shootspeed = 10.0
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0.5, 0 )
+shape = SubResource( 1 )
