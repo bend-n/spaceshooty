@@ -24,5 +24,5 @@ func transition(to = null):
 
 var title = "Spaceshooty"
 
-func _process(delta):
+func _process(_delta):
 	OS.set_window_title(title + " | fps: " + str(Engine.get_frames_per_second()))

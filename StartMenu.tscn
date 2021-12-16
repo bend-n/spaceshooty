@@ -1,4 +1,4 @@
-[gd_scene load_steps=412 format=2]
+[gd_scene load_steps=414 format=2]
 
 [ext_resource path="res://fonty.tres" type="DynamicFont" id=1]
 [ext_resource path="res://StartMenu.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Paskowy.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://buttontheme.tres" type="Theme" id=7]
 [ext_resource path="res://pause.tscn" type="PackedScene" id=8]
+[ext_resource path="res://inputs.png" type="Texture" id=9]
+[ext_resource path="res://tiny.tres" type="DynamicFont" id=10]
 
 [sub_resource type="ShaderMaterial" id=403]
 
@@ -2041,25 +2043,88 @@ position = Vector2( 42, 138 )
 frames = SubResource( 401 )
 flip_h = true
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 21.0
+[node name="label center" type="Label" parent="."]
+margin_left = 90.0
+margin_top = 51.0
+margin_right = 290.0
+margin_bottom = 68.0
+custom_colors/font_color_shadow = Color( 0.760784, 0.760784, 0.760784, 0.560784 )
+custom_fonts/font = ExtResource( 1 )
+text = "press "
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Highscorelabel" type="Label" parent="CenterContainer"]
-margin_left = 49.0
-margin_top = 71.0
-margin_right = 249.0
-margin_bottom = 108.0
-custom_colors/font_color_shadow = Color( 0.760784, 0.760784, 0.760784, 0.560784 )
-custom_fonts/font = ExtResource( 1 )
-text = "Press space
-press escape :<"
+[node name="space" type="Sprite" parent="label center" groups=["keyboard"]]
+position = Vector2( 154, 9 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 48, 16 )
+
+[node name="x" type="Sprite" parent="label center" groups=["gamepad"]]
+visible = false
+position = Vector2( 139, 9 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 32, 112, 16, 16 )
+
+[node name="space2" type="Label" parent="label center" groups=["keyboard"]]
+margin_left = 131.0
+margin_top = 6.0
+margin_right = 177.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "space
+"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="escape" type="Label" parent="."]
+margin_left = 90.0
+margin_top = 72.0
+margin_right = 290.0
+margin_bottom = 109.0
+custom_colors/font_color_shadow = Color( 0.760784, 0.760784, 0.760784, 0.560784 )
+custom_fonts/font = ExtResource( 1 )
+text = "
+press "
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="esc" type="Sprite" parent="escape" groups=["keyboard"]]
+position = Vector2( 84, 30 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 0, 16, 23, 16 )
+
+[node name="b" type="Sprite" parent="escape" groups=["gamepad"]]
+visible = false
+position = Vector2( 83, 31 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 16, 112, 16, 16 )
+
+[node name="esc2" type="Label" parent="escape" groups=["keyboard"]]
+margin_left = 75.0
+margin_top = 23.0
+margin_right = 93.0
+margin_bottom = 36.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "esc"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Stars" parent="." instance=ExtResource( 3 )]
 
@@ -2103,9 +2168,30 @@ margin_top = -28.0
 margin_right = 88.0
 margin_bottom = -11.0
 theme = ExtResource( 7 )
-text = "options = backspace"
+text = "options = "
 align = 1
 valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inputs" type="Sprite" parent="settings"]
+position = Vector2( 119, 10 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 0, 48, 32, 16 )
+
+[node name="backspace" type="Label" parent="settings"]
+margin_left = 104.0
+margin_top = 3.0
+margin_right = 134.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
+custom_fonts/font = ExtResource( 10 )
+text = "back _"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

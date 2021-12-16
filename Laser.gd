@@ -46,7 +46,7 @@ func _ready():
 			var trailinstance = Trail.instance()
 			self.add_child(trailinstance)
 	velocity.x += initial_velocity
-	if particles: $CPUParticles2D.emitting = true
+	$CPUParticles2D.emitting = particles
 	randomize() 
 	if scalingrand:
 		var rand = rand_range(minscalingrand, maxscalingrand)

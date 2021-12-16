@@ -239,11 +239,11 @@ emitting = false
 
 [node name="Trail" parent="." instance=ExtResource( 8 )]
 position = Vector2( -2, -4.65577 )
-THICKNESS = 2.5
+MAX_LENGTH = 30
 
 [node name="Trail2" parent="." instance=ExtResource( 8 )]
 position = Vector2( -2, 5 )
-THICKNESS = 2.5
+MAX_LENGTH = 30
 
 [node name="Collision3" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -332,6 +332,7 @@ shape = SubResource( 39 )
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
 [connection signal="area_entered" from="damage" to="." method="_on_Ship_area_entered"]
 [connection signal="body_entered" from="damage" to="." method="_on_Ship_body_entered"]
+[connection signal="target" from="target_getter" to="." method="_on_target_getter_target"]
 
 [editable path="MobileJoystick"]
 [editable path="MobileJoystick/MobileControls"]

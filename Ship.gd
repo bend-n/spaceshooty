@@ -1,7 +1,6 @@
 extends KinematicBody2D
 class_name playerkinematic
 
-var keyboard
 var counter
 var i_am_in_cooldown:bool
 var wait_time = .1
@@ -32,8 +31,6 @@ onready var fire = $Fire
 var amount = 1
 var target = null
 var firing = false
-signal velocity
-signal force
 var thrusting_last_frame = false
 var shake_intensity = .3
 var quant = 30
@@ -57,12 +54,10 @@ func create_hit_effect():
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
 
-func _unhandled_key_input(event): keyboard = true
-
 func _physics_process(delta):
 	input_vector.x = Input.get_axis('left_%s' % id, 'right_%s' % id)
 	input_vector.y = Input.get_axis('up_%s' % id, 'down_%s' % id)
-	if keyboard: input_vector = input_vector.normalized()
+	if playerstats.keyboard: input_vector = input_vector.normalized()
 	if $MobileJoystick/TouchScreenButton.in_use: input_vector = $MobileJoystick/TouchScreenButton.force
 	#makes a input vector based off of inputs, and supports controllers
 	# fire particle code
@@ -112,6 +107,7 @@ func _physics_process(delta):
 			"rockets": splitshot()
 			"splitshot": flak()
 			"flak": lasers()
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity)
 
 func _on_TouchScreenButton_force(force):
@@ -158,7 +154,7 @@ func rockets():
 		shake_duration = .3
 		wait_time = 1
 		amount = 1
-		quant = 2
+		quant = 4
 		enemy_damage.min_damage = 10
 		enemy_damage.max_damage = 30
 		movementpenalty = 60
@@ -170,7 +166,7 @@ func lasers():
 		shake_intensity = .3
 		shake_duration = .2
 		wait_time = .1
-		quant = 15
+		quant = 20
 		enemy_damage.min_damage = 4
 		enemy_damage.max_damage = 9
 		movementpenalty = 20
@@ -180,7 +176,7 @@ func lasers():
 
 func splitshot():
 	if splitshotu:
-		quant = 20
+		quant = 40
 		wait_time = 0.003
 		shake_intensity = .2
 		amount = .5
@@ -197,7 +193,6 @@ func shoot(): #shoot
 	if !firing: firing = true
 	Shake.shake(shake_intensity, shake_duration)
 	if playerstats.gun == "rockets":
-		target = $target_getter.target
 		if not self.is_on_wall(): velocity.x -= recoil
 		else: velocity.x -= recoil / 10
 		var missiles = preload("res://missile.tscn")
@@ -222,6 +217,6 @@ func _exit_tree():
 	emit_signal("player_death")
 
 
+
 func _on_target_getter_target(_target):
 	target = _target
-	print("hey")

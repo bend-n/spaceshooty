@@ -1,8 +1,13 @@
 extends Area2D
 
-var target = null
+var target = null setget tar
 
-func _physics_process(delta):
+signal target
+
+func tar(tget):
+	emit_signal("target", tget)
+
+func _physics_process(_delta):
 	if !target or not is_instance_valid(target): find_target()
 	
 func find_target():
@@ -11,6 +16,6 @@ func find_target():
 		var closest = units[0]
 		for unit in units:
 			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position): closest = unit
-		target = closest
+		self.target = closest
 	else:
-		target = null
+		self.target = null

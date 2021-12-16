@@ -4,13 +4,14 @@ extends RigidBody2D
 export(float) var TERMINAL_VELOCITY := 300.0
 export(float) var CONSTANT_THRUST := 200.0
 export(float) var TURN_STRENGTH := 15
+var off_screen = false
 onready var target_last_position
 var TARGET 
 
 func start(_target):
 	TARGET = _target
-	if is_instance_valid(TARGET):
-		target_last_position = TARGET.global_position
+	if is_instance_valid(TARGET): target_last_position = TARGET.global_position
+	else: linear_velocity.x = CONSTANT_THRUST
 
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(TARGET):
@@ -41,4 +42,10 @@ func create_explosion():
 	explosionEffect.global_position = global_position
 
 func _exit_tree():
-	create_explosion()
+	if not off_screen:
+		create_explosion()
+
+func _on_VisibilityNotifier2D_screen_exited(): 
+	if randi() % 6 != 5: 
+		off_screen = true
+		queue_free()
