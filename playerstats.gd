@@ -50,3 +50,4 @@ func set_keyboard(new_keyboard):
 	elif new_keyboard == false: 
 		get_tree().call_group("keyboard", "hide")
 		get_tree().call_group("gamepad", "show")
+

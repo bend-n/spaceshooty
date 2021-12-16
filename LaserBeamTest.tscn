@@ -1,6 +1,60 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://LaserBeamTest.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
+
+onready var ray = $RayCast2D
+onready var line = $Line2D
+var cast_length = 800
+var on
+var max_bounces = 5
+
+func _ready(): on = true
+
+func _process(_delta):
+	var ship
+	if $\"../../../Ship\" != null and is_instance_valid($\"../../../Ship\"): ship = $\"../../../Ship\".global_position
+	line.clear_points()
+	if on and $\"../../../Ship\" != null:
+		ray.clear_exceptions()
+		line.add_point(Vector2.ZERO)
+#		var cast_to = ray.get_cast_to().linear_interpolate((global_position - ship).normalized() * cast_length, 0.2) * -1
+		$End.global_position = ray.get_collision_point()
+		ray.global_position = line.global_position
+		ray.cast_to = (ship - line.global_position).normalized() * 500
+		ray.force_raycast_update()
+		
+		var bounces = 0
+		
+		while true:
+			ray.clear_exceptions()
+			if not ray.is_colliding():
+				ray.clear_exceptions()
+				var pt = ray.global_position + ray.cast_to
+				line.add_point(line.to_local(pt))
+				$End/CPUParticles2D.emitting = false
+				break 
+			$End.global_position = ray.get_collision_point()
+			$End/CPUParticles2D.emitting = true
+			var coll = ray.get_collider()
+			var pt = ray.get_collision_point()
+			
+			line.add_point(line.to_local(pt))
+			
+			if not coll.is_in_group(\"ebullet\"): break
+			
+			var normal = ray.get_collision_normal()
+			
+			if normal == Vector2.ZERO: break
+			ray.add_exception(coll)
+			
+			ray.global_position = pt
+			ray.cast_to = ray.cast_to.bounce(normal)
+			ray.force_raycast_update()
+			
+			bounces += 1
+			if bounces >= max_bounces: break
+"
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -11,7 +65,7 @@ colors = PoolColorArray( 0.422852, 0.422852, 0.422852, 0.384314, 1, 1, 1, 1 )
 
 [node name="LaserBeam" type="Node2D" groups=["laser"]]
 show_behind_parent = true
-script = ExtResource( 1 )
+script = SubResource( 3 )
 
 [node name="Line2D" type="Line2D" parent="."]
 show_behind_parent = true

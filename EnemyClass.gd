@@ -1,9 +1,11 @@
 class_name Enemy
 extends Area2D
 
+var count = 0
 var target
 export var missile = false
 var beaming = false
+export var beam = false
 export var ARMOR = 20
 export var score_on_kill = 10
 const ExplosionEffect = preload("res://ExplosionEffect.tscn")
@@ -15,14 +17,14 @@ var target_destination = Vector2.ZERO
 var damagetobesubtracted 
 export var stop_pos = Vector2(200, 0)
 onready var tween = $Tween
-export var litable = false
+
 
 func _ready():
 	target = $"../../Ship"
 	timer.wait_time = shootspeed
 	target_destination = global_position
-	if litable == true:
-		self.visible = false
+
+	if beam: _on_Timer_timeout()
 
 func _process(delta):
 	if global_position.x > stop_pos.x:
@@ -44,12 +46,7 @@ func _on_Enemy_body_entered(body):
 		if not body.is_in_group("Player"):
 			body.queue_free()
 			damage()
-	elif body.is_in_group("laser"):
-		self.visible = true
-		var beam = get_overlapping_bodies()
-		if beam != null:
-			yield(get_tree().create_timer(.4), "timeout")
-			damage()
+
 
 func _on_Enemy_area_entered(area):
 	if not area.is_in_group("laser"):
@@ -80,19 +77,26 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 func _on_Timer_timeout():
-	if not missile:
+	if not missile and not beam:
 		var laser = Laser.instance()
 		var main = get_tree().current_scene
 		main.add_child(laser)
 		laser.global_position = global_position
 		laser.apply_impulse(Vector2.ZERO, Vector2(-50, 0))
-	else:
+	elif missile == true:
 		var missiles = preload("res://missile.tscn")
 		var m = missiles.instance()
 		var main = get_tree().current_scene
 		main.add_child(m)
 		m.global_position = global_position
 		m.start(global_transform, target)
+	elif beam == true:
+		var bm = preload("res://EnemyLaserBeam.tscn")
+		if count == 0:
+			count = 1
+			var b = bm.instance()
+			self.add_child(b)
+
 
 func _on_sidestep_timeout():
 	var choosing = randi() %2

@@ -23,16 +23,6 @@ flags = 2
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 18, 9 )
 
-[sub_resource type="AtlasTexture" id=8]
-flags = 2
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 2
-atlas = ExtResource( 3 )
-region = Rect2( 16, 0, 16, 16 )
-
 [sub_resource type="AtlasTexture" id=10]
 flags = 2
 atlas = ExtResource( 5 )
@@ -42,6 +32,16 @@ region = Rect2( 0, 0, 10, 11 )
 flags = 2
 atlas = ExtResource( 5 )
 region = Rect2( 0, 11, 10, 11 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -55,32 +55,32 @@ animations = [ {
 "name": "New Anim 1",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "New Anim",
-"speed": 1.5
-}, {
-"frames": [ SubResource( 10 ), SubResource( 11 ) ],
-"loop": true,
-"name": "New Anim 2",
-"speed": 1.5
+"name": "New Anim 3",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "New Anim 4",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
-"name": "New Anim 3",
-"speed": 5.0
+"name": "New Anim 2",
+"speed": 1.5
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 1.5
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 5.5, 7 )
 
-[node name="Enemy" type="Area2D"]
+[node name="basicdude" type="Area2D"]
 z_index = 1
 collision_layer = 34
 script = ExtResource( 1 )
@@ -88,6 +88,7 @@ stop_pos = Vector2( 220, 0 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

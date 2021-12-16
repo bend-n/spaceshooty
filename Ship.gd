@@ -216,7 +216,4 @@ func _exit_tree():
 	explosionEffect.global_position = global_position
 	emit_signal("player_death")
 
-
-
-func _on_target_getter_target(_target):
-	target = _target
+func _on_target_getter_target(_target): target = _target
