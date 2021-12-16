@@ -14,7 +14,6 @@ shootspeed = 0.8
 
 [node name="Sprite" parent="." index="0"]
 animation = "New Anim"
-frame = 0
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
