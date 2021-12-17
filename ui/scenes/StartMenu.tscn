@@ -2043,7 +2043,7 @@ position = Vector2( 42, 138 )
 frames = SubResource( 401 )
 flip_h = true
 
-[node name="label center" type="Label" parent="."]
+[node name="label center" type="Label" parent="." groups=["not_mobile"]]
 margin_left = 90.0
 margin_top = 51.0
 margin_right = 290.0
@@ -2085,7 +2085,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="escape" type="Label" parent="."]
+[node name="escape" type="Label" parent="." groups=["not_mobile"]]
 margin_left = 90.0
 margin_top = 72.0
 margin_right = 290.0
@@ -2158,7 +2158,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="settings" type="Label" parent="."]
+[node name="settings" type="Label" parent="." groups=["not_mobile"]]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5

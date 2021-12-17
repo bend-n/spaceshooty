@@ -20,7 +20,7 @@ action = "shoot_1"
 
 [node name="Change gun" type="TouchScreenButton" parent="."]
 modulate = Color( 1, 1, 1, 0.392157 )
-position = Vector2( 16, 16 )
+position = Vector2( 7, 5 )
 normal = ExtResource( 3 )
 shape = SubResource( 1 )
 passby_press = true

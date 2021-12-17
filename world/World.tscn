@@ -54,10 +54,10 @@ __meta__ = {
 }
 
 [node name="WeaponUi" parent="CanvasLayer2/Background" instance=ExtResource( 5 )]
-margin_left = 61.0
-margin_top = 6.0
-margin_right = -239.0
-margin_bottom = -158.0
+margin_left = 31.0
+margin_top = 5.0
+margin_right = -269.0
+margin_bottom = -159.0
 
 [node name="HpUi" parent="CanvasLayer2/Background" instance=ExtResource( 7 )]
 margin_left = 269.0

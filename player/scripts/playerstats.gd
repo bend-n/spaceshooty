@@ -1,6 +1,7 @@
 extends Node
 class_name playerstatz
 
+var alive = true
 var dev_mode = false
 var beam = true
 var splitshot = true
@@ -29,10 +30,7 @@ func set_health(value):
 	emit_signal("hp_changed", hp)
 	if hp <= 0: emit_signal("no_hp")
 
-func _ready(): 
-	self.hp = max_hp
-	if USE_TOUCH: self.keyboard = 0
-
+func _ready(): self.hp = max_hp
 
 func _input(event: InputEvent) -> void:
 	if not USE_TOUCH:
@@ -41,10 +39,7 @@ func _input(event: InputEvent) -> void:
 
 func set_keyboard(new_keyboard):
 	keyboard = new_keyboard
-	if USE_TOUCH:
-		get_tree().call_group("keyboard", "hide")
-		get_tree().call_group("gamepad", "hide")
-	elif new_keyboard == true: 
+	if new_keyboard == true: 
 		get_tree().call_group("gamepad", "hide")
 		get_tree().call_group("keyboard", "show")
 	elif new_keyboard == false: 

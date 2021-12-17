@@ -210,6 +210,7 @@ func shoot(): #shoot
 		laser.global_position = global_position
 
 func _exit_tree():
+	playerstats.alive = false
 	var main = get_tree().current_scene
 	var explosionEffect = ExplosionEffect.instance()
 	main.call_deferred("add_child", explosionEffect)
