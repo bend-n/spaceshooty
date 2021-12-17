@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://world/World.gd" type="Script" id=1]
 [ext_resource path="res://ui/scenes/pause.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/scenes/HpUi.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/scenes/Ship.tscn" type="PackedScene" id=8]
 [ext_resource path="res://fonts/fonty.tres" type="DynamicFont" id=9]
+[ext_resource path="res://ui/buttontheme.tres" type="Theme" id=10]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 19.125, 183 )
@@ -60,18 +61,21 @@ margin_right = -269.0
 margin_bottom = -159.0
 
 [node name="HpUi" parent="CanvasLayer2/Background" instance=ExtResource( 7 )]
-margin_left = 269.0
-margin_top = 11.0
-margin_right = -7.0
-margin_bottom = -158.0
+margin_left = 242.0
+margin_top = 5.0
+margin_right = -11.0
+margin_bottom = -164.0
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer2/Background"]
 anchor_right = 1.0
+margin_left = 57.0
 margin_top = 5.0
+margin_right = -80.0
 margin_bottom = 22.0
 custom_fonts/font = ExtResource( 9 )
 text = "Score = 0"
 align = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -115,6 +119,35 @@ current = false
 
 [node name="pause" parent="CanvasLayer2/Background" instance=ExtResource( 2 )]
 visible = false
+
+[node name="anouncementlabel" type="Label" parent="CanvasLayer2/Background"]
+margin_left = 3.0
+margin_top = 163.0
+margin_right = 189.0
+margin_bottom = 177.0
+theme = ExtResource( 10 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="confetti" type="CPUParticles2D" parent="CanvasLayer2/Background/anouncementlabel"]
+show_behind_parent = true
+position = Vector2( 83, 2 )
+emitting = false
+amount = 80
+emission_shape = 2
+emission_rect_extents = Vector2( 80, 2 )
+direction = Vector2( 0, -1 )
+spread = 140.0
+gravity = Vector2( 0, -50 )
+initial_velocity = 20.0
+linear_accel = 20.0
+scale_amount = 3.0
+scale_amount_random = 1.0
+color = Color( 0.968627, 0, 1, 1 )
+hue_variation = 1.0
+hue_variation_random = 1.0
 
 [node name="Ship" parent="." instance=ExtResource( 8 )]
 position = Vector2( 30, 90 )

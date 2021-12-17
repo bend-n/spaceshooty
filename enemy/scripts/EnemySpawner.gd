@@ -10,7 +10,7 @@ var count7 = 0
 var count8 = 0
 
 
-onready var label = $Label
+onready var label = $"Sprite Holders/Label"
 var nexthing = 0
 #min, max, level
 var onscreenmax = 3
@@ -83,55 +83,55 @@ func _physics_process(_delta):
 					if not count3 >= 1:
 						count3 += 1
 						onscreenmax = 1
-						$Label.text = "First boss = "
+						label.text = "First boss = "
 						visible_then_not($"Sprite Holders/squid")
 						yield(get_tree().create_timer(6), "timeout")
-						$Label.text = "Next up ="
+						label.text = "Next up ="
 				4:
 					if not count4 >= 1:
 						count4 += 1
 						onscreenmax = 4
-						$Label.text = "Hats off to ye!"
-						$Label.visible = true
+						label.text = "Hats off to ye!"
+						label.visible = true
 						yield(get_tree().create_timer(6), "timeout")
-						$Label.visible = false
+						label.visible = false
 				5:
 					if not count5 >= 1:
 						count5 += 1
 						onscreenmax = 1
-						$Label.text = "Second boss = "
+						label.text = "Second boss = "
 						visible_then_not($"Sprite Holders/boss")
 						yield(get_tree().create_timer(6), "timeout")
 				6:
 					if not count6 >= 1:
 						count6 += 1
 						onscreenmax = 9
-						$Label.text = "Random bullshit go!"
-						$Label.visible = true
+						label.text = "Random bullshit go!"
+						label.visible = true
 						yield(get_tree().create_timer(6), "timeout")
-						$Label.visible = false
+						label.visible = false
 				7:
 					if not count7 >= 1:
 						count7 += 1
 						onscreenmax = 0
-						$Label.text = "Last boss = "
+						label.text = "Last boss = "
 						visible_then_not($"Sprite Holders/finale")
-						$Label.text = "Y r u alive!!!"
+						label.text = "Y r u alive!!!"
 				8:
 					if not count8 >= 1:
 						count8 += 1
 						onscreenmax = 5
-						$Label.visible = true
+						label.visible = true
 						yield(get_tree().create_timer(6), "timeout")
-						$Label.visible = false
+						label.visible = false
 
 func diff_levels(value): current_difficulty_level = difficulty_levels[value]
 
 func visible_then_not(sprite):
 	announcing = true
-	$Label.visible = true
+	label.visible = true
 	sprite.visible = true
 	yield(get_tree().create_timer(5), "timeout")
 	sprite.visible = false
-	$Label.visible = false
+	label.visible = false
 	announcing = false

@@ -25,7 +25,7 @@ position = Vector2( 0, 90 )
 position = Vector2( 0, 135 )
 
 [node name="Sprite Holders" type="Node2D" parent="."]
-position = Vector2( -16, -16 )
+position = Vector2( -19, -33 )
 
 [node name="octopus" type="Sprite" parent="Sprite Holders"]
 visible = false
@@ -68,12 +68,12 @@ position = Vector2( -16, 176 )
 rotation = -1.5708
 texture = ExtResource( 9 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="Sprite Holders"]
 visible = false
-margin_left = -360.0
-margin_top = 152.0
-margin_right = -48.0
-margin_bottom = 169.0
+margin_left = -344.0
+margin_top = 168.0
+margin_right = -32.0
+margin_bottom = 185.0
 custom_fonts/font = ExtResource( 7 )
 text = "Beware of the"
 align = 2

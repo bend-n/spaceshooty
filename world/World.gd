@@ -1,5 +1,6 @@
 extends Node
 
+var count2
 var count = 0
 var score = 0 setget set_score
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
@@ -11,13 +12,21 @@ func _ready():
 		$CanvasLayer2/WeaponUi.hide()
 		scoreLabel.hide()
 
-func _input(event):
-	if event.is_action("ui_home"):
-		self.score = 20000
+func _input(event): if event.is_action("ui_home"): self.score = 990
 
 func set_score(value):
 	score = value
 	update_score_label()
+	if score >= 1000:
+		if count2 != 1:
+			count2 = 1
+			var addorno = 1
+			if playerstats.hp != playerstats.max_hp: addorno += 1
+			playerstats.max_hp += 1
+			playerstats.hp += addorno
+			if addorno == 2: announce("congrats on those hearts")
+			else: announce("congrats on that heart")
+
 	if score >= 10000:
 		if count != 1:
 			count = 1
@@ -39,6 +48,7 @@ func update_save_data():
 		SaveAndLoad.save_data_to_file(save_data)
 
 func _on_Ship_player_death():
+	playerstats.max_hp = 3
 	playerstats.recent_score = score
 	$CanvasLayer2/Background/HpUi.visible = false
 	playerstats.hp = playerstats.max_hp
@@ -46,3 +56,13 @@ func _on_Ship_player_death():
 	yield(get_tree().create_timer(1), "timeout")
 # warning-ignore:return_value_discarded
 	Game.transition("res://ui/scenes/GameOverScreen.tscn")
+onready var speaker = $CanvasLayer2/Background/anouncementlabel
+onready var confetti = $CanvasLayer2/Background/anouncementlabel/confetti
+
+func announce(text):
+	speaker.text = text
+	confetti.emitting = true
+	yield(get_tree().create_timer(8), "timeout")
+	confetti.emitting = false
+	speaker.text = " "
+
