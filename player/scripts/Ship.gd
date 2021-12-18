@@ -57,7 +57,7 @@ func create_hit_effect():
 func _physics_process(delta):
 	input_vector.x = Input.get_axis('left_%s' % id, 'right_%s' % id)
 	input_vector.y = Input.get_axis('up_%s' % id, 'down_%s' % id)
-	if playerstats.keyboard: input_vector = input_vector.normalized()
+	if Game.keyboard: input_vector = input_vector.normalized()
 	if $MobileJoystick/TouchScreenButton.in_use: input_vector = $MobileJoystick/TouchScreenButton.force
 	#makes a input vector based off of inputs, and supports controllers
 	# fire particle code
