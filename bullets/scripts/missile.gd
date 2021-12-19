@@ -59,8 +59,8 @@ func _ready():
 		minscalingrand += 1
 		maxscalingrand += 2
 	var rand = rand_range(minscalingrand, maxscalingrand)
-	$Sprite.scale.x = rand
-	$Sprite.scale.y = rand
-	$CollisionPolygon2D.scale.x = rand
-	$CollisionPolygon2D.scale.y = rand
+	var to_scale = Vector2(rand, rand)
+	$Sprite.scale = to_scale
+	$Glow.scale = to_scale
+	$CollisionPolygon2D.scale = to_scale
 	if powered_up: $Trail.THICKNESS = rand * 2

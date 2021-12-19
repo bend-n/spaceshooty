@@ -107,8 +107,7 @@ func _physics_process(delta):
 			"rockets": splitshot()
 			"splitshot": flak()
 			"flak": lasers()
-# warning-ignore:return_value_discarded
-	move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
 
 func _on_TouchScreenButton_force(force):
 	input_vector = force

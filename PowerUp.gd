@@ -2,6 +2,7 @@ extends Area2D
 
 func _on_PowerUp_area_entered(area): 
 	if area.is_in_group("Player"): playerstats.power = true
+	get_tree().current_scene.score += 100
 	$AnimationPlayer.play('death')
 
 const ExplosionEffect = preload("res://effects/ExplosionEffect.tscn")

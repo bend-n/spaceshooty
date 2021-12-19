@@ -110,15 +110,21 @@ extents = Vector2( 1, 1 )
 [node name="Flak" instance=ExtResource( 1 )]
 mass = 30.0
 linear_velocity = Vector2( 15, 0 )
+steer_force = 50.0
 speed = 1000
+max_speed = 500
 spreadminpos = 5
 spreadmaxpos = 40
 spreadmaxneg = -40
 spreadminneg = -5
+spread = true
 scalingrand = true
+minscalingrand = 1
+maxscalingrand = 3
 initial_velocity = 50
-trail = false
+rarity_min = 1
 spark_qty = 2
+scale_glow = false
 
 [node name="CPUParticles2D" parent="." index="0"]
 scale = Vector2( 2, 2 )

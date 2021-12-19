@@ -19,6 +19,7 @@ export var trail_rare = true
 export var rarity_min = 1
 export var rarity_max = 5
 export var spark_qty = 60
+export var scale_glow = true
 
 var powered_up
 var rotation_pos
@@ -46,10 +47,11 @@ func _ready():
 	randomize() 
 	var rand = rand_range(minscalingrand, maxscalingrand)
 	if scalingrand:
-		$Laser.scale.x = rand
-		$Laser.scale.y = rand
-		$Collision.scale.x = rand
-		$Collision.scale.y = rand
+		var to_scale = Vector2(rand, rand)
+		$Laser.scale = to_scale
+		$Collision.scale = to_scale
+		if scale_glow:
+			$Glow.scale = to_scale / 2
 	var animatedSprite = $Laser
 	animatedSprite.frame = rand_range(0, 13)
 	if spread:
