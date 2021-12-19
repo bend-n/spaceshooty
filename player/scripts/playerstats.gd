@@ -10,6 +10,7 @@ var rockets = true
 var lasers = true
 var flak = true
 var gun = "lasers"
+var power = false setget set_power
 export(int) var max_hp = 3 setget set_max_health
 var hp = max_hp setget set_health
 var recent_score :int
@@ -29,3 +30,9 @@ func set_health(value):
 	if hp <= 0: emit_signal("no_hp")
 
 func _ready(): self.hp = max_hp
+
+func set_power(new_power):
+	power = new_power
+	yield(get_tree().create_timer(8),"timeout")
+	power = false
+	

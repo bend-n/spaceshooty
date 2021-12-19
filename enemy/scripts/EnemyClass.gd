@@ -3,6 +3,7 @@ extends Area2D
 
 var count = 0
 var target
+export var drop_power_up = false
 export var missile = false
 export var ARMOR = 20
 export var score_on_kill = 10
@@ -23,6 +24,13 @@ func _ready():
 
 func _process(delta): if global_position.x > stop_pos.x: global_position.x -= SPEED * delta
 
+func _exit_tree():
+	if drop_power_up and randi() % 4 == 3:
+		var powerUp = preload("res://PowerUp.tscn")
+		var powerup = powerUp.instance()
+		powerup.global_position = global_position
+		var main = get_tree().current_scene
+		main.add_child(powerup)
 
 func damage():
 	damagetobesubtracted = rand_range(enemy_damage.min_damage, enemy_damage.max_damage)

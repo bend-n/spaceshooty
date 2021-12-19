@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://world/World.gd" type="Script" id=1]
 [ext_resource path="res://ui/scenes/pause.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://player/scenes/Ship.tscn" type="PackedScene" id=8]
 [ext_resource path="res://fonts/fonty.tres" type="DynamicFont" id=9]
 [ext_resource path="res://ui/buttontheme.tres" type="Theme" id=10]
+[ext_resource path="res://PowerUp.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 19.125, 183 )
@@ -74,6 +75,21 @@ margin_right = -80.0
 margin_bottom = 22.0
 custom_fonts/font = ExtResource( 9 )
 text = "Score = 0"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="powerup" type="Label" parent="CanvasLayer2/Background"]
+visible = false
+anchor_right = 1.0
+margin_left = 134.0
+margin_top = 156.0
+margin_right = -3.0
+margin_bottom = 173.0
+custom_fonts/font = ExtResource( 9 )
+text = "POWER UP!!!"
 align = 1
 autowrap = true
 __meta__ = {
@@ -165,5 +181,8 @@ tile_data = PoolIntArray( 5177420, 0, 0, 5177421, 0, 0, 5177422, 0, 0, 5177423, 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 160, 90 )
 current = true
+
+[node name="PowerUp" parent="." instance=ExtResource( 11 )]
+position = Vector2( 226, 57 )
 
 [connection signal="player_death" from="Ship" to="." method="_on_Ship_player_death"]

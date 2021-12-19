@@ -113,13 +113,13 @@ func _physics_process(delta):
 func _on_TouchScreenButton_force(force):
 	input_vector = force
 
-func _on_Ship_area_entered(area): if not area.is_in_group("pbullet") or is_in_group("Player"): qfreenplay(area)
+func _on_Ship_area_entered(area): if not area.is_in_group("pbullet") and not area.is_in_group("Player"): qfreenplay(area)
 
 func qfreenplay(q):
 	q.queue_free()
 	play()
 
-func _on_Ship_body_entered(body): if not body.is_in_group("Player") or is_in_group("pbullet"): qfreenplay(body)
+func _on_Ship_body_entered(body): if not body.is_in_group("Player") and not body.is_in_group("pbullet"): qfreenplay(body)
 
 func play():
 	hitSound.play()
@@ -198,16 +198,18 @@ func shoot(): #shoot
 		var missiles = preload("res://bullets/scenes/missile.tscn")
 		var m = missiles.instance()
 		var main = get_tree().current_scene
-		main.add_child(m)
 		m.global_position = global_position
 		m.start(target)
+		if playerstats.power: m.powered_up = true
+		main.add_child(m)
 	else:
 		if not self.is_on_wall(): velocity.x -= recoil
 		else: velocity.x -= recoil / 10
 		var laser = attack.instance()
 		var main = get_tree().current_scene
-		main.add_child(laser)
 		laser.global_position = global_position
+		if playerstats.power: laser.powered_up = true
+		main.add_child(laser)
 
 func _exit_tree():
 	playerstats.alive = false

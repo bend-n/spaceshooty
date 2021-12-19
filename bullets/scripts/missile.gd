@@ -7,6 +7,7 @@ export(float) var TURN_STRENGTH := 15
 var off_screen = false
 onready var target_last_position
 var TARGET 
+var powered_up
 
 func start(_target):
 	TARGET = _target
@@ -49,3 +50,17 @@ func _on_VisibilityNotifier2D_screen_exited():
 	if randi() % 6 != 5: 
 		off_screen = true
 		queue_free()
+
+func _ready():
+	var minscalingrand = 1
+	var maxscalingrand = 1
+	if powered_up: 
+		TURN_STRENGTH += 20
+		minscalingrand += 1
+		maxscalingrand += 2
+	var rand = rand_range(minscalingrand, maxscalingrand)
+	$Sprite.scale.x = rand
+	$Sprite.scale.y = rand
+	$CollisionPolygon2D.scale.x = rand
+	$CollisionPolygon2D.scale.y = rand
+	if powered_up: $Trail.THICKNESS = rand * 2

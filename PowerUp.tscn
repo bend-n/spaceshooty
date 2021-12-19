@@ -1,10 +1,84 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://PowerUp.gd" type="Script" id=1]
+[ext_resource path="res://sprites/star.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 13.0384
 
-[node name="PowerUp" type="Node2D"]
+[sub_resource type="Animation" id=2]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("confetti:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "create_explosion"
+}, {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="PowerUp" type="Area2D" groups=["Player"]]
+collision_layer = 0
+script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.5
+anims/death = SubResource( 2 )
+
+[node name="confetti" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+amount = 80
+direction = Vector2( 0, -1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+linear_accel = 20.0
+scale_amount = 3.0
+scale_amount_random = 1.0
+color = Color( 0.968627, 0, 1, 1 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[connection signal="area_entered" from="." to="." method="_on_PowerUp_area_entered"]

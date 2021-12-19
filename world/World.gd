@@ -38,8 +38,7 @@ func set_score(value):
 # warning-ignore:return_value_discarded
 		Game.transition("res://ui/scenes/Win.tscn")
 
-func update_score_label():
-	scoreLabel.text = "Score = " + str(score)
+func update_score_label(): scoreLabel.text = "Score = " + str(score)
 
 func update_save_data():
 	var save_data = SaveAndLoad.load_data_from_file()
@@ -66,3 +65,6 @@ func announce(text):
 	confetti.emitting = false
 	speaker.text = " "
 
+func _process(_delta):
+	if playerstats.power == true: $CanvasLayer2/Background/powerup.show()
+	else: $CanvasLayer2/Background/powerup.hide()

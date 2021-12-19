@@ -9,6 +9,7 @@ extents = Vector2( 4.5, 4.5 )
 
 [node name="squid" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+drop_power_up = true
 ARMOR = 75
 score_on_kill = 200
 SPEED = 10
