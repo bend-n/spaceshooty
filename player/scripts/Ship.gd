@@ -35,6 +35,7 @@ var thrusting_last_frame = false
 var shake_intensity = .3
 var quant = 30
 var shake_duration = .2
+var triple_shot
 
 func _ready():
 	playerstats.gun = "lasers"
@@ -135,6 +136,7 @@ func _go_into_cooldown():
 
 func flak():
 	if flaku:
+		triple_shot = false
 		wait_time = .001
 		shake_intensity = .03
 		shake_duration = .04
@@ -149,6 +151,7 @@ func flak():
 
 func rockets():
 	if rocketsu:
+		triple_shot = false
 		shake_intensity = .4
 		shake_duration = .3
 		wait_time = 1
@@ -161,6 +164,7 @@ func rockets():
 		playerstats.gun = "rockets"
 func lasers():
 	if lasersu:
+		triple_shot = false
 		amount = 1
 		shake_intensity = .3
 		shake_duration = .2
@@ -176,13 +180,14 @@ func lasers():
 func splitshot():
 	if splitshotu:
 		quant = 40
-		wait_time = 0.003
+		triple_shot = true
+		wait_time = 0.05
 		shake_intensity = .2
 		amount = .5
 		shake_duration = .2
-		enemy_damage.min_damage = .2
-		enemy_damage.max_damage = 1
-		recoil = 14
+		enemy_damage.min_damage = .1
+		enemy_damage.max_damage = .4
+		recoil = 17
 		movementpenalty = 130
 		attack = preload("res://bullets/scenes/SplitShot.tscn")
 		playerstats.gun = "splitshot"
@@ -197,10 +202,16 @@ func shoot(): #shoot
 		var missiles = preload("res://bullets/scenes/missile.tscn")
 		var m = missiles.instance()
 		var main = get_tree().current_scene
-		m.global_position = global_position
+		m.global_position = $Trail/LeftWingtip.global_position
 		m.start(target)
 		if playerstats.power: m.powered_up = true
 		main.add_child(m)
+		var laser2 = missiles.instance()
+		laser2.global_position = $Trail2/RightWingtip.global_position
+		if playerstats.power: laser2.powered_up = true
+		main.add_child(laser2)
+		laser2.start(target)
+
 	else:
 		if not self.is_on_wall(): velocity.x -= recoil
 		else: velocity.x -= recoil / 10
@@ -209,6 +220,17 @@ func shoot(): #shoot
 		laser.global_position = global_position
 		if playerstats.power: laser.powered_up = true
 		main.add_child(laser)
+		if triple_shot:
+		
+			var laser2 = attack.instance()
+			laser2.global_position = $Trail2/RightWingtip.global_position
+			if playerstats.power: laser2.powered_up = true
+			main.add_child(laser2)
+			
+			var laser3 = attack.instance()
+			laser3.global_position = $Trail/LeftWingtip.global_position
+			if playerstats.power: laser3.powered_up = true
+			main.add_child(laser3)
 
 func _exit_tree():
 	playerstats.alive = false

@@ -4,6 +4,7 @@ func _on_PowerUp_area_entered(area):
 	if area.is_in_group("Player"): playerstats.power = true
 	get_tree().current_scene.score += 100
 	$AnimationPlayer.play('death')
+	$confetti.emitting = true
 
 const ExplosionEffect = preload("res://effects/ExplosionEffect.tscn")
 const HitEffect = preload("res://effects/HitEffect.tscn")
@@ -23,5 +24,7 @@ func create_explosion():
 func _ready():
 	$confetti.emitting = false
 	$Sprite.visible = true
-	yield(get_tree().create_timer(9), "timeout")
+
+func _on_Timer_timeout():
 	$AnimationPlayer.play("death")
+

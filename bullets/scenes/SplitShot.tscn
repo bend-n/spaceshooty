@@ -91,11 +91,14 @@ spreadminpos = 10
 spreadmaxpos = -20
 spreadmaxneg = -20
 spreadminneg = -10
-trail_rare = true
 rarity_max = 10
 spark_qty = 20
 
+[node name="Glow" parent="." index="1"]
+self_modulate = Color( 0.619608, 0.698039, 1, 0.368627 )
+
 [node name="Laser" parent="." index="2"]
+self_modulate = Color( 1, 1, 1, 0.815686 )
 frames = SubResource( 15 )
 frame = 11
 

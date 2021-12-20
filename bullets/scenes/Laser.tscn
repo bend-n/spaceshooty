@@ -118,8 +118,8 @@ spreadmaxpos = 3
 spreadmaxneg = -3
 particles = true
 trail = true
-trail_rare = false
-rarity_max = 3
+rarity_max = 2
+modulate_gradually = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false

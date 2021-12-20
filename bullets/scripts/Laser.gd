@@ -20,6 +20,8 @@ export var rarity_min = 1
 export var rarity_max = 5
 export var spark_qty = 60
 export var scale_glow = true
+export var modulate_gradually = false
+export var modulate_amount = .2
 
 var powered_up
 var rotation_pos
@@ -82,6 +84,10 @@ func create_hit_effect():
 func _on_VisibilityNotifier2D_screen_exited(): queue_free()
 
 func _physics_process(delta):
+	if modulate_gradually:
+		var before = $Laser.self_modulate
+		before.a -= modulate_amount * delta
+		$Laser.self_modulate = before
 	if spread:
 		dir = Vector2.RIGHT.rotated(rotation)
 		velocity = dir * speed * delta

@@ -55,6 +55,7 @@ func _ready():
 	var minscalingrand = 1
 	var maxscalingrand = 1
 	if powered_up: 
+		CONSTANT_THRUST -= 20
 		TURN_STRENGTH += 20
 		minscalingrand += 1
 		maxscalingrand += 2

@@ -237,12 +237,17 @@ position = Vector2( -5, 0 )
 emitting = false
 
 [node name="Trail" parent="." instance=ExtResource( 3 )]
-position = Vector2( -2, -4.65577 )
+position = Vector2( -2, -5 )
 MAX_LENGTH = 30
+
+[node name="LeftWingtip" type="Position2D" parent="Trail"]
+position = Vector2( 0, -4.76837e-07 )
 
 [node name="Trail2" parent="." instance=ExtResource( 3 )]
 position = Vector2( -2, 5 )
 MAX_LENGTH = 30
+
+[node name="RightWingtip" type="Position2D" parent="Trail2"]
 
 [node name="Collision3" type="CollisionPolygon2D" parent="."]
 visible = false
