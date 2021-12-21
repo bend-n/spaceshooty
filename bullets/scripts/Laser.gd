@@ -85,9 +85,7 @@ func _on_VisibilityNotifier2D_screen_exited(): queue_free()
 
 func _physics_process(delta):
 	if modulate_gradually:
-		var before = $Laser.self_modulate
-		before.a -= modulate_amount * delta
-		$Laser.self_modulate = before
+		$Laser.self_modulate.a -= modulate_amount * delta
 	if spread:
 		dir = Vector2.RIGHT.rotated(rotation)
 		velocity = dir * speed * delta
