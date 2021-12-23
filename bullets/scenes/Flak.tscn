@@ -10,7 +10,6 @@ colors = PoolColorArray( 0.397949, 0.397949, 0.397949, 1, 1, 1, 1, 0.529412, 1, 
 
 [sub_resource type="StreamTexture" id=19]
 flags = 2
-load_path = "res://.import/Laser-Sheet.png-e39102a7b68c73fc691818f6c21ba261.stex"
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 2
@@ -77,12 +76,10 @@ flags = 2
 atlas = SubResource( 19 )
 region = Rect2( 192, 0, 16, 16 )
 
+[sub_resource type="StreamTexture" id=20]
+
 [sub_resource type="StreamTexture" id=21]
 flags = 2
-load_path = "res://.import/PlayerMissle.png-cea989aa34fa45e3cacf8eaa24cc20e3.stex"
-
-[sub_resource type="StreamTexture" id=20]
-load_path = "res://.import/smallparticle.png-6f2e54b58654de98bf3900b2acdac85f.stex"
 
 [sub_resource type="SpriteFrames" id=15]
 resource_local_to_scene = true
@@ -92,14 +89,14 @@ animations = [ {
 "name": "default",
 "speed": 20.0
 }, {
-"frames": [ SubResource( 21 ) ],
-"loop": true,
-"name": "New Anim",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 20 ) ],
 "loop": true,
 "name": "New Anim 1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 21 ) ],
+"loop": true,
+"name": "New Anim",
 "speed": 5.0
 } ]
 
