@@ -60,20 +60,20 @@ animations = [ {
 "name": "New Anim",
 "speed": 1.5
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "New Anim 2",
-"speed": 1.5
+"name": "New Anim 3",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "New Anim 4",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
-"name": "New Anim 3",
-"speed": 5.0
+"name": "New Anim 2",
+"speed": 1.5
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
