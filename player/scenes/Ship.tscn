@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://ui/scenes/MobileControls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sounds/thrust.wav" type="AudioStream" id=2]
@@ -11,6 +11,10 @@
 [ext_resource path="res://ui/scenes/MobileJoystick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://effects/Fire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://player/scripts/Ship.gd" type="Script" id=11]
+[ext_resource path="res://sprites/Ship.png" type="Texture" id=12]
+
+[sub_resource type="Gradient" id=41]
+colors = PoolColorArray( 1, 1, 1, 0.486275, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=38]
 resource_name = "Die Anim"
@@ -258,6 +262,20 @@ z_index = 2
 z_as_relative = false
 texture = ExtResource( 4 )
 hframes = 9
+
+[node name="Particles2D" type="CPUParticles2D" parent="Sprite"]
+show_behind_parent = true
+emitting = false
+amount = 5
+lifetime = 0.25
+local_coords = false
+draw_order = 1
+texture = ExtResource( 12 )
+flag_align_y = true
+direction = Vector2( 0, 1 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+color_ramp = SubResource( 41 )
 
 [node name="Timer" type="Timer" parent="."]
 

@@ -52,6 +52,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 		queue_free()
 
 func _ready():
+	$LaserSound.pitch_scale = randf() + 0.4
 	var minscalingrand = 1
 	var maxscalingrand = 1
 	if powered_up: 

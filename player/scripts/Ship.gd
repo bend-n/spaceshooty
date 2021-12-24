@@ -65,8 +65,12 @@ func _physics_process(delta):
 	var fire_dir = input_vector * -1
 	fire.direction = fire_dir
 	
-	if input_vector.x > 0 or input_vector.y != 0: fire.emitting = true
-	else: fire.emitting = false
+	if input_vector.x > 0 or input_vector.y != 0: 
+		$Sprite/Particles2D.emitting = true
+		fire.emitting = true
+	else: 
+		$Sprite/Particles2D.emitting = false
+		fire.emitting = false
 	
 	if input_vector != Vector2.ZERO:
 		if not thrusting_last_frame:
