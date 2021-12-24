@@ -2,7 +2,7 @@ extends KinematicBody2D
 class_name playerkinematic
 
 var counter
-var i_am_in_cooldown:bool
+var i_am_in_cooldown: bool
 var wait_time = .1
 var walled = false
 export var id = 1
@@ -24,7 +24,7 @@ var input_vector = Vector2.ZERO
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
 onready var splitshotu
 onready var rocketsu
-onready var lasersu 
+onready var lasersu
 onready var flaku
 onready var beamu
 onready var fire = $Fire
@@ -36,6 +36,7 @@ var shake_intensity = .3
 var quant = 30
 var shake_duration = .2
 var triple_shot
+
 
 func _ready():
 	playerstats.gun = "lasers"
@@ -49,29 +50,33 @@ func _ready():
 	flaku = playerstats.flak
 	beamu = playerstats.beam
 
+
 func create_hit_effect():
 	var main = get_tree().current_scene
 	var hitEffect = HitEffect.instance()
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
 
+
 func _physics_process(delta):
-	input_vector.x = Input.get_axis('left_%s' % id, 'right_%s' % id)
-	input_vector.y = Input.get_axis('up_%s' % id, 'down_%s' % id)
-	if Game.keyboard: input_vector = input_vector.normalized()
-	if $MobileJoystick/TouchScreenButton.in_use: input_vector = $MobileJoystick/TouchScreenButton.force
+	input_vector.x = Input.get_axis("left_%s" % id, "right_%s" % id)
+	input_vector.y = Input.get_axis("up_%s" % id, "down_%s" % id)
+	if Game.keyboard:
+		input_vector = input_vector.normalized()
+	if $MobileJoystick/TouchScreenButton.in_use:
+		input_vector = $MobileJoystick/TouchScreenButton.force
 	#makes a input vector based off of inputs, and supports controllers
 	# fire particle code
 	var fire_dir = input_vector * -1
 	fire.direction = fire_dir
-	
-	if input_vector.x > 0 or input_vector.y != 0: 
+
+	if input_vector.x > 0 or input_vector.y != 0:
 		$Sprite/Particles2D.emitting = true
 		fire.emitting = true
-	else: 
+	else:
 		$Sprite/Particles2D.emitting = false
 		fire.emitting = false
-	
+
 	if input_vector != Vector2.ZERO:
 		if not thrusting_last_frame:
 			$thrustsfxin.playing = true
@@ -79,7 +84,8 @@ func _physics_process(delta):
 		if not $thrustsfxloop.playing:
 			$thrustsfxloop.playing = true
 
-		if $thrustsfxend.playing: pass
+		if $thrustsfxend.playing:
+			pass
 
 		thrusting_last_frame = true
 	else:
@@ -91,7 +97,7 @@ func _physics_process(delta):
 				$thrustsfxin.playing = false
 
 		thrusting_last_frame = false
-	if input_vector != Vector2.ZERO:#moves ya
+	if input_vector != Vector2.ZERO:  #moves ya
 		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
 		$AnimationTree.set("parameters/Turn/blend_position", input_vector)
 		animationState.travel("Turn")
@@ -102,41 +108,62 @@ func _physics_process(delta):
 	if firing:
 		SPEED = movementpenalty
 		if not i_am_in_cooldown:
-			if randi() % quant == quant - 1: Glitch.apply(.1, amount)
-	else: SPEED = 100
-	if not i_am_in_cooldown and Input.is_action_pressed('shoot_%s' % id): shoot()
-	elif not Input.is_action_pressed('shoot_%s' % id): firing = false
+			if randi() % quant == quant - 1:
+				Glitch.apply(.1, amount)
+	else:
+		SPEED = 100
+	if not i_am_in_cooldown and Input.is_action_pressed("shoot_%s" % id):
+		shoot()
+	elif not Input.is_action_pressed("shoot_%s" % id):
+		firing = false
 	if Input.is_action_just_pressed("change_gun_%s" % id):
 		match playerstats.gun:
-			"lasers": rockets()
-			"rockets": splitshot()
-			"splitshot": flak()
-			"flak": lasers()
+			"lasers":
+				rockets()
+			"rockets":
+				splitshot()
+			"splitshot":
+				flak()
+			"flak":
+				lasers()
 	velocity = move_and_slide(velocity)
+
 
 func _on_TouchScreenButton_force(force):
 	input_vector = force
 
-func _on_Ship_area_entered(area): if not area.is_in_group("pbullet") and not area.is_in_group("Player"): qfreenplay(area)
+
+func _on_Ship_area_entered(area):
+	if not area.is_in_group("pbullet") and not area.is_in_group("Player"):
+		qfreenplay(area)
+
 
 func qfreenplay(q):
 	q.queue_free()
 	play()
 
-func _on_Ship_body_entered(body): if not body.is_in_group("Player") and not body.is_in_group("pbullet"): qfreenplay(body)
+
+func _on_Ship_body_entered(body):
+	if not body.is_in_group("Player") and not body.is_in_group("pbullet"):
+		qfreenplay(body)
+
 
 func play():
 	hitSound.play()
 
+
 func _on_AudioStreamPlayer_finished():
 	playerstats.hp -= 1
-	if playerstats.hp <= 0: $AnimationPlayer.play("Die Anim")
+	if playerstats.hp <= 0:
+		$AnimationPlayer.play("Die Anim")
+
 
 func _go_into_cooldown():
-  i_am_in_cooldown = true
-  timer.start(wait_time)   
-  yield(timer, "timeout")
-  i_am_in_cooldown = false
+	i_am_in_cooldown = true
+	timer.start(wait_time)
+	yield(timer, "timeout")
+	i_am_in_cooldown = false
+
 
 func flak():
 	if flaku:
@@ -153,6 +180,7 @@ func flak():
 		attack = preload("res://bullets/scenes/Flak.tscn")
 		playerstats.gun = "flak"
 
+
 func rockets():
 	if rocketsu:
 		triple_shot = false
@@ -166,6 +194,8 @@ func rockets():
 		movementpenalty = 60
 		recoil = 200
 		playerstats.gun = "rockets"
+
+
 func lasers():
 	if lasersu:
 		triple_shot = false
@@ -180,6 +210,7 @@ func lasers():
 		recoil = 20
 		attack = preload("res://bullets/scenes/Laser.tscn")
 		playerstats.gun = "lasers"
+
 
 func splitshot():
 	if splitshotu:
@@ -196,45 +227,56 @@ func splitshot():
 		attack = preload("res://bullets/scenes/SplitShot.tscn")
 		playerstats.gun = "splitshot"
 
-func shoot(): #shoot
+
+func shoot():  #shoot
 	_go_into_cooldown()
-	if !firing: firing = true
+	if !firing:
+		firing = true
 	Shake.shake(shake_intensity, shake_duration)
 	if playerstats.gun == "rockets":
-		if not self.is_on_wall(): velocity.x -= recoil
-		else: velocity.x -= recoil / 10
+		if not self.is_on_wall():
+			velocity.x -= recoil
+		else:
+			velocity.x -= recoil / 10
 		var missiles = preload("res://bullets/scenes/missile.tscn")
 		var m = missiles.instance()
 		var main = get_tree().current_scene
 		m.global_position = $Trail/LeftWingtip.global_position
 		m.start(target)
-		if playerstats.power: m.powered_up = true
+		if playerstats.power:
+			m.powered_up = true
 		main.add_child(m)
 		var laser2 = missiles.instance()
 		laser2.global_position = $Trail2/RightWingtip.global_position
-		if playerstats.power: laser2.powered_up = true
+		if playerstats.power:
+			laser2.powered_up = true
 		main.add_child(laser2)
 		laser2.start(target)
 
 	else:
-		if not self.is_on_wall(): velocity.x -= recoil
-		else: velocity.x -= recoil / 10
+		if not self.is_on_wall():
+			velocity.x -= recoil
+		else:
+			velocity.x -= recoil / 10
 		var laser = attack.instance()
 		var main = get_tree().current_scene
 		laser.global_position = global_position
-		if playerstats.power: laser.powered_up = true
+		if playerstats.power:
+			laser.powered_up = true
 		main.add_child(laser)
 		if triple_shot:
-		
 			var laser2 = attack.instance()
 			laser2.global_position = $Trail2/RightWingtip.global_position
-			if playerstats.power: laser2.powered_up = true
+			if playerstats.power:
+				laser2.powered_up = true
 			main.add_child(laser2)
-			
+
 			var laser3 = attack.instance()
 			laser3.global_position = $Trail/LeftWingtip.global_position
-			if playerstats.power: laser3.powered_up = true
+			if playerstats.power:
+				laser3.powered_up = true
 			main.add_child(laser3)
+
 
 func _exit_tree():
 	playerstats.alive = false
@@ -244,4 +286,6 @@ func _exit_tree():
 	explosionEffect.global_position = global_position
 	emit_signal("player_death")
 
-func _on_target_getter_target(_target): target = _target
+
+func _on_target_getter_target(_target):
+	target = _target

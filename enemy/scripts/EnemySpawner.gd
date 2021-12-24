@@ -9,7 +9,6 @@ var count6 = 0
 var count7 = 0
 var count8 = 0
 
-
 onready var label = $"Sprite Holders/Label"
 var nexthing = 0
 #min, max, level
@@ -17,7 +16,7 @@ var onscreenmax = 3
 var onscreen = 0
 var announcing = true
 var dev_mode = playerstats.dev_mode
-var score_ranges : Array = [
+var score_ranges: Array = [
 	[50, 200, 1],
 	[200, 749, 2],
 	[750, 2499, 3],
@@ -29,14 +28,16 @@ var score_ranges : Array = [
 	[30001, 40000, 8]
 ]
 onready var spawnPoints = $SpawnPoints
-var difficulty_levels:Array
+var difficulty_levels: Array
 var current_difficulty_level
 onready var main = get_node("../../../EnemyHolder")
 
+
 func _ready():
 	visible_then_not($"Sprite Holders/octopus")
-	difficulty_levels = load("res://enemy/scenes/Difficulty Scaling.tscn").instance().get_children();
+	difficulty_levels = load("res://enemy/scenes/Difficulty Scaling.tscn").instance().get_children()
 	current_difficulty_level = difficulty_levels[0]
+
 
 func spawn_enemy_on_current_difficulty():
 	if not announcing:
@@ -62,6 +63,7 @@ func get_spawn_position():
 	var points = spawnPoints.get_children()
 	points.shuffle()
 	return points[0].global_position
+
 
 func _physics_process(_delta):
 	var world = get_tree().current_scene
@@ -125,7 +127,10 @@ func _physics_process(_delta):
 						yield(get_tree().create_timer(6), "timeout")
 						label.visible = false
 
-func diff_levels(value): current_difficulty_level = difficulty_levels[value]
+
+func diff_levels(value):
+	current_difficulty_level = difficulty_levels[value]
+
 
 func visible_then_not(sprite):
 	announcing = true

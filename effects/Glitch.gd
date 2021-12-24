@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+
 func apply(length, off = 1):
 	$shaderholder.visible = true
 	$shaderholder.get_material().set_shader_param("offset", off)

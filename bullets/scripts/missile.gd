@@ -1,25 +1,33 @@
 extends RigidBody2D
 
-
 export(float) var TERMINAL_VELOCITY := 300.0
 export(float) var CONSTANT_THRUST := 200.0
 export(float) var TURN_STRENGTH := 15
 var off_screen = false
 onready var target_last_position
-var TARGET 
+var TARGET
 var powered_up
+
 
 func start(_target):
 	TARGET = _target
-	if is_instance_valid(TARGET): target_last_position = TARGET.global_position
-	else: linear_velocity.x = CONSTANT_THRUST
+	if is_instance_valid(TARGET):
+		target_last_position = TARGET.global_position
+	else:
+		linear_velocity.x = CONSTANT_THRUST
+
 
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(TARGET):
-		var target_position = TARGET.global_position + (TARGET.global_position - target_last_position)/delta
+		var target_position = (
+			TARGET.global_position
+			+ (TARGET.global_position - target_last_position) / delta
+		)
 		target_last_position = TARGET.global_position
 		var direction: Vector2 = global_position.direction_to(target_position - linear_velocity)
-		var attenuate_turning: float = global_transform.y.dot(direction.rotated(angular_velocity*delta))
+		var attenuate_turning: float = global_transform.y.dot(
+			direction.rotated(angular_velocity * delta)
+		)
 		apply_torque_impulse(TURN_STRENGTH * attenuate_turning)
 		var apply_thrust := Vector2()
 		if linear_velocity.length() < TERMINAL_VELOCITY:
@@ -27,8 +35,10 @@ func _physics_process(delta: float) -> void:
 			apply_thrust = global_transform.x * CONSTANT_THRUST * attenuate_thrust
 			apply_central_impulse(apply_thrust)
 
+
 const ExplosionEffect = preload("res://effects/ExplosionEffect.tscn")
 const HitEffect = preload("res://effects/HitEffect.tscn")
+
 
 func create_hit_effect():
 	var main = get_tree().current_scene
@@ -36,26 +46,30 @@ func create_hit_effect():
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
 
+
 func create_explosion():
 	var main = get_tree().current_scene
 	var explosionEffect = ExplosionEffect.instance()
 	main.add_child(explosionEffect)
 	explosionEffect.global_position = global_position
 
+
 func _exit_tree():
 	if not off_screen:
 		create_explosion()
 
-func _on_VisibilityNotifier2D_screen_exited(): 
-	if randi() % 6 != 5: 
+
+func _on_VisibilityNotifier2D_screen_exited():
+	if randi() % 6 != 5:
 		off_screen = true
 		queue_free()
+
 
 func _ready():
 	$LaserSound.pitch_scale = randf() + 0.4
 	var minscalingrand = 1
 	var maxscalingrand = 1
-	if powered_up: 
+	if powered_up:
 		CONSTANT_THRUST -= 20
 		TURN_STRENGTH += 20
 		minscalingrand += 1
@@ -65,4 +79,5 @@ func _ready():
 	$Sprite.scale = to_scale
 	$Glow.scale = to_scale
 	$CollisionPolygon2D.scale = to_scale
-	if powered_up: $Trail.THICKNESS = rand * 2
+	if powered_up:
+		$Trail.THICKNESS = rand * 2
