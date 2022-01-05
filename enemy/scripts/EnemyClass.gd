@@ -31,12 +31,9 @@ func _process(delta):
 
 
 func _exit_tree():
-	if drop_power_up and randi() % 4 == 3:
+	if drop_power_up and randi() % 10 == 2:
 		var powerUp = preload("res://PowerUp.tscn")
-		var powerup = powerUp.instance()
-		powerup.global_position = global_position
-		var main = get_tree().current_scene
-		main.add_child(powerup)
+		Game.instance_scene_on_main(powerUp, global_position)
 
 
 func damage():
@@ -79,10 +76,7 @@ func add_to_score():
 
 
 func create_explosion():
-	var main = get_tree().current_scene
-	var explosionEffect = ExplosionEffect.instance()
-	main.add_child(explosionEffect)
-	explosionEffect.global_position = global_position
+	Game.instance_scene_on_main(ExplosionEffect, global_position)
 
 
 func _on_VisibilityNotifier2D_screen_exited():
@@ -91,18 +85,12 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_Timer_timeout():
 	if not missile:
-		var laser = Laser.instance()
-		var main = get_tree().current_scene
-		main.add_child(laser)
-		laser.global_position = global_position
+		var laser = Game.instance_scene_on_main(Laser, global_position)
 		laser.apply_impulse(Vector2.ZERO, Vector2(-50, 0))
 	elif missile == true:
 		var missiles = preload("res://bullets/scenes/missile.tscn")
-		var m = missiles.instance()
-		var main = get_tree().current_scene
-		main.add_child(m)
-		m.global_position = global_position
-		m.start(global_transform, target)
+		var m = Game.instance_scene_on_main(missiles, global_position)
+		m.start(target)
 
 
 func _on_sidestep_timeout():

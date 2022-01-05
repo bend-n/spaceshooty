@@ -18,7 +18,7 @@ var movementpenalty = 20
 var velocity = Vector2.ZERO
 signal player_death
 var ACCELERATION = 500
-var FRICTION = 400
+var FRICTION = 20
 var recoil = 40
 var input_vector = Vector2.ZERO
 var USE_TOUCH = OS.has_touchscreen_ui_hint()
@@ -35,7 +35,6 @@ var thrusting_last_frame = false
 var shake_intensity = .3
 var quant = 30
 var shake_duration = .2
-var triple_shot
 
 
 func _ready():
@@ -52,10 +51,7 @@ func _ready():
 
 
 func create_hit_effect():
-	var main = get_tree().current_scene
-	var hitEffect = HitEffect.instance()
-	main.add_child(hitEffect)
-	hitEffect.global_position = global_position
+	Game.instance_scene_on_main(HitEffect, global_position)
 
 
 func _physics_process(delta):
@@ -71,10 +67,9 @@ func _physics_process(delta):
 	fire.direction = fire_dir
 
 	if input_vector.x > 0 or input_vector.y != 0:
-		$Sprite/Particles2D.emitting = true
 		fire.emitting = true
+		fire.initial_velocity = input_vector.x * 40
 	else:
-		$Sprite/Particles2D.emitting = false
 		fire.emitting = false
 
 	if input_vector != Vector2.ZERO:
@@ -83,9 +78,6 @@ func _physics_process(delta):
 
 		if not $thrustsfxloop.playing:
 			$thrustsfxloop.playing = true
-
-		if $thrustsfxend.playing:
-			pass
 
 		thrusting_last_frame = true
 	else:
@@ -167,7 +159,6 @@ func _go_into_cooldown():
 
 func flak():
 	if flaku:
-		triple_shot = false
 		wait_time = .001
 		shake_intensity = .03
 		shake_duration = .04
@@ -183,7 +174,6 @@ func flak():
 
 func rockets():
 	if rocketsu:
-		triple_shot = false
 		shake_intensity = .4
 		shake_duration = .3
 		wait_time = 1
@@ -193,12 +183,12 @@ func rockets():
 		enemy_damage.max_damage = 30
 		movementpenalty = 60
 		recoil = 200
+		attack = preload("res://bullets/scenes/missile.tscn")
 		playerstats.gun = "rockets"
 
 
 func lasers():
 	if lasersu:
-		triple_shot = false
 		amount = 1
 		shake_intensity = .3
 		shake_duration = .2
@@ -215,14 +205,13 @@ func lasers():
 func splitshot():
 	if splitshotu:
 		quant = 40
-		triple_shot = true
 		wait_time = 0.05
 		shake_intensity = .2
 		amount = .5
 		shake_duration = .2
-		enemy_damage.min_damage = .1
-		enemy_damage.max_damage = .4
-		recoil = 17
+		enemy_damage.min_damage = .5
+		enemy_damage.max_damage = 1
+		recoil = 12
 		movementpenalty = 130
 		attack = preload("res://bullets/scenes/SplitShot.tscn")
 		playerstats.gun = "splitshot"
@@ -233,57 +222,40 @@ func shoot():  #shoot
 	if !firing:
 		firing = true
 	Shake.shake(shake_intensity, shake_duration)
-	if playerstats.gun == "rockets":
-		if not self.is_on_wall():
-			velocity.x -= recoil
-		else:
-			velocity.x -= recoil / 10
-		var missiles = preload("res://bullets/scenes/missile.tscn")
-		var m = missiles.instance()
-		var main = get_tree().current_scene
-		m.global_position = $Trail/LeftWingtip.global_position
-		m.start(target)
-		if playerstats.power:
-			m.powered_up = true
-		main.add_child(m)
-		var laser2 = missiles.instance()
-		laser2.global_position = $Trail2/RightWingtip.global_position
-		if playerstats.power:
-			laser2.powered_up = true
-		main.add_child(laser2)
-		laser2.start(target)
+	match playerstats.gun:
+		"rockets":
+			var muzzles = $Muzzles/RocketMuzzle.get_children()
+			for muzzle in muzzles:
+				var bullet = fire(muzzle.global_position, attack)
+				bullet.start(target)
+		"lasers":
+			var muzzles = $Muzzles/LaserMuzzle.get_children()
+			for muzzle in muzzles:
+				fire(muzzle.global_position, attack)
+		"splitshot":
+			var muzzles = $Muzzles/SplitMuzzle.get_children()
+			for muzzle in muzzles:
+				fire(muzzle.global_position, attack)
+		"flak":
+			var muzzles = $Muzzles/FlakMuzzle.get_children()
+			for muzzle in muzzles:
+				fire(muzzle.global_position, attack)
 
+
+func fire(global_pos, Bullet):
+	var bullet = Game.instance_scene_on_main(Bullet, global_pos)
+	if playerstats.power:
+		bullet.powered_up = true
+	if not self.is_on_wall():
+		velocity.x -= recoil
 	else:
-		if not self.is_on_wall():
-			velocity.x -= recoil
-		else:
-			velocity.x -= recoil / 10
-		var laser = attack.instance()
-		var main = get_tree().current_scene
-		laser.global_position = global_position
-		if playerstats.power:
-			laser.powered_up = true
-		main.add_child(laser)
-		if triple_shot:
-			var laser2 = attack.instance()
-			laser2.global_position = $Trail2/RightWingtip.global_position
-			if playerstats.power:
-				laser2.powered_up = true
-			main.add_child(laser2)
-
-			var laser3 = attack.instance()
-			laser3.global_position = $Trail/LeftWingtip.global_position
-			if playerstats.power:
-				laser3.powered_up = true
-			main.add_child(laser3)
+		velocity.x -= recoil / 10
+	return bullet
 
 
 func _exit_tree():
 	playerstats.alive = false
-	var main = get_tree().current_scene
-	var explosionEffect = ExplosionEffect.instance()
-	main.call_deferred("add_child", explosionEffect)
-	explosionEffect.global_position = global_position
+	Game.instance_scene_on_main(ExplosionEffect, global_position)
 	emit_signal("player_death")
 
 

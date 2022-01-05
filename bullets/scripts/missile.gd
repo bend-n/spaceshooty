@@ -41,17 +41,11 @@ const HitEffect = preload("res://effects/HitEffect.tscn")
 
 
 func create_hit_effect():
-	var main = get_tree().current_scene
-	var hitEffect = HitEffect.instance()
-	main.add_child(hitEffect)
-	hitEffect.global_position = global_position
+	Game.instance_scene_on_main(HitEffect, global_position)
 
 
 func create_explosion():
-	var main = get_tree().current_scene
-	var explosionEffect = ExplosionEffect.instance()
-	main.add_child(explosionEffect)
-	explosionEffect.global_position = global_position
+	Game.instance_scene_on_main(ExplosionEffect, global_position)
 
 
 func _exit_tree():

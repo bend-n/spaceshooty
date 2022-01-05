@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://sprites/glow.png" type="Texture" id=1]
 [ext_resource path="res://sounds/Laser.wav" type="AudioStream" id=2]
@@ -6,10 +6,6 @@
 [ext_resource path="res://sprites/smallparticle.png" type="Texture" id=4]
 [ext_resource path="res://sprites/PlayerMissle.png" type="Texture" id=5]
 [ext_resource path="res://bullets/scripts/Laser.gd" type="Script" id=6]
-
-[sub_resource type="Gradient" id=16]
-offsets = PoolRealArray( 0, 0.462766, 0.744681 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.658824, 0.289062, 0.650085, 1, 1 )
 
 [sub_resource type="CanvasItemMaterial" id=17]
 blend_mode = 1
@@ -103,38 +99,28 @@ resource_local_to_scene = true
 extents = Vector2( 4.5, 4 )
 
 [node name="Laser" type="RigidBody2D" groups=["pbullet"]]
+visible = false
 show_behind_parent = true
 light_mask = 32769
+position = Vector2( 0, 1 )
 collision_layer = 32768
 collision_mask = 130
 mass = 5.0
 gravity_scale = 0.0
+linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
-spreadmaxpos = 3
 spreadmaxneg = -3
-particles = true
-trail = true
+spreadmaxpos = 3
+initial_velocity = 400
+trail_rare = false
 rarity_max = 2
-modulate_gradually = true
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-emitting = false
-amount = 60
-lifetime = 7.0
-local_coords = false
-emission_shape = 2
-emission_rect_extents = Vector2( 4, 4 )
-direction = Vector2( -1, 0 )
-spread = 0.0
-gravity = Vector2( 0, 0 )
-color_ramp = SubResource( 16 )
 
 [node name="Glow" type="Sprite" parent="."]
-self_modulate = Color( 0.619608, 0.698039, 1, 0.498039 )
+self_modulate = Color( 0.278431, 0.352941, 0.643137, 0.184314 )
 material = SubResource( 17 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )

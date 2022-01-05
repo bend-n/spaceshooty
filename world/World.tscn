@@ -41,6 +41,11 @@ extents = Vector2( 19.125, 183 )
 [node name="World" type="Node" groups=["World"]]
 script = ExtResource( 1 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 160, 90 )
+z_index = 1
+current = true
+
 [node name="EnemyHolder" type="Node2D" parent="."]
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
@@ -170,11 +175,6 @@ tile_set = SubResource( 5 )
 cell_size = Vector2( 3, 3 )
 format = 1
 tile_data = PoolIntArray( 5177420, 0, 0, 5177421, 0, 0, 5177422, 0, 0, 5177423, 0, 0, 5177424, 0, 0, 5242956, 0, 0, 5242960, 0, 0, 5308492, 0, 0, 5308496, 0, 0, 5374028, 0, 0, 5374029, 0, 0, 5374030, 0, 0, 5374031, 0, 0, 5374032, 0, 0 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 160, 90 )
-z_index = 1
-current = true
 
 [node name="PowerUp" parent="." instance=ExtResource( 11 )]
 position = Vector2( 226, 57 )

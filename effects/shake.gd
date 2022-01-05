@@ -56,11 +56,33 @@ func _process(delta):
 		camera_shake_duration = 0.0
 		return
 
-	# Subtract the elapsed time from the camera_shake_duration
-	# so that it eventually ends
-	#
-	# You can do other fun stuff here too like have the intensity
-	# decay gradually so that the shake tapers off
+		# Subtract the elapsed time from the camera_shake_duration
+		# so that it eventually ends
+		#
+		# You can do other fun stuff here too like have the intensity
+		# decay gradually so that the shake tapers off
+
+		# Shake it
+
+		# Random shake
+		# Chaos
+		# Madness
+		#
+		# Personally, I like this best because players don't notice
+		# any difference in the thick of battle when the shakes are short
+		# and because it's dead simple.
+
+		# Sine wave based shake
+		#
+		# Play around with the magic numbers to adjust the feel
+		#
+		# Basing the sine wave off of get_ticks_msec ensures that
+		# the returned value is continuous and smooth
+
+		# Noise based shake
+		#
+		# Accessing the noise based on get_ticks_msec ensures that
+		# the returned value is continuous and smooth
 	camera_shake_duration = camera_shake_duration - delta
 
 	# Shake it
@@ -76,6 +98,17 @@ func _process(delta):
 		# and because it's dead simple.
 		offset = Vector2(randf(), randf()) * camera_shake_intensity
 
+		# Sine wave based shake
+		#
+		# Play around with the magic numbers to adjust the feel
+		#
+		# Basing the sine wave off of get_ticks_msec ensures that
+		# the returned value is continuous and smooth
+
+		# Noise based shake
+		#
+		# Accessing the noise based on get_ticks_msec ensures that
+		# the returned value is continuous and smooth
 	if camera_shake_type == Type.Sine:
 		# Sine wave based shake
 		#
@@ -89,6 +122,10 @@ func _process(delta):
 			* 0.5
 		)
 
+		# Noise based shake
+		#
+		# Accessing the noise based on get_ticks_msec ensures that
+		# the returned value is continuous and smooth
 	if camera_shake_type == Type.Noise:
 		# Noise based shake
 		#
@@ -97,5 +134,4 @@ func _process(delta):
 		var noise_value_x = noise.get_noise_1d(OS.get_ticks_msec() * 0.1)
 		var noise_value_y = noise.get_noise_1d(OS.get_ticks_msec() * 0.1 + 100.0)
 		offset = Vector2(noise_value_x, noise_value_y) * camera_shake_intensity * 2.0
-
 	camera.offset = offset

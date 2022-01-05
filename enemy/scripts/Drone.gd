@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var alive = true
 var asleep = false
-var health = 15 
+var health = 15
 var COOLDOWN = 1
 
 var hovering
@@ -12,10 +12,11 @@ export var MAX_THRUST = 25
 
 
 func _integrate_forces(state):
-	if not alive: return
-	
-	
-	if asleep: return
+	if not alive:
+		return
+
+	if asleep:
+		return
 
 	var delta = state.get_step()
 
@@ -37,7 +38,7 @@ func _integrate_forces(state):
 		if randf() < 0.5:
 			dodge_direction = -1
 		linear_velocity += normal * MAX_THRUST * 2 * delta
-		linear_velocity += normal.rotated(PI/2 * dodge_direction) * MAX_THRUST * delta
+		linear_velocity += normal.rotated(PI / 2 * dodge_direction) * MAX_THRUST * delta
 
 	# Steer towards player
 	var distance_to_player = global_position.distance_to($"../../Ship".global_position)
@@ -47,7 +48,9 @@ func _integrate_forces(state):
 	var start = $turret.rotation
 	var angle_to_target = Vector2(1, 0).rotated(start).angle_to(vector_to_player)
 	var end = start + angle_to_target
-	$Tween.interpolate_property($turret, 'rotation', start, end, 0.1, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	$Tween.interpolate_property(
+		$turret, "rotation", start, end, 0.1, Tween.TRANS_QUAD, Tween.EASE_OUT
+	)
 	$Tween.start()
 
 	if distance_to_player > 40:
@@ -63,6 +66,7 @@ func _integrate_forces(state):
 	if linear_velocity.length() > MAX_SPEED:
 		linear_velocity = linear_velocity.normalized() * MAX_SPEED
 
+
 func shoot():
 	$shootCooldown.wait_time = COOLDOWN * (1 + rand_range(-0.25, 0.25))
 	$shootCooldown.start()
@@ -72,39 +76,37 @@ func shoot():
 
 	if asleep:
 		return
-	
 
 	# Start firing animation
-	$AnimationPlayer.play('firing')
+	$AnimationPlayer.play("firing")
+
 
 const Laser = preload("res://bullets/scenes/EnemyLaser.tscn")
 
+
 func spawn_bullet():
-		var laser = Laser.instance()
-		var main = get_tree().current_scene
-		main.add_child(laser)
-		laser.global_position = global_position
-		laser.apply_impulse(Vector2.ZERO, Vector2(-50, 0))
+	var laser = Game.instance_scene_on_main(Laser, global_position)
+	laser.apply_impulse(Vector2.ZERO, Vector2(-50, 0))
+
 
 const ExplosionEffect = preload("res://effects/ExplosionEffect.tscn")
 const HitEffect = preload("res://effects/HitEffect.tscn")
 
+
 func create_hit_effect():
-	var main = get_tree().current_scene
-	var hitEffect = HitEffect.instance()
-	main.add_child(hitEffect)
-	hitEffect.global_position = global_position
+	Game.instance_scene_on_main(HitEffect, global_position)
+
 
 func create_explosion():
-	var main = get_tree().current_scene
-	var explosionEffect = ExplosionEffect.instance()
-	main.add_child(explosionEffect)
-	explosionEffect.global_position = global_position
+	Game.instance_scene_on_main(ExplosionEffect, global_position)
+
 
 func _exit_tree():
 	create_explosion()
 
+
 func _on_Drone_body_entered(body):
 	if body.is_in_group("pbullet"):
 		health -= 1
-		if health <= 0: queue_free()
+		if health <= 0:
+			queue_free()

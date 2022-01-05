@@ -84,22 +84,21 @@ extents = Vector2( 4.5, 4 )
 [node name="Split" instance=ExtResource( 1 )]
 mass = 1.0
 linear_velocity = Vector2( 30, 0 )
-spreadminpos = 10
-spreadmaxpos = -20
 spreadmaxneg = -20
-spreadminneg = -10
+spreadmaxpos = 20
+initial_velocity = 150
 rarity_max = 10
-spark_qty = 20
+modulate_amount = 0.1
+modulate_glow = true
 
-[node name="Glow" parent="." index="1"]
+[node name="Glow" parent="." index="0"]
 self_modulate = Color( 0.619608, 0.698039, 1, 0.368627 )
 
-[node name="Laser" parent="." index="2"]
-self_modulate = Color( 1, 1, 1, 0.815686 )
+[node name="Laser" parent="." index="1"]
 position = Vector2( -37, -4 )
 frames = SubResource( 15 )
 animation = "New Anim"
 offset = Vector2( 37, 4 )
 
-[node name="Collision" parent="." index="3"]
+[node name="Collision" parent="." index="2"]
 shape = SubResource( 16 )

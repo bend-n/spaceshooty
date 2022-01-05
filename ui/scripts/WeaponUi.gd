@@ -1,5 +1,6 @@
 extends Control
 
+
 func _process(_delta) -> void:
 	$Laser.visible = playerstats.gun == "lasers"
 	$Flak.visible = playerstats.gun == "flak"

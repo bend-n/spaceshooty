@@ -66,3 +66,12 @@ func set_keyboard(new_keyboard):
 	elif new_keyboard == false:
 		get_tree().call_group("keyboard", "hide")
 		get_tree().call_group("gamepad", "show")
+
+
+func instance_scene_on_main(scene, position):
+	var main = get_tree().current_scene
+	var instance = scene.instance()
+	main.call_deferred("add_child", instance)
+#	main.add_child(instance)
+	instance.global_position = position
+	return instance

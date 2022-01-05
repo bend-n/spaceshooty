@@ -11,10 +11,10 @@
 [ext_resource path="res://ui/scenes/MobileJoystick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://effects/Fire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://player/scripts/Ship.gd" type="Script" id=11]
-[ext_resource path="res://sprites/Ship.png" type="Texture" id=12]
+[ext_resource path="res://sprites/glow.png" type="Texture" id=13]
 
-[sub_resource type="Gradient" id=41]
-colors = PoolColorArray( 1, 1, 1, 0.486275, 1, 1, 1, 0 )
+[sub_resource type="CanvasItemMaterial" id=42]
+blend_mode = 1
 
 [sub_resource type="Animation" id=38]
 resource_name = "Die Anim"
@@ -236,8 +236,12 @@ collision_layer = 17
 collision_mask = 8
 script = ExtResource( 11 )
 
+[node name="Sprite2" type="Sprite" parent="."]
+material = SubResource( 42 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
+
 [node name="Fire" parent="." instance=ExtResource( 10 )]
-position = Vector2( -5, 0 )
 emitting = false
 
 [node name="Trail" parent="." instance=ExtResource( 3 )]
@@ -262,20 +266,6 @@ z_index = 2
 z_as_relative = false
 texture = ExtResource( 4 )
 hframes = 9
-
-[node name="Particles2D" type="CPUParticles2D" parent="Sprite"]
-show_behind_parent = true
-emitting = false
-amount = 5
-lifetime = 0.25
-local_coords = false
-draw_order = 1
-texture = ExtResource( 12 )
-flag_align_y = true
-direction = Vector2( 0, 1 )
-spread = 0.0
-gravity = Vector2( 0, 0 )
-color_ramp = SubResource( 41 )
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -315,12 +305,16 @@ amount = 100
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.5
+local_coords = false
+draw_order = 1
 emission_shape = 3
 emission_points = PoolVector2Array( 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1, 9, 1, 10, 1, 11, 1, 12, 2, 3, 2, 4, 2, 5, 2, 6, 2, 7, 2, 8, 2, 9, 2, 10, 2, 11, 2, 12, 3, 0, 3, 1, 3, 2, 3, 3, 3, 4, 3, 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 10, 3, 11, 3, 12, 3, 13, 3, 14, 3, 15, 4, 0, 4, 1, 4, 2, 4, 3, 4, 4, 4, 5, 4, 6, 4, 7, 4, 8, 4, 9, 4, 10, 4, 11, 4, 12, 4, 13, 4, 14, 4, 15, 5, 0, 5, 1, 5, 2, 5, 3, 5, 4, 5, 5, 5, 6, 5, 7, 5, 8, 5, 9, 5, 10, 5, 11, 5, 12, 5, 13, 5, 14, 5, 15, 6, 1, 6, 2, 6, 3, 6, 4, 6, 5, 6, 6, 6, 7, 6, 8, 6, 9, 6, 10, 6, 11, 6, 12, 6, 13, 6, 14, 7, 2, 7, 3, 7, 4, 7, 5, 7, 6, 7, 7, 7, 8, 7, 9, 7, 10, 7, 11, 7, 12, 7, 13, 8, 3, 8, 4, 8, 5, 8, 6, 8, 7, 8, 8, 8, 9, 8, 10, 8, 11, 8, 12, 9, 4, 9, 5, 9, 6, 9, 7, 9, 8, 9, 9, 9, 10, 9, 11, 10, 5, 10, 6, 10, 7, 10, 8, 10, 9, 10, 10, 11, 5, 11, 6, 11, 7, 11, 8, 11, 9, 11, 10, 12, 5, 12, 6, 12, 7, 12, 8, 12, 9, 12, 10, 13, 6, 13, 7, 13, 8, 13, 9, 14, 6, 14, 7, 14, 8, 14, 9, 15, 7, 15, 8 )
 emission_colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1 )
 direction = Vector2( 1, -1 )
 spread = 100.0
 initial_velocity = 90.0
+scale_amount = 1.5
+scale_amount_random = 0.2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
@@ -349,6 +343,38 @@ script = ExtResource( 7 )
 [node name="Collision" type="CollisionShape2D" parent="target_getter"]
 visible = false
 shape = SubResource( 39 )
+
+[node name="Muzzles" type="Node2D" parent="."]
+visible = false
+
+[node name="LaserMuzzle" type="Node2D" parent="Muzzles"]
+
+[node name="Position2D" type="Position2D" parent="Muzzles/LaserMuzzle"]
+position = Vector2( 5, 0 )
+
+[node name="RocketMuzzle" type="Node2D" parent="Muzzles"]
+
+[node name="Position2D" type="Position2D" parent="Muzzles/RocketMuzzle"]
+position = Vector2( -2, -5 )
+
+[node name="Position2D2" type="Position2D" parent="Muzzles/RocketMuzzle"]
+position = Vector2( -2, 5 )
+
+[node name="SplitMuzzle" type="Node2D" parent="Muzzles"]
+
+[node name="Position2D" type="Position2D" parent="Muzzles/SplitMuzzle"]
+position = Vector2( -2, -5 )
+
+[node name="Position2D2" type="Position2D" parent="Muzzles/SplitMuzzle"]
+position = Vector2( -2, 5 )
+
+[node name="Position2D3" type="Position2D" parent="Muzzles/SplitMuzzle"]
+position = Vector2( 5, 0 )
+
+[node name="FlakMuzzle" type="Node2D" parent="Muzzles"]
+
+[node name="Position2D" type="Position2D" parent="Muzzles/FlakMuzzle"]
+position = Vector2( 5, 0 )
 
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
 [connection signal="area_entered" from="damage" to="." method="_on_Ship_area_entered"]
