@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://world/World.gd" type="Script" id=1]
 [ext_resource path="res://ui/scenes/pause.tscn" type="PackedScene" id=2]
 [ext_resource path="res://effects/Stars.tscn" type="PackedScene" id=3]
 [ext_resource path="res://enemy/scenes/EnemySpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/scenes/WeaponUi.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/EnemyHolder.gd" type="Script" id=6]
 [ext_resource path="res://ui/scenes/HpUi.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/scenes/Ship.tscn" type="PackedScene" id=8]
 [ext_resource path="res://fonts/fonty.tres" type="DynamicFont" id=9]
@@ -47,14 +48,19 @@ z_index = 1
 current = true
 
 [node name="EnemyHolder" type="Node2D" parent="."]
+script = ExtResource( 6 )
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = -1
+[node name="CanvasLayer2" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="ColorRect" parent="CanvasLayer2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.129412, 0.129412, 0.129412, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -166,8 +172,8 @@ color = Color( 0.968627, 0, 1, 1 )
 hue_variation = 1.0
 hue_variation_random = 1.0
 
-[node name="Ship" parent="." instance=ExtResource( 8 )]
-position = Vector2( 30, 90 )
+[node name="Ship" parent="CanvasLayer2/Background" instance=ExtResource( 8 )]
+position = Vector2( 25, 77 )
 z_index = 1
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -179,4 +185,4 @@ tile_data = PoolIntArray( 5177420, 0, 0, 5177421, 0, 0, 5177422, 0, 0, 5177423, 
 [node name="PowerUp" parent="." instance=ExtResource( 11 )]
 position = Vector2( 226, 57 )
 
-[connection signal="player_death" from="Ship" to="." method="_on_Ship_player_death"]
+[connection signal="player_death" from="CanvasLayer2/Background/Ship" to="." method="_on_Ship_player_death"]

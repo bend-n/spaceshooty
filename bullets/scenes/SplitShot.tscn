@@ -91,14 +91,11 @@ rarity_max = 10
 modulate_amount = 0.1
 modulate_glow = true
 
-[node name="Glow" parent="." index="0"]
-self_modulate = Color( 0.619608, 0.698039, 1, 0.368627 )
-
-[node name="Laser" parent="." index="1"]
+[node name="Laser" parent="." index="0"]
 position = Vector2( -37, -4 )
 frames = SubResource( 15 )
 animation = "New Anim"
 offset = Vector2( 37, 4 )
 
-[node name="Collision" parent="." index="2"]
+[node name="Collision" parent="." index="1"]
 shape = SubResource( 16 )

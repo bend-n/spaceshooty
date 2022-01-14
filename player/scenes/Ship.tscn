@@ -11,7 +11,7 @@
 [ext_resource path="res://ui/scenes/MobileJoystick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://effects/Fire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://player/scripts/Ship.gd" type="Script" id=11]
-[ext_resource path="res://sprites/glow.png" type="Texture" id=13]
+[ext_resource path="res://sprites/spot.png" type="Texture" id=12]
 
 [sub_resource type="CanvasItemMaterial" id=42]
 blend_mode = 1
@@ -236,10 +236,15 @@ collision_layer = 17
 collision_mask = 8
 script = ExtResource( 11 )
 
-[node name="Sprite2" type="Sprite" parent="."]
+[node name="Light" type="Light2D" parent="."]
 material = SubResource( 42 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
+texture_scale = 3.0
+shadow_enabled = true
+shadow_gradient_length = 3.0
+shadow_filter = 2
+shadow_filter_smooth = 5.0
 
 [node name="Fire" parent="." instance=ExtResource( 10 )]
 emitting = false

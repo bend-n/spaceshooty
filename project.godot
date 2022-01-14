@@ -87,6 +87,13 @@ Shake="*res://effects/shake.gd"
 Game="*res://effects/Game.tscn"
 Glitch="*res://effects/Glitch.tscn"
 
+[compression]
+
+formats/zstd/long_distance_matching=true
+formats/zstd/compression_level=22
+formats/zlib/compression_level=9
+formats/gzip/compression_level=9
+
 [display]
 
 window/size/width=320
@@ -286,8 +293,11 @@ x={
 
 quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
+2d/options/use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+2d/snapping/use_gpu_pixel_snap=true
+threads/thread_model=2
 vram_compression/import_etc=true
 vram_compression/import_pvrtc=true
 quality/shadows/filter_mode=2

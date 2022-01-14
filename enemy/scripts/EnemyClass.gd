@@ -19,8 +19,7 @@ onready var tween = $Tween
 
 
 func _ready():
-	if $"../../Ship" != null:
-		target = $"../../Ship"
+	target = get_parent().target
 	timer.wait_time = shootspeed
 	target_destination = global_position
 

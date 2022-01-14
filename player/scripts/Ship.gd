@@ -113,11 +113,11 @@ func _physics_process(delta):
 			"lasers":
 				rockets()
 			"rockets":
-				splitshot()
-			"splitshot":
-				flak()
-			"flak":
 				lasers()
+#			"splitshot":
+#				lasers()
+#			"flak":
+#				lasers()
 	velocity = move_and_slide(velocity)
 
 

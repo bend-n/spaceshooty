@@ -162,10 +162,14 @@ mass = 400.0
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 14 )
-frame = 10
+frame = 5
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 15 )
 
 [node name="AudioStreamPlayer" parent="." index="3"]
 stream = SubResource( 29 )
+
+[node name="LightOccluder2D" parent="." index="4"]
+position = Vector2( 0, 2 )
+scale = Vector2( 3, 3 )

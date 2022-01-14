@@ -46,7 +46,7 @@ func _ready():
 		$Laser.scale = to_scale
 		$Collision.scale = to_scale
 		if scale_glow:
-			$Glow.scale = to_scale / 3
+			$Light.texture_scale += to_scale.x / 3
 	var animatedSprite = $Laser
 	animatedSprite.frame = rand_range(0, 13)
 	if trail:
@@ -75,4 +75,4 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _physics_process(delta):
 	if modulate_glow:
-		$Glow.self_modulate.a -= modulate_amount * delta
+		$Light.colors.a -= modulate_amount * delta
