@@ -80,14 +80,14 @@ animations = [ {
 "name": "default",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "New Anim 1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "New Anim",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "New Anim 1",
 "speed": 5.0
 } ]
 
@@ -141,6 +141,7 @@ material = SubResource( 33 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 color = Color( 0, 0.6, 1, 0.733333 )
+energy = 2.0
 shadow_enabled = true
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
