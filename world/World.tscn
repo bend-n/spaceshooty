@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://world/World.gd" type="Script" id=1]
 [ext_resource path="res://ui/scenes/pause.tscn" type="PackedScene" id=2]
@@ -11,6 +11,36 @@
 [ext_resource path="res://fonts/fonty.tres" type="DynamicFont" id=9]
 [ext_resource path="res://ui/buttontheme.tres" type="Theme" id=10]
 [ext_resource path="res://PowerUp.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sprites/background.png" type="Texture" id=12]
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform float vignette_intensity = 0.4;
+uniform float vignette_opacity : hint_range(0.0, 1.0) = 0.5;
+uniform vec4 vignette_rgb : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+float vignette(vec2 uv){
+	uv *= 1.0 - uv.xy;
+	float vignette = uv.x * uv.y * 15.0;
+	return pow(vignette, vignette_intensity * vignette_opacity);
+}
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	vec4 text = texture(TEXTURE, UV);
+	
+	text.rgba *= (vignette_rgb.rgba);
+	text.rgba *= (1.0 - vignette(UV));
+	
+	COLOR = vec4((text.rgb)*color.rgb,text.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/vignette_intensity = 4.829
+shader_param/vignette_opacity = 0.12
+shader_param/vignette_rgb = Color( 0, 0, 0, 1 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 19.125, 183 )
@@ -57,10 +87,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="CanvasLayer2"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.129412, 0.129412, 0.129412, 1 )
+color = Color( 0.105882, 0.105882, 0.105882, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="CanvasLayer2"]
+material = SubResource( 7 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 12 )
+expand = true
 __meta__ = {
 "_edit_lock_": true
 }
