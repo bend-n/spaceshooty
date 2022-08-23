@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://fonts/fonty.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/(16)04B_30__.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/scripts/GameOverScreen.gd" type="Script" id=3]
+[ext_resource path="res://effects/Stars.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sprites/changegun.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 30.0
+
+[node name="Win" type="Node"]
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = -8.0
+margin_top = 24.0
+margin_right = 312.0
+margin_bottom = 89.0
+custom_fonts/font = SubResource( 1 )
+text = "You win"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="." groups=["not_mobile"]]
+margin_left = 8.0
+margin_top = 88.0
+margin_right = 312.0
+margin_bottom = 176.0
+custom_fonts/font = ExtResource( 1 )
+text = "esc to go back to start screen, not that i assume your going to play again"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighscoreLabel" type="Label" parent="."]
+anchor_right = 1.0
+margin_bottom = 17.0
+custom_fonts/font = ExtResource( 1 )
+text = "highscore goes here"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stars" parent="." instance=ExtResource( 4 )]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( 24, 24 )
+normal = ExtResource( 5 )
+shape = SubResource( 2 )
+action = "ui_cancel"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 160, 90 )

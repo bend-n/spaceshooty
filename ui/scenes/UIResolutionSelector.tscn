@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/scripts/UIResolutionSelector.gd" type="Script" id=1]
+[ext_resource path="res://ui/buttontheme.tres" type="Theme" id=5]
+
+[node name="OptionButton" type="OptionButton"]
+margin_right = 72.0
+margin_bottom = 40.0
+theme = ExtResource( 5 )
+custom_constants/arrow_margin = 0
+text = "1280x720"
+items = [ "640x300", null, false, 0, null, "1280x720", null, false, 1, null, "1920x1080", null, false, 2, null ]
+selected = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="." to="." method="_on_OptionButton_item_selected"]

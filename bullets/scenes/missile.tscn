@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sounds/missile.wav" type="AudioStream" id=2]
+[ext_resource path="res://effects/Trail.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/PlayerMissle.png" type="Texture" id=4]
+[ext_resource path="res://bullets/scripts/missile.gd" type="Script" id=5]
+[ext_resource path="res://sprites/spot.png" type="Texture" id=6]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[node name="missile" type="RigidBody2D"]
+collision_layer = 32768
+collision_mask = 130
+mass = 80.0
+gravity_scale = 0.0
+script = ExtResource( 5 )
+TERMINAL_VELOCITY = 200.0
+CONSTANT_THRUST = 100.0
+TURN_STRENGTH = 75.0
+
+[node name="Trail" parent="." instance=ExtResource( 3 )]
+position = Vector2( -5, 0 )
+THICKNESS = 3.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+polygon = PoolVector2Array( -7, 1, -6, 2, 3, 2, 3, 3, 4, 4, 5, 4, 7, 2, 7, -2, 5, -4, 4, -4, 3, -3, 3, -2, -6, -2, -7, -1 )
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -20.0
+autoplay = true
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.5, -8.9407e-08 )
+scale = Vector2( 0.35, 0.3 )
+
+[node name="Light" type="Light2D" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+texture_scale = 2.0
+color = Color( 0.145098, 0.658824, 1, 1 )
+energy = 2.0
+shadow_enabled = true
+shadow_gradient_length = 3.0
+shadow_filter = 2
+shadow_filter_smooth = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="queue_free"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

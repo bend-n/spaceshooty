@@ -1,0 +1,15 @@
+[gd_scene format=2]
+
+[node name="Stars" type="CPUParticles2D"]
+pause_mode = 2
+position = Vector2( 320, 90 )
+amount = 100
+lifetime = 6.0
+preprocess = 6.5
+emission_shape = 2
+emission_rect_extents = Vector2( 1, 90 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = -100.0
+initial_velocity_random = 0.5
+scale_amount_random = 0.5

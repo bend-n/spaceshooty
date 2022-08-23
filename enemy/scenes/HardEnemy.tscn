@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://enemy/scenes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://enemy/scripts/HardEnemy.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 5.5, 7 )
+
+[node name="hardenemy" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+score_on_kill = 20
+shootspeed = 0.8
+
+[node name="Sprite" parent="." index="0"]
+animation = "New Anim"
+frame = 1
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )

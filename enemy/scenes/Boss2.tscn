@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://enemy/scenes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://bullets/scenes/Fireball.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 8, 9 )
+
+[node name="bigboi" instance=ExtResource( 1 )]
+drop_power_up = true
+ARMOR = 300
+score_on_kill = 400
+Laser = ExtResource( 2 )
+SPEED = 5
+shootspeed = 1.0
+stop_pos = Vector2( 300, 0 )
+
+[node name="Sprite" parent="." index="0"]
+rotation = 1.5708
+animation = "New Anim 3"
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )

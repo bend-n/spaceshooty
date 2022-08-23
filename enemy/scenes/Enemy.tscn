@@ -1,0 +1,121 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://sprites/enemy.png" type="Texture" id=1]
+[ext_resource path="res://sprites/UFO-export.png" type="Texture" id=2]
+[ext_resource path="res://sprites/litableenemy.png" type="Texture" id=3]
+[ext_resource path="res://sprites/squid.png" type="Texture" id=4]
+[ext_resource path="res://sprites/HardEnemy.png" type="Texture" id=5]
+[ext_resource path="res://sprites/boss2.png" type="Texture" id=6]
+[ext_resource path="res://enemy/scripts/Enemy.gd" type="Script" id=7]
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 2
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 2
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 18, 9 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 2
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 2
+atlas = ExtResource( 5 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 10, 11 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 0, 11, 10, 11 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.5
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "New Anim 1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 1.5
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "New Anim 4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "New Anim 3",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "New Anim 2",
+"speed": 1.5
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 5.5, 7 )
+
+[sub_resource type="OccluderPolygon2D" id=12]
+polygon = PoolVector2Array( -2, -7, -5, -4, -5, 5, -2, 7, 3, 7, 6, 4, 6, -5, 3, -7 )
+
+[node name="basicdude" type="Area2D"]
+z_index = 1
+collision_layer = 34
+script = ExtResource( 7 )
+stop_pos = Vector2( 220, 0 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -2.38419e-07, 0 )
+scale = Vector2( 0.5, 0.7 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="sidestep" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 12 )
+
+[connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Enemy_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="sidestep" to="." method="_on_sidestep_timeout"]

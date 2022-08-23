@@ -1,0 +1,123 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://bullets/scenes/EnemyLaser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/enemylaser-sheet.png" type="Texture" id=2]
+[ext_resource path="res://sprites/blackandwhitefball-Sheet.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 80, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 112, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 144, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 160, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 176, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 2
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 19, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 38, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 57, 0, 19, 11 )
+
+[sub_resource type="SpriteFrames" id=33]
+resource_local_to_scene = true
+animations = [ {
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 25.0
+}, {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "New Anim 1",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=34]
+resource_local_to_scene = true
+extents = Vector2( 6.5, 5 )
+
+[node name="Fireball" instance=ExtResource( 1 )]
+mass = 1000.0
+linear_velocity = Vector2( -60, 0 )
+
+[node name="AnimatedSprite" parent="." index="0"]
+frames = SubResource( 33 )
+animation = "New Anim 1"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -2.5, -1.19209e-07 )
+shape = SubResource( 34 )
+
+[node name="LightOccluder2D" parent="." index="4"]
+position = Vector2( -3, 0 )
