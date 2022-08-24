@@ -2190,7 +2190,6 @@ __meta__ = {
 [node name="pause" parent="." instance=ExtResource( 8 )]
 visible = false
 trigger = "options"
-pausing = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 160, 90 )
