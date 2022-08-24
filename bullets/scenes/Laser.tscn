@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://sounds/Laser.wav" type="AudioStream" id=2]
 [ext_resource path="res://sprites/Laser-Sheet.png" type="Texture" id=3]
@@ -91,15 +91,11 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
-resource_local_to_scene = true
-extents = Vector2( 4.5, 4 )
-
-[sub_resource type="CanvasItemMaterial" id=33]
-blend_mode = 1
+[sub_resource type="CapsuleShape2D" id=34]
+radius = 5.0
+height = 5.0
 
 [node name="Laser" type="RigidBody2D" groups=["pbullet"]]
-visible = false
 show_behind_parent = true
 light_mask = 32769
 position = Vector2( 0, 1 )
@@ -115,19 +111,22 @@ spreadmaxpos = 3
 initial_velocity = 400
 trail_rare = false
 rarity_max = 2
+modulate_glow = true
 
 [node name="Laser" type="AnimatedSprite" parent="."]
+unique_name_in_owner = true
 frames = SubResource( 15 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 34 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -1.19209e-07, 2.98023e-08 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource( 2 )
 volume_db = -20.0
 autoplay = true
@@ -137,11 +136,14 @@ autoplay = true
 [node name="Timer2" type="Timer" parent="."]
 
 [node name="Light" type="Light2D" parent="."]
-material = SubResource( 33 )
+unique_name_in_owner = true
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 color = Color( 0, 0.6, 1, 0.733333 )
 energy = 2.0
 shadow_enabled = true
+shadow_buffer_size = 1024
+shadow_filter = 2
+shadow_filter_smooth = 2.0
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

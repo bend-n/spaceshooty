@@ -19,10 +19,7 @@ func find_target():
 	if units.size() > 0:
 		var closest = units[0]
 		for unit in units:
-			if (
-				position.distance_to(unit.global_position)
-				< position.distance_to(closest.global_position)
-			):
+			if position.distance_to(unit.global_position) < position.distance_to(closest.global_position):
 				closest = unit
 		self.target = closest
 	else:

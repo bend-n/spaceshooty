@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://bullets/scenes/EnemyLaser.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/enemylaser-sheet.png" type="Texture" id=2]
@@ -105,7 +105,10 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=34]
 resource_local_to_scene = true
-extents = Vector2( 6.5, 5 )
+extents = Vector2( 5.5, 4.5 )
+
+[sub_resource type="OccluderPolygon2D" id=35]
+polygon = PoolVector2Array( -6, -3.33333, -6, 2, -3, 5, 5, 5, 5, -6, -3.33333, -6 )
 
 [node name="Fireball" instance=ExtResource( 1 )]
 mass = 1000.0
@@ -114,10 +117,12 @@ linear_velocity = Vector2( -60, 0 )
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 33 )
 animation = "New Anim 1"
+frame = 0
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( -2.5, -1.19209e-07 )
+position = Vector2( -3.5, -0.5 )
 shape = SubResource( 34 )
 
 [node name="LightOccluder2D" parent="." index="4"]
 position = Vector2( -3, 0 )
+occluder = SubResource( 35 )

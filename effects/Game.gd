@@ -21,8 +21,7 @@ func transition(to = null):
 		$transitionAnimation.stop(true)
 		$transitionAnimation.play("fadeinout")
 		if to:
-			yield(Game, "transition_halfway")
-			# warning-ignore:return_value_discarded
+			yield(self, "transition_halfway")
 			get_tree().change_scene(to)
 			set_keyboard(keyboard)
 			if OS.has_touchscreen_ui_hint():
@@ -45,7 +44,6 @@ func _process(_delta):
 
 
 func turn_off():
-	yield(get_tree().create_timer(.3), "timeout")
 	get_tree().call_group("keyboard", "hide")
 	get_tree().call_group("gamepad", "hide")
 	get_tree().call_group("not_mobile", "hide")

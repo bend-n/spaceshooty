@@ -22,46 +22,54 @@ const HitEffect = preload("res://effects/HitEffect.tscn")
 const Trail = preload("res://effects/Trail.tscn")
 var choosing = 0
 
+onready var light = $"%Light"
+onready var anims: AnimatedSprite = $"%Laser"
+onready var laser_sound: AudioStreamPlayer = $"%LaserSound"
+
 
 func _ready():
-	yield(get_tree().create_timer(.1), "timeout")
+	set_lights(ProjectSettings.get_setting("global/bullet_lights"))
+	yield(get_tree(), "idle_frame")
 	visible = true
 	var direction = Vector2(initial_velocity, rand_range(spreadmaxneg, spreadmaxpos))
 	apply_impulse(Vector2.ZERO, direction)
 	rotation = direction.angle()
-	$LaserSound.pitch_scale = randf() + 0.4
-	$LaserSound.play()
-	$Laser.playing = true
 
 	randomize()
-	var rand = rand_range(minscalingrand, maxscalingrand)
+	laser_sound.pitch_scale = randf() + 0.4
+	#warning-ignore: narrowing_conversion
+	anims.frame = rand_range(0, 13)
+
+	laser_sound.play()
+	anims.play()
 
 	if powered_up:
 		scalingrand = true
 
 	if scalingrand:
+		var rand = rand_range(minscalingrand, maxscalingrand)
 		var to_scale = Vector2(rand, rand)
 		if powered_up:
 			to_scale += Vector2(1.5, 1.5)
-		$Laser.scale = to_scale
+		anims.scale = to_scale
 		$Collision.scale = to_scale
 		if scale_glow:
-			$Light.texture_scale += to_scale.x / 3
-	var animatedSprite = $Laser
-	animatedSprite.frame = rand_range(0, 13)
+			light.texture_scale += to_scale.x / 3
 	if trail:
 		if trail_rare:
 			var chance = rand_range(rarity_min, rarity_max)
 			chance = round(chance)
 			if chance == 1:
 				var trailinstance = Trail.instance()
-				self.add_child(trailinstance)
+				add_child(trailinstance)
 				if powered_up:
+					var rand = rand_range(minscalingrand, maxscalingrand)
 					trailinstance.THICKNESS = rand * 2
 		else:
 			var trailinstance = Trail.instance()
-			self.add_child(trailinstance)
+			add_child(trailinstance)
 			if powered_up:
+				var rand = rand_range(minscalingrand, maxscalingrand)
 				trailinstance.THICKNESS = rand * 2
 
 
@@ -74,5 +82,12 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _physics_process(delta):
-	if modulate_glow:
-		$Light.colors.a -= modulate_amount * delta
+	if light.enabled:
+		light.color.a -= modulate_amount * delta
+		if light.color.a < 0:
+			light.enabled = false
+			set_physics_process(false)
+
+
+func set_lights(enabled: bool) -> void:
+	light.enabled = enabled

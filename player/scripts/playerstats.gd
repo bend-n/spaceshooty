@@ -10,7 +10,7 @@ var rockets = true
 var lasers = true
 var flak = true
 var gun = "lasers"
-var power = false setget set_power
+var power = false setget set_powerup
 export(int) var max_hp = 3 setget set_max_health
 var hp = max_hp setget set_health
 var recent_score: int
@@ -37,7 +37,8 @@ func _ready():
 	self.hp = max_hp
 
 
-func set_power(new_power):
+func set_powerup(new_power):
 	power = new_power
-	yield(get_tree().create_timer(8), "timeout")
-	power = false
+	if power:
+		var t = get_tree().create_timer(8)
+		t.connect("timeout", self, "set_powerup", [false])

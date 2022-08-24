@@ -46,26 +46,17 @@ func damage():
 
 
 func _on_Enemy_body_entered(body):
-	if not body.is_in_group("laser"):
-		body.create_hit_effect()
-		if not body.is_in_group("Player"):
-			body.queue_free()
-			damage()
+	body.create_hit_effect()
+	if not body.is_in_group("Player"):
+		body.queue_free()
+		damage()
 
 
 func _on_Enemy_area_entered(area):
-	if not area.is_in_group("laser"):
-		if not area.is_in_group("Player"):
-			area.create_hit_effect()
-			area.queue_free()
-			damage()
-
-	elif area.is_in_group("laser"):
-		self.visible = true
-		var beam = get_overlapping_bodies()
-		if beam != null:
-			yield(get_tree().create_timer(.4), "timeout")
-			damage()
+	if not area.is_in_group("Player"):
+		area.create_hit_effect()
+		area.queue_free()
+		damage()
 
 
 func add_to_score():
@@ -101,12 +92,6 @@ func _on_sidestep_timeout():
 	elif target_destination.y < 10:
 		target_destination.y = 10
 	tween.interpolate_property(
-		self,
-		"position",
-		global_position,
-		target_destination,
-		1,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT
+		self, "position", global_position, target_destination, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	tween.start()

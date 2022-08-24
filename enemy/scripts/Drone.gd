@@ -48,9 +48,7 @@ func _integrate_forces(state):
 	var start = $turret.rotation
 	var angle_to_target = Vector2(1, 0).rotated(start).angle_to(vector_to_player)
 	var end = start + angle_to_target
-	$Tween.interpolate_property(
-		$turret, "rotation", start, end, 0.1, Tween.TRANS_QUAD, Tween.EASE_OUT
-	)
+	$Tween.interpolate_property($turret, "rotation", start, end, 0.1, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	$Tween.start()
 
 	if distance_to_player > 40:

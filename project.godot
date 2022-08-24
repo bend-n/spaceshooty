@@ -94,6 +94,10 @@ formats/zstd/compression_level=22
 formats/zlib/compression_level=9
 formats/gzip/compression_level=9
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=320
@@ -112,6 +116,10 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PoolStringArray(  )
+
+[global]
+
+bullet_lights=true
 
 [importer_defaults]
 

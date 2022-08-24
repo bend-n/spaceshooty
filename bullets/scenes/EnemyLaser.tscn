@@ -5,26 +5,6 @@
 [ext_resource path="res://bullets/scripts/EnemyLaser.gd" type="Script" id=3]
 [ext_resource path="res://sprites/blackandwhitefball-Sheet.png" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=29]
-flags = 2
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 19, 11 )
-
-[sub_resource type="AtlasTexture" id=30]
-flags = 2
-atlas = ExtResource( 4 )
-region = Rect2( 19, 0, 19, 11 )
-
-[sub_resource type="AtlasTexture" id=31]
-flags = 2
-atlas = ExtResource( 4 )
-region = Rect2( 38, 0, 19, 11 )
-
-[sub_resource type="AtlasTexture" id=32]
-flags = 2
-atlas = ExtResource( 4 )
-region = Rect2( 57, 0, 19, 11 )
-
 [sub_resource type="AtlasTexture" id=16]
 flags = 2
 atlas = ExtResource( 1 )
@@ -90,26 +70,46 @@ flags = 2
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=29]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 19, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 38, 0, 19, 11 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 57, 0, 19, 11 )
+
 [sub_resource type="SpriteFrames" id=14]
 resource_local_to_scene = true
 animations = [ {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
-"loop": true,
-"name": "New Anim 1",
-"speed": 15.0
-}, {
 "frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": true,
 "name": "New Anim",
 "speed": 25.0
+}, {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "New Anim 1",
+"speed": 15.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=34]
 resource_local_to_scene = true
-extents = Vector2( 4, 6 )
+extents = Vector2( 4, 3 )
 
-[sub_resource type="OccluderPolygon2D" id=33]
-polygon = PoolVector2Array( -6, -3, -6, 2, -3, 4, 4, 4, 4, -5, -4, -5 )
+[sub_resource type="OccluderPolygon2D" id=35]
+polygon = PoolVector2Array( -5, -2, -5, 2, -3, 4, 4, 4, 4, -4, -3, -4 )
 
 [node name="EnemyLaser" type="RigidBody2D" groups=["ebullet"]]
 z_index = 1
@@ -126,13 +126,12 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 14 )
 animation = "New Anim"
-frame = 3
+frame = 12
 playing = true
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1.19209e-07 )
-shape = SubResource( 15 )
+shape = SubResource( 34 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 2.08616e-07, -2.38419e-07 )
@@ -144,6 +143,6 @@ volume_db = -30.0
 autoplay = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource( 33 )
+occluder = SubResource( 35 )
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -1,15 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/scripts/settings.gd" type="Script" id=1]
 [ext_resource path="res://sprites/stop.png" type="Texture" id=2]
-[ext_resource path="res://fonts/fonty.tres" type="DynamicFont" id=4]
 [ext_resource path="res://sprites/stop-2.png" type="Texture" id=5]
 [ext_resource path="res://ui/scripts/Volume.gd" type="Script" id=6]
 [ext_resource path="res://ui/scenes/UiSettingContainer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/scenes/UIResolutionSelector.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/buttontheme.tres" type="Theme" id=9]
 [ext_resource path="res://ui/new_styleboxflat.tres" type="StyleBox" id=10]
-[ext_resource path="res://effects/Stars.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.898039, 0.898039, 0.898039, 0.854902 )
@@ -40,58 +38,30 @@ pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Backgroud" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color( 0, 0, 0, 0.611765 )
 
-[node name="Stars" parent="ColorRect" instance=ExtResource( 12 )]
-emitting = false
-
-[node name="label" type="Label" parent="ColorRect"]
-margin_left = 90.0
-margin_top = 36.0
-margin_right = 162.0
-margin_bottom = 51.0
-theme = ExtResource( 9 )
-text = "Resolutioេn​តថឹ"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VolumeLabel" type="Label" parent="ColorRect"]
-margin_left = 120.0
-margin_top = 17.0
-margin_right = 173.0
-margin_bottom = 32.0
-theme = ExtResource( 9 )
-custom_colors/font_color = Color( 1, 0.929412, 0.764706, 1 )
-text = "volume"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+[node name="SettingsWindow" type="VBoxContainer" parent="Backgroud"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 111.0
-margin_bottom = 127.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = 173.0
+margin_bottom = 128.0
+theme = ExtResource( 9 )
 
-[node name="VolumeSlider" type="HSlider" parent="ColorRect/VBoxContainer"]
-margin_right = 95.0
+[node name="VolumeBox" type="HBoxContainer" parent="Backgroud/SettingsWindow"]
+margin_right = 157.0
 margin_bottom = 16.0
-focus_neighbour_top = NodePath("../Back")
-focus_neighbour_bottom = NodePath("../UIResolutionSelector")
+custom_constants/separation = 10
+
+[node name="VolumeSlider" type="HSlider" parent="Backgroud/SettingsWindow/VolumeBox"]
+margin_right = 99.0
+margin_bottom = 16.0
+focus_neighbour_top = NodePath("../../BackButton")
+focus_neighbour_bottom = NodePath("../../ResolutionBox/UIResolutionSelector")
+size_flags_horizontal = 3
 custom_icons/grabber_highlight = ExtResource( 5 )
 custom_icons/grabber = ExtResource( 2 )
 custom_styles/slider = SubResource( 1 )
@@ -104,80 +74,86 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UIResolutionSelector" parent="ColorRect/VBoxContainer" instance=ExtResource( 8 )]
+[node name="VolumeLabel" type="Label" parent="Backgroud/SettingsWindow/VolumeBox"]
+margin_left = 109.0
+margin_top = 1.0
+margin_right = 157.0
+margin_bottom = 15.0
+theme = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 0.929412, 0.764706, 1 )
+text = "volume"
+
+[node name="ResolutionBox" type="HBoxContainer" parent="Backgroud/SettingsWindow"]
 margin_top = 20.0
-margin_right = 67.0
+margin_right = 157.0
 margin_bottom = 34.0
-focus_neighbour_top = NodePath("../VolumeSlider")
-focus_neighbour_bottom = NodePath("../fullscreen")
+
+[node name="UIResolutionSelector" parent="Backgroud/SettingsWindow/ResolutionBox" instance=ExtResource( 8 )]
+margin_right = 67.0
+margin_bottom = 14.0
+focus_neighbour_top = NodePath("../../VolumeBox/VolumeSlider")
+focus_neighbour_bottom = NodePath("../../fullscreen")
 size_flags_horizontal = 0
+theme = null
 text = "640x300"
 items = [ "640x300", null, false, 0, null, "1280x720", null, false, 1, null, "1920x1080", null, false, 2, null ]
 selected = 0
 
-[node name="fullscreen" parent="ColorRect/VBoxContainer" instance=ExtResource( 7 )]
+[node name="ResolutionLabel" type="Label" parent="Backgroud/SettingsWindow/ResolutionBox"]
+margin_left = 71.0
+margin_right = 143.0
+margin_bottom = 14.0
+theme = ExtResource( 9 )
+text = "Resolutioេn​តថឹ"
+
+[node name="fullscreen" parent="Backgroud/SettingsWindow" instance=ExtResource( 7 )]
 margin_top = 38.0
-margin_right = 92.0
+margin_right = 88.0
 margin_bottom = 54.0
-focus_neighbour_top = NodePath("../UIResolutionSelector")
+focus_neighbour_top = NodePath("../ResolutionBox/UIResolutionSelector")
 focus_neighbour_bottom = NodePath("../vsync")
 size_flags_horizontal = 0
+theme = null
+pressed = true
 text = "fullscreen"
 
-[node name="vsync" parent="ColorRect/VBoxContainer" instance=ExtResource( 7 )]
+[node name="vsync" parent="Backgroud/SettingsWindow" instance=ExtResource( 7 )]
 margin_top = 58.0
-margin_right = 60.0
+margin_right = 56.0
 margin_bottom = 74.0
 focus_neighbour_top = NodePath("../fullscreen")
-focus_neighbour_bottom = NodePath("../Back")
+focus_neighbour_bottom = NodePath("../bullet lights")
 size_flags_horizontal = 0
+theme = null
 text = "Vsync"
 
-[node name="Back" type="Button" parent="ColorRect/VBoxContainer"]
+[node name="bullet lights" type="CheckBox" parent="Backgroud/SettingsWindow"]
 margin_top = 78.0
-margin_right = 32.0
-margin_bottom = 92.0
+margin_right = 157.0
+margin_bottom = 94.0
 focus_neighbour_top = NodePath("../vsync")
-focus_neighbour_bottom = NodePath("../VolumeSlider")
+focus_neighbour_bottom = NodePath("../BackButton")
+pressed = true
+text = "bullet lights"
+
+[node name="BackButton" type="Button" parent="Backgroud/SettingsWindow"]
+unique_name_in_owner = true
+margin_top = 98.0
+margin_right = 32.0
+margin_bottom = 112.0
+focus_neighbour_top = NodePath("../bullet lights")
+focus_neighbour_bottom = NodePath("../VolumeBox/VolumeSlider")
 size_flags_horizontal = 0
-theme = ExtResource( 9 )
 text = "Back"
 align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pause2" type="Label" parent="ColorRect"]
-margin_left = 6.0
-margin_top = 155.0
-margin_right = 288.0
-margin_bottom = 172.0
-custom_fonts/font = ExtResource( 4 )
-text = "Paused"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="pause" type="Label" parent="ColorRect"]
-margin_left = 28.0
-margin_top = 133.0
-margin_right = 310.0
-margin_bottom = 150.0
-custom_fonts/font = ExtResource( 4 )
-text = "Press esc to unpause"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="pause_icon" type="Sprite" parent="ColorRect"]
-position = Vector2( 303, 164 )
-scale = Vector2( 1, 0.987089 )
-texture = ExtResource( 2 )
-
-[connection signal="gui_input" from="ColorRect/VBoxContainer/VolumeSlider" to="ColorRect/VBoxContainer/VolumeSlider" method="_on_VolumeSlider_gui_input"]
-[connection signal="value_changed" from="ColorRect/VBoxContainer/VolumeSlider" to="ColorRect/VBoxContainer/VolumeSlider" method="_on_value_changed"]
-[connection signal="resolution_changed" from="ColorRect/VBoxContainer/UIResolutionSelector" to="." method="_on_UIResolutionSelector_resolution_changed"]
-[connection signal="toggled" from="ColorRect/VBoxContainer/fullscreen" to="." method="_on_UIFullscreenCheckbox_toggled"]
-[connection signal="toggled" from="ColorRect/VBoxContainer/vsync" to="." method="_on_UIVsyncCheckbox_toggled"]
-[connection signal="gui_input" from="ColorRect/VBoxContainer/Back" to="." method="_on_Back_gui_input"]
+[connection signal="gui_input" from="Backgroud/SettingsWindow/VolumeBox/VolumeSlider" to="Backgroud/SettingsWindow/VolumeBox/VolumeSlider" method="_on_VolumeSlider_gui_input"]
+[connection signal="value_changed" from="Backgroud/SettingsWindow/VolumeBox/VolumeSlider" to="Backgroud/SettingsWindow/VolumeBox/VolumeSlider" method="_on_value_changed"]
+[connection signal="resolution_changed" from="Backgroud/SettingsWindow/ResolutionBox/UIResolutionSelector" to="." method="_on_UIResolutionSelector_resolution_changed"]
+[connection signal="toggled" from="Backgroud/SettingsWindow/fullscreen" to="." method="_on_UIFullscreenCheckbox_toggled"]
+[connection signal="toggled" from="Backgroud/SettingsWindow/vsync" to="." method="_on_UIVsyncCheckbox_toggled"]
+[connection signal="toggled" from="Backgroud/SettingsWindow/bullet lights" to="." method="_on_bullet_lights_toggled"]
+[connection signal="pressed" from="Backgroud/SettingsWindow/BackButton" to="." method="_on_BackButton_pressed"]

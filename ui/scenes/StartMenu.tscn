@@ -2165,9 +2165,6 @@ theme = ExtResource( 7 )
 text = "options = "
 align = 1
 valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Inputs" type="Sprite" parent="settings"]
 position = Vector2( 119, 10 )

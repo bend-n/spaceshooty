@@ -14,11 +14,6 @@ func _ready():
 		scoreLabel.hide()
 
 
-func _input(event):
-	if event.is_action("ui_home"):
-		self.score = 990
-
-
 func set_score(value):
 	score = value
 	update_score_label()
@@ -43,7 +38,6 @@ func set_score(value):
 			SaveAndLoad.save_data_to_file(save_data)
 			print("saved?")
 	if score >= 30000:
-# warning-ignore:return_value_discarded
 		Game.transition("res://ui/scenes/Win.tscn")
 
 
@@ -65,7 +59,6 @@ func _on_Ship_player_death():
 	playerstats.hp = playerstats.max_hp
 	update_save_data()
 	yield(get_tree().create_timer(1), "timeout")
-# warning-ignore:return_value_discarded
 	Game.transition("res://ui/scenes/GameOverScreen.tscn")
 
 

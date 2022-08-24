@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sounds/missile.wav" type="AudioStream" id=2]
 [ext_resource path="res://effects/Trail.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/PlayerMissle.png" type="Texture" id=4]
 [ext_resource path="res://bullets/scripts/missile.gd" type="Script" id=5]
 [ext_resource path="res://sprites/spot.png" type="Texture" id=6]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 6.0
+height = 6.0
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
@@ -23,10 +27,10 @@ TURN_STRENGTH = 75.0
 position = Vector2( -5, 0 )
 THICKNESS = 3.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-rotation = -3.14159
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 scale = Vector2( 1, -1 )
-polygon = PoolVector2Array( -7, 1, -6, 2, 3, 2, 3, 3, 4, 4, 5, 4, 7, 2, 7, -2, 5, -4, 4, -4, 3, -3, 3, -2, -6, -2, -7, -1 )
+shape = SubResource( 3 )
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
