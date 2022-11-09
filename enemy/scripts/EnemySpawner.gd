@@ -31,6 +31,8 @@ onready var spawnPoints = $SpawnPoints
 var difficulty_levels: Array
 var current_difficulty_level
 onready var main = get_node("../../../EnemyHolder")
+onready var world = get_tree().current_scene
+var last_score: int = -1
 
 
 func _ready():
@@ -66,7 +68,9 @@ func get_spawn_position():
 
 
 func _physics_process(_delta):
-	var world = get_tree().current_scene
+	if world.score == last_score:
+		last_score = world.score
+		return
 	for i in score_ranges.size():
 		if world.score in range(score_ranges[i][0], score_ranges[i][1], 1):
 			#set your dificulty to score_ranges[i][2]

@@ -11,6 +11,7 @@
 [ext_resource path="res://fonts/fonty.tres" type="DynamicFont" id=9]
 [ext_resource path="res://ui/buttontheme.tres" type="Theme" id=10]
 [ext_resource path="res://PowerUp.tscn" type="PackedScene" id=11]
+[ext_resource path="res://fonts/04b-19.tres" type="DynamicFont" id=12]
 
 [sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
@@ -43,30 +44,6 @@ shader_param/vignette_rgb = Color( 0, 0, 0, 1 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 19.125, 183 )
-
-[sub_resource type="TileSet" id=5]
-0/name = "bitmaskexample.png 0"
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 9, 9 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 176, Vector2( 0, 1 ), 146, Vector2( 0, 2 ), 50, Vector2( 1, 0 ), 56, Vector2( 1, 2 ), 56, Vector2( 2, 0 ), 152, Vector2( 2, 1 ), 146, Vector2( 2, 2 ), 26 ]
-0/autotile/icon_coordinate = Vector2( 0, 0 )
-0/autotile/tile_size = Vector2( 3, 3 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
 
 [node name="World" type="Node" groups=["World"]]
 script = ExtResource( 1 )
@@ -113,18 +90,16 @@ margin_right = -11.0
 margin_bottom = -164.0
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer2/Background"]
-anchor_right = 1.0
-margin_left = 57.0
-margin_top = 5.0
-margin_right = -80.0
-margin_bottom = 22.0
-custom_fonts/font = ExtResource( 9 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -91.5
+margin_top = 7.0
+margin_right = 91.5
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 12 )
 text = "Score = 0"
 align = 1
 autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="powerup" type="Label" parent="CanvasLayer2/Background"]
 visible = false
@@ -207,12 +182,6 @@ hue_variation_random = 1.0
 [node name="Ship" parent="CanvasLayer2/Background" instance=ExtResource( 8 )]
 position = Vector2( 25, 77 )
 z_index = 1
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 5 )
-cell_size = Vector2( 3, 3 )
-format = 1
-tile_data = PoolIntArray( 5177420, 0, 0, 5177421, 0, 0, 5177422, 0, 0, 5177423, 0, 0, 5177424, 0, 0, 5242956, 0, 0, 5242960, 0, 0, 5308492, 0, 0, 5308496, 0, 0, 5374028, 0, 0, 5374029, 0, 0, 5374030, 0, 0, 5374031, 0, 0, 5374032, 0, 0 )
 
 [node name="PowerUp" parent="." instance=ExtResource( 11 )]
 position = Vector2( 226, 57 )

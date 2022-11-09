@@ -21,26 +21,16 @@ func transition(to = null):
 		$transitionAnimation.stop(true)
 		$transitionAnimation.play("fadeinout")
 		if to:
-			yield(self, "transition_halfway")
 			get_tree().change_scene(to)
-			set_keyboard(keyboard)
-			if OS.has_touchscreen_ui_hint():
-				turn_off()
+			yield(self, "transition_halfway")
+			set_input_prompts()
 		get_tree().paused = false
 		just_called = false
 
 
 func _ready():
-	if OS.has_touchscreen_ui_hint():
-		turn_off()
-
-
-var title = "spaceshooty"
-
-
-func _process(_delta):
-	if Engine.get_physics_frames() % 30 == 0:
-		OS.set_window_title(title + " | fps: " + str(Engine.get_frames_per_second()))
+	set_input_prompts()
+	set_process_input(not USE_TOUCH)
 
 
 func turn_off():
@@ -50,20 +40,32 @@ func turn_off():
 
 
 func _input(event: InputEvent) -> void:
-	if not USE_TOUCH:
-		if event is InputEventJoypadButton or event is InputEventJoypadMotion and keyboard == true:
-			self.keyboard = false
-		elif event is InputEventKey and keyboard == false:
-			self.keyboard = true
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion and keyboard == true:
+		self.keyboard = false
+	elif event is InputEventKey and keyboard == false:
+		self.keyboard = true
 
 
 func set_keyboard(new_keyboard):
 	keyboard = new_keyboard
-	if new_keyboard == true:
-		get_tree().call_group("gamepad", "hide")
-		get_tree().call_group("keyboard", "show")
-	elif new_keyboard == false:
+	set_input_prompts()
+
+
+func set_input_prompts():
+	if USE_TOUCH:
+		get_tree().call_group("not_mobile", "hide")
+		get_tree().call_group("mobile", "show")
 		get_tree().call_group("keyboard", "hide")
+		get_tree().call_group("gamepad", "hide")
+	elif keyboard == true:
+		get_tree().call_group("not_mobile", "show")
+		get_tree().call_group("gamepad", "hide")
+		get_tree().call_group("mobile", "hide")
+		get_tree().call_group("keyboard", "show")
+	elif keyboard == false:
+		get_tree().call_group("not_mobile", "show")
+		get_tree().call_group("keyboard", "hide")
+		get_tree().call_group("mobile", "hide")
 		get_tree().call_group("gamepad", "show")
 
 

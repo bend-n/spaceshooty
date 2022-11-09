@@ -28,6 +28,12 @@ onready var lasersu
 onready var flaku
 onready var beamu
 onready var fire = $Fire
+onready var joystick = $MobileControls/MobileJoystick
+onready var thrustsfxin = $thrustsfxin
+onready var thrustsfxend = $thrustsfxend
+onready var thrustsfxloop = $thrustsfxloop
+onready var animation_tree = $AnimationTree
+
 var amount = 1
 var target = null
 var firing = false
@@ -39,10 +45,7 @@ var shake_duration = .2
 
 func _ready():
 	playerstats.gun = "lasers"
-	$MobileJoystick/TouchScreenButton.visible = USE_TOUCH
-	$MobileJoystick/MobileControls/Attack.visible = USE_TOUCH
-	$"MobileJoystick/MobileControls/Change gun".visible = USE_TOUCH
-	$AnimationTree.active = true
+	animation_tree.active = true
 	lasersu = playerstats.lasers
 	rocketsu = playerstats.rockets
 	splitshotu = playerstats.splitshot
@@ -59,8 +62,8 @@ func _physics_process(delta):
 	input_vector.y = Input.get_axis("up_%s" % id, "down_%s" % id)
 	if Game.keyboard:
 		input_vector = input_vector.normalized()
-	if $MobileJoystick/TouchScreenButton.in_use:
-		input_vector = $MobileJoystick/TouchScreenButton.force
+	if joystick.in_use:
+		input_vector = joystick.force
 	#makes a input vector based off of inputs, and supports controllers
 	# fire particle code
 	var fire_dir = input_vector * -1
@@ -74,24 +77,24 @@ func _physics_process(delta):
 
 	if input_vector != Vector2.ZERO:
 		if not thrusting_last_frame:
-			$thrustsfxin.playing = true
+			thrustsfxin.playing = true
 
-		if not $thrustsfxloop.playing:
-			$thrustsfxloop.playing = true
+		if not thrustsfxloop.playing:
+			thrustsfxloop.playing = true
 
 		thrusting_last_frame = true
 	else:
 		if thrusting_last_frame:
-			$thrustsfxloop.playing = false
-			$thrustsfxend.playing = true
+			thrustsfxloop.playing = false
+			thrustsfxend.playing = true
 
-			if $thrustsfxin.playing:
-				$thrustsfxin.playing = false
+			if thrustsfxin.playing:
+				thrustsfxin.playing = false
 
 		thrusting_last_frame = false
 	if input_vector != Vector2.ZERO:  #moves ya
 		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
-		$AnimationTree.set("parameters/Turn/blend_position", input_vector)
+		animation_tree.set("parameters/Turn/blend_position", input_vector)
 		animationState.travel("Turn")
 	else:
 		#stops you
@@ -217,6 +220,10 @@ func splitshot():
 		playerstats.gun = "splitshot"
 
 
+onready var rocket_muzzles = $Muzzles/RocketMuzzle.get_children()
+onready var laser_muzzles = $Muzzles/LaserMuzzle.get_children()
+
+
 func shoot():  #shoot
 	_go_into_cooldown()
 	if !firing:
@@ -224,21 +231,11 @@ func shoot():  #shoot
 	Shake.shake(shake_intensity, shake_duration)
 	match playerstats.gun:
 		"rockets":
-			var muzzles = $Muzzles/RocketMuzzle.get_children()
-			for muzzle in muzzles:
+			for muzzle in rocket_muzzles:
 				var bullet = fire(muzzle.global_position, attack)
 				bullet.start(target)
 		"lasers":
-			var muzzles = $Muzzles/LaserMuzzle.get_children()
-			for muzzle in muzzles:
-				fire(muzzle.global_position, attack)
-		"splitshot":
-			var muzzles = $Muzzles/SplitMuzzle.get_children()
-			for muzzle in muzzles:
-				fire(muzzle.global_position, attack)
-		"flak":
-			var muzzles = $Muzzles/FlakMuzzle.get_children()
-			for muzzle in muzzles:
+			for muzzle in laser_muzzles:
 				fire(muzzle.global_position, attack)
 
 

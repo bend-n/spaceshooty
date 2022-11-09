@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/squid.png" type="Texture" id=4]
 [ext_resource path="res://sprites/UFO-export.png" type="Texture" id=5]
 [ext_resource path="res://sprites/boss2.png" type="Texture" id=6]
-[ext_resource path="res://fonts/fonty.tres" type="DynamicFont" id=7]
+[ext_resource path="res://fonts/04b-19.tres" type="DynamicFont" id=7]
 [ext_resource path="res://sprites/HardEnemy.png" type="Texture" id=8]
 [ext_resource path="res://sprites/bossfinal.png" type="Texture" id=9]
 
@@ -29,58 +29,55 @@ position = Vector2( -19, -33 )
 
 [node name="octopus" type="Sprite" parent="Sprite Holders"]
 visible = false
-position = Vector2( -24, 176 )
+position = Vector2( -21, 197 )
 rotation = -1.5708
 texture = ExtResource( 2 )
 hframes = 2
 
 [node name="basicenemy" type="Sprite" parent="Sprite Holders"]
 visible = false
-position = Vector2( -24, 176 )
+position = Vector2( -23, 197 )
 texture = ExtResource( 3 )
 
 [node name="squid" type="Sprite" parent="Sprite Holders"]
 visible = false
-position = Vector2( -24, 176 )
+position = Vector2( -21, 197 )
 texture = ExtResource( 4 )
 vframes = 2
 
 [node name="ufo" type="Sprite" parent="Sprite Holders"]
 visible = false
-position = Vector2( 2, 176 )
+position = Vector2( -20, 197 )
 texture = ExtResource( 5 )
 
 [node name="boss" type="Sprite" parent="Sprite Holders"]
 visible = false
-position = Vector2( -16, 176 )
+position = Vector2( -20, 197 )
 texture = ExtResource( 6 )
 
 [node name="hardy" type="Sprite" parent="Sprite Holders"]
 visible = false
-position = Vector2( -16, 176 )
+position = Vector2( -20, 197 )
 rotation = -1.5708
 texture = ExtResource( 8 )
 hframes = 2
 
 [node name="finale" type="Sprite" parent="Sprite Holders"]
 visible = false
-position = Vector2( -16, 176 )
+position = Vector2( -20, 197 )
 rotation = -1.5708
 texture = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="Sprite Holders"]
 visible = false
 margin_left = -344.0
-margin_top = 168.0
+margin_top = 189.0
 margin_right = -32.0
-margin_bottom = 185.0
+margin_bottom = 206.0
 custom_fonts/font = ExtResource( 7 )
 text = "Beware of the"
 align = 2
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

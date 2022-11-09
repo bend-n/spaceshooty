@@ -14,12 +14,14 @@ var center: Vector2
 var event_index = -1
 var in_use: bool = false
 var force: Vector2 = Vector2()
-onready var FRICTION = 400
+const FRICTION = 400
+onready var handle = $"%Handle"
 
 
 func _ready():
 	radius = normal.get_width() * global_scale.x / 2
 	center = global_position + Vector2(radius, radius)
+	handle.global_position = center
 
 
 func _input(event):
@@ -35,7 +37,7 @@ func _input(event):
 
 			force = angle_to_vec(angle) * clamped_dist / radius
 
-			$Button.global_position = center + force.normalized() * clamped_dist
+			handle.global_position = center + force.normalized() * clamped_dist
 
 	if event is InputEventScreenTouch and !event.is_pressed() and event.get_index() == event_index:
 		event_index = -1
@@ -45,5 +47,5 @@ func _input(event):
 func _process(delta):
 	# Return the button to the center of the joystick
 	if !in_use:
-		$Button.global_position = weighted_average($Button.global_position, center, 0.7)
+		handle.global_position = weighted_average(handle.global_position, center, 0.8)
 		force = force.move_toward(Vector2.ZERO, FRICTION * delta)

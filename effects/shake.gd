@@ -10,6 +10,7 @@ var noise: OpenSimplexNoise
 
 
 func _ready():
+	set_process(false)
 	# Generate noise for noise shake
 	#
 	# This is only generated once when the game starts
@@ -37,6 +38,7 @@ func shake(intensity, duration, type = Type.Random):
 		camera_shake_intensity = intensity
 		camera_shake_duration = duration
 		camera_shake_type = type
+		set_process(true)
 
 
 func _process(delta):
@@ -54,6 +56,7 @@ func _process(delta):
 		camera.offset = Vector2.ZERO
 		camera_shake_intensity = 0.0
 		camera_shake_duration = 0.0
+		set_process(false)
 		return
 
 		# Subtract the elapsed time from the camera_shake_duration

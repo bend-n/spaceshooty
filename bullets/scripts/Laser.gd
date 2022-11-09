@@ -82,12 +82,12 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _physics_process(delta):
-	if light.enabled:
-		light.color.a -= modulate_amount * delta
-		if light.color.a < 0:
-			light.enabled = false
-			set_physics_process(false)
+	light.color.a -= modulate_amount * delta
+	if light.color.a < 0:
+		light.enabled = false
+		set_physics_process(false)
 
 
 func set_lights(enabled: bool) -> void:
 	light.enabled = enabled
+	set_physics_process(enabled)

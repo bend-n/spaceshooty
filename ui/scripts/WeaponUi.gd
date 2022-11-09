@@ -1,8 +1,13 @@
 extends Control
 
+onready var laser := $Laser
+onready var rocket := $Rocket
+onready var split := $Split
+onready var flak := $Flak
+
 
 func _process(_delta) -> void:
-	$Laser.visible = playerstats.gun == "lasers"
-	$Flak.visible = playerstats.gun == "flak"
-	$Split.visible = playerstats.gun == "splitshot"
-	$Rocket.visible = playerstats.gun == "rockets"
+	laser.visible = playerstats.gun == "lasers"
+	flak.visible = playerstats.gun == "flak"
+	split.visible = playerstats.gun == "splitshot"
+	rocket.visible = playerstats.gun == "rockets"
